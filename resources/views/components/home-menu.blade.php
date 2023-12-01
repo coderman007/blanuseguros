@@ -28,20 +28,16 @@
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                @auth
-                <!-- Teams Dropdown and Settings Dropdown for authenticated users -->
-                <!-- ... (existing code for authenticated users) ... -->
-                @else
-                <!-- Content for non-authenticated users -->
+
+
                 <div class="ml-3">
                     <x-nav-link href="{{ route('login') }}" class="text-white hover:text-gray-300">
-                        {{ __('Iniciar sesión') }}
+                        {{ __('Login') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('register') }}" class="btn-primary">
                         {{ __('Registrarse') }}
                     </x-nav-link>
                 </div>
-                @endauth
             </div>
 
             <div class="-mr-2 flex items-center sm:hidden">
@@ -56,11 +52,7 @@
     </div>
 
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        @auth
-        <!-- Responsive Navigation Menu for authenticated users -->
-        <!-- ... (existing code for authenticated users) ... -->
-        @else
-        <!-- Responsive Navigation Menu for non-authenticated users -->
+
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="/" :active="request()->routeIs('dashboard')">
                 {{ __('Inicio') }}
@@ -84,6 +76,5 @@
                 {{ __('Registrarse') }}
             </x-responsive-nav-link>
         </div>
-        @endauth
     </div>
 </nav>
