@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('insurance_company_id')->references('id')->on('insurance_companies');
-            $table->foreign('line_id')->references('id')->on('lines');
+            $table->foreign('line_id')->references('id')->on('insurance_lines');
             $table->foreign('policy_holder_id')->references('id')->on('policy_holders');
         });
     }

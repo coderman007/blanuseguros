@@ -24,9 +24,9 @@ class InsurancePolicy extends Model
         return $this->belongsTo(InsuranceCompany::class);
     }
 
-    public function line()
+    public function insuranceLine()
     {
-        return $this->belongsTo(Line::class);
+        return $this->belongsTo(InsuranceLine::class);
     }
 
     public function policyHolder()

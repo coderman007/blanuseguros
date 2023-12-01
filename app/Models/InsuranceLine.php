@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Line extends Model
+class InsuranceLine extends Model
 {
     use HasFactory;
 
@@ -14,14 +14,15 @@ class Line extends Model
         'name',
         'description',
         'image',
+        'is_active',
     ];
 
-    public function insurancePlans()
+    public function InsurancePlans()
     {
         return $this->hasMany(InsurancePlan::class);
     }
 
-    public function insurancePolicies()
+    public function InsurancePolicies()
     {
         return $this->hasMany(InsurancePolicy::class);
     }

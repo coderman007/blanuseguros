@@ -1,13 +1,8 @@
 <div class="my-auto">
-    <a href="#" wire:click="$set('open', true)">
-        <i class="p-1 text-blue-400 rounded hover:text-white hover:bg-blue-500 fa-solid fa-pen-to-square"></i>
-        <div
-            class="absolute z-10 px-3 py-2 mb-2 text-center text-white bg-gray-700 rounded-lg opacity-0 pointer-events-none text-md group-hover:opacity-80 bottom-full -left-6">
-            Editar
-            <svg class="absolute left-0 w-full h-2 text-black top-full" x="0px" y="0px" viewBox="0 0 255 255"
-                xml:space="preserve">
-            </svg>
-        </div>
+    <a href="#" wire:click="$set('open', true)"
+        class="flex items-center p-1 space-x-1 text-blue-400 rounded hover:text-white hover:bg-blue-500">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <span class="hidden group-hover:inline">Editar</span>
     </a>
 
     <x-dialog-modal wire:model="open">
@@ -16,7 +11,6 @@
         </x-slot>
 
         <x-slot name="content">
-
             <!-- Dropdown para Compañía de Seguros -->
             <x-label value="Compañía de Seguros" class="text-gray-700" />
             <select class="w-full rounded-md" wire:model.lazy="insurance_company_id">
@@ -68,18 +62,17 @@
             <x-input-error for="premium_amount" />
 
             <!-- Agregar más campos según las propiedades del modelo -->
-
         </x-slot>
 
         <x-slot name="footer">
-            <div class="mx-auto">
+            <div class="flex justify-end mt-4">
                 <x-secondary-button wire:click="$set('open', false)"
                     class="mr-4 text-gray-500 border border-gray-500 shadow-lg hover:shadow-gray-400">
                     Cancelar
                 </x-secondary-button>
                 <x-secondary-button
                     class="text-blue-500 border border-blue-500 shadow-lg hover:shadow-blue-400 disabled:opacity-50 disabled:bg-blue-600 disabled:text-white"
-                    wire:click="add" wire:loading.attr="disabled" wire:target="add">
+                    wire:click="updatePolicy" wire:loading.attr="disabled" wire:target="updatePolicy">
                     Editar
                 </x-secondary-button>
             </div>

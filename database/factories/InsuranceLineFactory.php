@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\InsurancePlan>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\InsuranceLine>
  */
-class InsurancePlanFactory extends Factory
+class InsuranceLineFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,12 +17,9 @@ class InsurancePlanFactory extends Factory
     public function definition(): array
     {
         return [
-            'line_id'  => fake()->numberBetween(1, 10),
             'name' => $this->faker->word,
             'description' => $this->faker->sentence,
-            'coverage' => $this->faker->paragraph,
-            'price' => $this->faker->randomFloat(2, 30, 200),
-            'image' => 'plans/' . fake()->image('public/storage/plans', 640, 480, null, false),
+            'image' => 'lines/' . fake()->image('public/storage/lines', 640, 480, null, false),
             'is_active' => $this->faker->boolean(90), // 90% de probabilidad de ser activo
         ];
     }

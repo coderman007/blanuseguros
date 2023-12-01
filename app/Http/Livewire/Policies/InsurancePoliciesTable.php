@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Policies;
 
 use App\Models\InsurancePlan;
-use App\Models\Line;
+use App\Models\InsuranceLine;
 use App\Models\InsurancePolicy;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -24,7 +24,7 @@ class InsurancePoliciesTable extends Component
 
     protected $listeners = ['render'];
 
-    public function mount(Line $lineModel, InsurancePlan $planModel)
+    public function mount(InsuranceLine $lineModel, InsurancePlan $planModel)
     {
         $this->lines = $lineModel->all();
         $this->plans = $planModel->all();
