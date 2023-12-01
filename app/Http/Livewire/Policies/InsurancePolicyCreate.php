@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Policies;
 
 use App\Models\InsuranceCompany;
 use App\Models\InsurancePolicy;
-use App\Models\Line;
+use App\Models\InsuranceLine;
 use App\Models\PolicyHolder;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -23,7 +23,7 @@ class InsurancePolicyCreate extends Component
 
     protected $rules = [
         'insurance_company_id' => 'required|exists:insurance_companies,id',
-        'line_id' => 'required|exists:lines,id',
+        'line_id' => 'required|exists:insurance_lines,id',
         'policy_holder_id' => 'required|exists:policy_holders,id',
         'policy_number' => 'required|unique:insurance_policies,policy_number',
         'start_date' => 'required|date',
@@ -34,7 +34,7 @@ class InsurancePolicyCreate extends Component
     public function mount()
     {
         $this->insurance_companies = InsuranceCompany::all();
-        $this->lines = Line::all();
+        $this->lines = InsuranceLine::all();
         $this->policy_holders = PolicyHolder::all();
     }
 
@@ -75,7 +75,7 @@ class InsurancePolicyCreate extends Component
             'premium_amount',
         ]);
     }
-    
+
     public function render()
     {
         return view('livewire.policies.insurance-policy-create');

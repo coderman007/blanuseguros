@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('policy_holders', function (Blueprint $table) {
             $table->id();
+            $table->string('document')->default('No Definido');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('address')->nullable();

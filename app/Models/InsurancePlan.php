@@ -10,12 +10,14 @@ class InsurancePlan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+
+        'line_id',
+        'name',
         'description',
         'coverage',
-        'effective_period', // vigencia del plan
+        'image',
         'price',
-        'active',
+        'is_active',
     ];
 
     public function line()

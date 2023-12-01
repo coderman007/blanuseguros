@@ -11,6 +11,7 @@ class PolicyHolder extends Model
 
     protected $fillable =
     [
+        'document',
         'first_name',
         'last_name',
         'address',

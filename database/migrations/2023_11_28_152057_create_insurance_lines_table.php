@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lines', function (Blueprint $table) {
+        Schema::create('insurance_lines', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // Nombre de la línea de negocio (por ejemplo, vida, automóvil, hogar)
             $table->text('description')->nullable(); // Descripción de la línea de negocio (puede ser nulo)
             $table->string('image')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lines');
+        Schema::dropIfExists('insurance_lines');
     }
 };

@@ -90,8 +90,11 @@
                 <div class="p-6 bg-white rounded-lg shadow-lg shadow-gray-400 dark:bg-gray-800">
                     <h2 class="mb-2 text-3xl font-semibold text-center">{{ $line['name'] }}</h2>
                     <div class="w-11/12 h-1 mx-auto mb-4 bg-blue-400 rounded-md"></div>
-                    <img src="{{ asset($line->image) }}" alt="{{ $line['name'] }}"
-                        class="object-cover w-full h-48 mb-4 rounded-md">
+                    <div class="mx-auto my-2 rounded-full w-52">
+                        <img src="{{ asset('storage/' . $line->image) }}" alt="Imagen de {{ $line->name }}"
+                            class="w-full h-auto rounded-lg">
+                    </div>
+                    class="object-cover w-full h-48 mb-4 rounded-md">
                     <p class="px-2 text-gray-700 dark:text-gray-300">
                         {{-- {{ $line['description'] }} --}}
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil voluptates provident in sapiente
