@@ -56,7 +56,10 @@
     </div>
 
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-
+        @auth
+        <!-- Responsive Navigation Menu for authenticated users -->
+        <!-- ... (existing code for authenticated users) ... -->
+        @else
         <!-- Responsive Navigation Menu for non-authenticated users -->
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="/" :active="request()->routeIs('dashboard')">
