@@ -1,5 +1,5 @@
-<nav x-data="{ open: false }" class="bg-white border-b" style="background: rgb(22,48,81); background: linear-gradient(90deg, rgba(22,48,81,1) 0%, rgba(66,87,114,1) 100%);">
-    <div class="ml-4">
+<nav x-data="{ open: false }" class="bg-white" style="background: rgb(22,48,81); background: linear-gradient(90deg, rgba(22,48,81,1) 0%, rgba(66,87,114,1) 100%);">
+    <div class="mx-4">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <div class="shrink-0 flex items-center">
@@ -27,17 +27,13 @@
                 </div>
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-
-
-                <div class="ml-3">
-                    <x-nav-link href="{{ route('login') }}" class="text-white hover:text-gray-300">
-                        {{ __('Login') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('register') }}" class="btn-primary">
-                        {{ __('Registrarse') }}
-                    </x-nav-link>
-                </div>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <x-nav-link href="{{ route('login') }}" class="text-white hover:text-gray-300">
+                    {{ __('Login') }}
+                </x-nav-link>
+                <x-nav-link href="{{ route('register') }}" class="btn-primary">
+                    {{ __('Registrarse') }}
+                </x-nav-link>
             </div>
 
             <div class="-mr-2 flex items-center sm:hidden">

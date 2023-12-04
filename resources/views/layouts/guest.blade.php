@@ -37,23 +37,24 @@
             }
 
             .navbar {
-            background-color: #EEEFF1;
-            transition: background-color 0.4s;
+                background-color: #EEEFF1;
+                transition: background-color 0.4s;
             }
             .navbar a:hover {
-            top: 0;
-            color: white;
-            background-color: #0000005e;
-            transition: background-color 0.4s;
+                top: 0;
+                color: white;
+                background-color: #0000005e;
+                transition: background-color 0.4s;
             }
 
             .navbar.scrolled {
-            background-color: #00000064;
-            color: white;
+                background-color: #00000064;
+                color: white;
             }
         </style>
     </head>
     <body>
+        <x-home-menu />
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>

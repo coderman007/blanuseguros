@@ -1,8 +1,6 @@
 <div>
     <x-guest-layout>
-        <div class="m-4">
-            <x-home-menu />
-
+        <div>
             <!-- Contenido principal -->
             <!-- Video de presentación -->
             <div class="relative aspect-w-16 aspect-h-9">
