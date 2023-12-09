@@ -17,6 +17,7 @@ class InsuranceLineFactory extends Factory
     public function definition(): array
     {
         return [
+            'insurance_company_id' => fake()->numberBetween(1, 18),
             'name' => $this->faker->word,
             'description' => $this->faker->sentence,
             'image' => 'lines/' . fake()->image('public/storage/lines', 640, 480, null, false),

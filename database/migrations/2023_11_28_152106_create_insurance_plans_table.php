@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('insurance_plans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('line_id'); // Clave foránea para la relación con los ramos
+            $table->unsignedBigInteger('insurance_line_id'); // Clave foránea para la relación con los ramos
             $table->string('name');
             $table->text('description');
             $table->text('coverage');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->timestamps();
 
-            $table->foreign('line_id')->references('id')->on('insurance_lines');
+            $table->foreign('insurance_line_id')->references('id')->on('insurance_lines');
         });
     }
 

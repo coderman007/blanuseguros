@@ -16,7 +16,7 @@ class InsurancePlanSeeder extends Seeder
     {
         // $insurancePlans = [
         //     [
-        //         'line_id' => 1, // Asociado a la línea de Vida
+        //         'insurance_line_id' => 1, // Asociado a la línea de Vida
         //         'title' => 'Plan de Vida Básico',
         //         'description' => 'Cobertura esencial para asegurar la vida y proteger a los beneficiarios.',
         //         'coverage' => 'Muerte por cualquier causa',
@@ -24,7 +24,7 @@ class InsurancePlanSeeder extends Seeder
         //         'active' => true,
         //     ],
         //     [
-        //         'line_id' => 2, // Asociado a la línea de Automóvil
+        //         'insurance_line_id' => 2, // Asociado a la línea de Automóvil
         //         'title' => 'Seguro de Automóvil Estándar',
         //         'description' => 'Cobertura estándar para proteger tu vehículo y terceros en la carretera.',
         //         'coverage' => 'Daños al vehículo, responsabilidad civil, robo',
@@ -32,7 +32,7 @@ class InsurancePlanSeeder extends Seeder
         //         'active' => true,
         //     ],
         //     [
-        //         'line_id' => 3, // Asociado a la línea de Hogar
+        //         'insurance_line_id' => 3, // Asociado a la línea de Hogar
         //         'title' => 'Seguro de Hogar Completo',
         //         'description' => 'Protección completa para tu hogar y pertenencias.',
         //         'coverage' => 'Incendios, robos, daños estructurales',
@@ -40,7 +40,7 @@ class InsurancePlanSeeder extends Seeder
         //         'active' => true,
         //     ],
         //     [
-        //         'line_id' => 4, // Asociado a la línea de Salud
+        //         'insurance_line_id' => 4, // Asociado a la línea de Salud
         //         'title' => 'Plan de Salud Familiar',
         //         'description' => 'Cobertura médica integral para toda la familia.',
         //         'coverage' => 'Consultas, hospitalización, medicamentos',

@@ -17,7 +17,7 @@ class InsurancePlanFactory extends Factory
     public function definition(): array
     {
         return [
-            'line_id'  => fake()->numberBetween(1, 10),
+            'insurance_line_id'  => fake()->numberBetween(1, 10),
             'name' => $this->faker->word,
             'description' => $this->faker->sentence,
             'coverage' => $this->faker->paragraph,

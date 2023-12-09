@@ -11,7 +11,7 @@ class InsurancePlan extends Model
 
     protected $fillable = [
 
-        'line_id',
+        'insurance_line_id',
         'name',
         'description',
         'coverage',
@@ -22,7 +22,7 @@ class InsurancePlan extends Model
 
     public function line()
     {
-        return $this->belongsTo(Line::class);
+        return $this->belongsTo(InsuranceLine::class);
     }
 
     public function insurancePolicies()

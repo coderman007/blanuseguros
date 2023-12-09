@@ -15,15 +15,15 @@ class InsurancePolicyEdit extends Component
 
     public $policyId;
     public $insurancePolicy;
-    public $lines;
+    public $insurance_lines;
 
-    public $insurance_company_id, $line_id, $policy_holder_id;
+    public $insurance_company_id, $insurance_line_id, $policy_holder_id;
     public $policy_number, $start_date, $end_date, $premium_amount;
     public $open = false;
 
     protected $rules = [
         'insurance_company_id' => 'required|exists:insurance_companies,id',
-        'line_id' => 'required|exists:insurance_lines,id',
+        'insurance_line_id' => 'required|exists:insurance_lines,id',
         'policy_holder_id' => 'required|exists:policy_holders,id',
         'policy_number' => 'required',
         'start_date' => 'required|date',
@@ -34,10 +34,10 @@ class InsurancePolicyEdit extends Component
     public function mount()
     {
         $this->insurancePolicy = InsurancePolicy::find($this->policyId);
-        $this->lines = InsuranceLine::all();
+        $this->insurance_lines = InsuranceLine::all();
 
         $this->insurance_company_id = $this->insurancePolicy->insurance_company_id;
-        $this->line_id = $this->insurancePolicy->line_id;
+        $this->insurance_line_id = $this->insurancePolicy->insurance_line_id;
         $this->policy_holder_id = $this->insurancePolicy->policy_holder_id;
         $this->policy_number = $this->insurancePolicy->policy_number;
         $this->start_date = $this->insurancePolicy->start_date;
@@ -55,7 +55,7 @@ class InsurancePolicyEdit extends Component
         $this->validate();
 
         $this->insurancePolicy->insurance_company_id = $this->insurance_company_id;
-        $this->insurancePolicy->line_id = $this->line_id;
+        $this->insurancePolicy->insurance_line_id = $this->insurance_line_id;
         $this->insurancePolicy->policy_holder_id = $this->policy_holder_id;
         $this->insurancePolicy->policy_number = $this->policy_number;
         $this->insurancePolicy->start_date = $this->start_date;
@@ -63,7 +63,7 @@ class InsurancePolicyEdit extends Component
         $this->insurancePolicy->premium_amount = $this->premium_amount;
         $this->insurancePolicy->save();
 
-        $this->emitTo('policies.insurance-policies-table', 'render');
+        $this->emitTo('policies.insurance-policies', 'render');
         $this->emit('alert', '¡Póliza Editada Exitosamente!');
     }
 
@@ -73,7 +73,7 @@ class InsurancePolicyEdit extends Component
         return view('livewire.policies.insurance-policy-edit', [
             'insurance_companies' => InsuranceCompany::all(),
             'policy_holders' => PolicyHolder::all(),
-            'lines' => $this->lines,
+            'insurance_lines' => $this->insurance_lines,
         ]);
     }
 }

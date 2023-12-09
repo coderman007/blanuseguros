@@ -13,9 +13,9 @@ class InsurancePolicyDelete extends Component
     public function deleteConfirmed()
     {
         $insurancePolicy = InsurancePolicy::find($this->policyId);
-        
+
         $insurancePolicy->delete();
-        $this->emitTo('policies.insurance-policies-table', 'render');
+        $this->emitTo('policies.insurance-policies', 'render');
         $this->emit('alert', '¡Póliza Eliminada!');
         $this->open = false;
     }

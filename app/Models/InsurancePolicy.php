@@ -11,7 +11,7 @@ class InsurancePolicy extends Model
 
     protected $fillable = [
         'insurance_company_id',
-        'line_id',
+        'insurance_line_id',
         'policy_holder_id',
         'policy_number',
         'start_date',

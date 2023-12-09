@@ -21,4 +21,9 @@ class InsuranceCompany extends Model
     {
         return $this->hasMany(InsurancePolicy::class);
     }
+
+    public function insuranceLines()
+    {
+        return $this->hasMany(InsuranceLine::class);
+    }
 }
