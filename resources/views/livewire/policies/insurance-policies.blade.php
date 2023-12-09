@@ -2,11 +2,11 @@
     <!-- Verificar si hay pólizas antes de renderizar la tabla y su encabezado -->
     <div class="grid items-center w-full mt-2 md:grid-cols-12">
         <div class="col-span-4">
-            <input type="text" name="search" wire:model.lazy="search" class="w-full bg-gray-200 border-2 border-gray-300 rounded-lg focus:ring-gray-400" placeholder="Buscar...">
+            <input type="text" name="search" wire:model="search" class="w-full bg-gray-200 border-2 border-gray-300 rounded-lg focus:ring-gray-400" placeholder="Buscar...">
         </div>
         <div class="inline pl-4 pr-16 mt-4 md:pl-0 md:pr-0 md:mt-0 md:block md:col-span-4">
             <div class="text-xl font-bold text-center text-blue-400 uppercase">
-                <h1 class="text-gray-800 dark:text-gray-400">Pólizas</h1>
+                <h1>Pólizas</h1>
             </div>
         </div>
     </div>

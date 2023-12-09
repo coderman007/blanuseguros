@@ -34,5 +34,6 @@ class DatabaseSeeder extends Seeder
         $this->call(InsurancePlanSeeder::class);
         $this->call(PolicyHolderSeeder::class);
         $this->call(BeneficiarySeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

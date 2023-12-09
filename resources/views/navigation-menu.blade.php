@@ -12,13 +12,13 @@ background: linear-gradient(90deg, rgba(22,48,81,1) 0%, rgba(66,87,114,1) 100%);
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="/" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="auth()->check() ? route('dashboard') : route('home')" :active="request()->routeIs('home')">
                         {{ __('Inicio') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="users" :active="request()->routeIs('users')">
+                    <x-nav-link href="/users" :active="request()->routeIs('users')">
                         {{ __('Usuarios') }}
                     </x-nav-link>
                 </div>
@@ -176,7 +176,7 @@ background: linear-gradient(90deg, rgba(22,48,81,1) 0%, rgba(66,87,114,1) 100%);
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="/" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="auth()->check() ? route('dashboard') : route('home')" :active="request()->routeIs('home')">
                 {{ __('Inicio') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">

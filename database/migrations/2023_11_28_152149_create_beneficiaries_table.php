@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('policy_holder_id'); // Clave foránea para la relación con los tomadores
             $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address')->nullable();
             $table->string('relationship');
             $table->timestamps();
 

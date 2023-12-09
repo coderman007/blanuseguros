@@ -13,6 +13,9 @@ class Beneficiary extends Model
     [
         'policy_holder_id',
         'name',
+        'email',
+        'phone',
+        'address',
         'relationship'
     ];
 
