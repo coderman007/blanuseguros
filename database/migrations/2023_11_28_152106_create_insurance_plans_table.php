@@ -18,8 +18,9 @@ return new class extends Migration
             $table->text('description');
             $table->text('coverage');
             $table->decimal('price', 10, 2);
-            $table->string('image')->nullable();
+            $table->string('slug')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->string('image')->nullable();
             $table->timestamps();
 
             $table->foreign('insurance_line_id')->references('id')->on('insurance_lines');

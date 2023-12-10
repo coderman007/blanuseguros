@@ -38,6 +38,16 @@
                                 <h1 class="ml-2 text-sm">Correo Electrónico:</h1>
                                 <p class="p-2 bg-gray-200 rounded-md">{{ $company->email }}</p>
                             </div>
+
+                            <div>
+                                @if ($company->is_active)
+                                <h1 class="ml-2 text-sm">Estado:</h1>
+                                <p class="p-2 text-gray-100 bg-green-600 rounded-md">Activa</p>
+                                @else
+                                <h1 class="ml-2 text-sm">Estado:</h1>
+                                <p class="p-2 text-gray-100 bg-red-400 rounded-md">Inactiva</p>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

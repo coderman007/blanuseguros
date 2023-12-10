@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Livewire\lines;
+namespace App\Http\Livewire\Lines;
 
 use App\Models\InsuranceCompany;
 use App\Models\InsuranceLine;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -11,22 +12,22 @@ class InsuranceLineCreate extends Component
 {
     use WithFileUploads;
 
-    public $insurance_companies;
-    public $insurance_company_id;
+    public $insuranceCompanies;
+    public $insuranceCompanyId;
     public $name, $description, $is_active, $image;
     public $open = false;
 
     protected $rules = [
-        'insurance_company_id' => 'required|exists:insurance_companies,id',
+        'insuranceCompanyId' => 'required|exists:insurance_companies,id',
         'name' => 'required|max:50',
         'description' => 'required',
-        'is_active' => 'required',
+        'is_active' => 'required|boolean',
         'image' => 'nullable|image|max:2048',
     ];
 
     public function mount()
     {
-        $this->insurance_companies = InsuranceCompany::all();
+        $this->insuranceCompanies = InsuranceCompany::all();
     }
 
     public function updated($propertyName)
@@ -38,14 +39,14 @@ class InsuranceLineCreate extends Component
     {
         $this->validate();
 
-        if ($this->image) {
-            $image_url = $this->image->store('lines');
-        } else {
-            $image_url = null;
-        }
+        $image_url = $this->image ? $this->image->store('lines') : null;
+
+        $slug = Str::slug($this->name);
+
         InsuranceLine::create([
-            'insurance_company_id' => $this->insurance_company_id,
+            'insurance_company_id' => $this->insuranceCompanyId,
             'name' => $this->name,
+            'slug' => $slug,
             'description' => $this->description,
             'is_active' => $this->is_active,
             'image' => $image_url,
@@ -60,7 +61,7 @@ class InsuranceLineCreate extends Component
     {
         $this->reset([
             'open',
-            'insurance_company_id',
+            'insuranceCompanyId',
             'name',
             'description',
             'is_active',

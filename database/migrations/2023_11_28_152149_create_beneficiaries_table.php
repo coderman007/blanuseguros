@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('beneficiaries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('policy_holder_id'); // Clave foránea para la relación con los tomadores
+            $table->string('document');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
             $table->string('address')->nullable();
+            $table->string('slug')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->string('relationship');
+            $table->string('image')->nullable();
             $table->timestamps();
 
             $table->foreign('policy_holder_id')->references('id')->on('policy_holders');

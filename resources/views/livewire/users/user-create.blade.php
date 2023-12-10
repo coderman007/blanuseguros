@@ -63,14 +63,13 @@
                     <x-input class="w-full" wire:model.lazy="password" type="password" />
                     <x-input-error for="password" />
 
-                    <!-- Dropdown para Estado -->
+                    <!-- Estado -->
                     <x-label value="Estado" class="text-gray-700" />
-                    <select class="w-full mb-4 rounded-md" wire:model.lazy="status">
-                        <option disabled>Selecciona un estado</option>
-                        <option value="Activo">Activo</option>
-                        <option value="Inactivo">Inactivo</option>
-                    </select>
-                    <x-input-error for="status" />
+                    <div class="flex items-center">
+                        <input type="checkbox" wire:model.lazy="is_active" class="ml-2 mr-4 my-4">
+                        <span class="{{ $is_active ? 'text-green-500' : 'text-red-500' }} text-lg">{{ $is_active ? 'Activo' : 'Inactivo' }}</span>
+                    </div>
+                    <x-input-error for="is_active" />
                 </form>
 
             </x-slot>

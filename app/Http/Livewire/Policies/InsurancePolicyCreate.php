@@ -58,7 +58,7 @@ class InsurancePolicyCreate extends Component
         ]);
 
         $this->resetForm();
-        $this->emitTo('policies.insurance-policies-table', 'render');
+        $this->emitTo('policies.insurance-policies', 'render');
         $this->emit('alert', '¡Póliza Creada Exitosamente!');
     }
 

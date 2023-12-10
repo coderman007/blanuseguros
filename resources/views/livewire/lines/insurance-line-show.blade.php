@@ -21,7 +21,7 @@
                         <div class="text-lg text-start">
                             <div class="mb-3">
                                 <h1 class="ml-2 text-sm">Compañía:</h1>
-                                <p class="p-2 bg-gray-200 rounded-md">{{ $company->name }}</p>
+                                <p class="p-2 bg-gray-200 rounded-md">{{ $line->insuranceCompany->name }}</p>
                             </div>
                             <div class="mb-3">
                                 <h1 class="ml-2 text-sm">Descripción:</h1>

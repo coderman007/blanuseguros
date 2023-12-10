@@ -14,8 +14,8 @@ class InsuranceLineShow extends Component
 
     public function mount(InsuranceLine $line)
     {
-        $this->line = $line->load('company:id,name'); // Cargar la relación con la compañía
-        $this->company = $this->line->company; // Acceder a la compañía a través de la relación
+        $this->line = $line;
+        $this->company = $line->insuranceCompany::get(['id', 'name']);
     }
 
     public function render()

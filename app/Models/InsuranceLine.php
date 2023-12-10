@@ -14,8 +14,9 @@ class InsuranceLine extends Model
         'insurance_company_id',
         'name',
         'description',
-        'image',
+        'slug',
         'is_active',
+        'image',
     ];
 
     public function insurancePlans()

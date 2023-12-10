@@ -38,12 +38,12 @@
                                 <p class="p-2 bg-gray-200 rounded-md">{{ $user->phone }}</p>
                             </div>
                             <div>
-                                @if ($user->status == 'Activo')
+                                @if ($user->is_active)
                                 <h1 class="ml-2 text-sm">Estado:</h1>
-                                <p class="p-2 text-gray-100 bg-green-500 rounded-md">{{ $user->status }}</p>
+                                <p class="p-2 text-gray-100 bg-green-600 rounded-md">Activo</p>
                                 @else
                                 <h1 class="ml-2 text-sm">Estado:</h1>
-                                <p class="p-2 text-gray-100 bg-red-400 rounded-md">{{ $user->status }}</p>
+                                <p class="p-2 text-gray-100 bg-red-400 rounded-md">Inactivo</p>
                                 @endif
                             </div>
                         </div>

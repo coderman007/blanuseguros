@@ -2,27 +2,39 @@
 
 namespace App\Http\Livewire\Companies;
 
-use App\Models\InsuranceCompany;
 use Livewire\Component;
+use App\Models\InsuranceCompany;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
 
 class InsuranceCompanyEdit extends Component
 {
-    public $companyId;
+    use WithFileUploads;
+
     public $company;
-    public $open = false;
+    public $name, $url, $address, $phone, $email, $slug, $is_active, $image;
+    public $open_edit = false;
 
     protected $rules = [
-        'company.name' => 'required|string|max:255',
-        'company.url' => 'nullable|url|max:255',
-        'company.address' => 'nullable|string|max:255',
-        'company.phone' => 'nullable|string|max:20',
-        'company.email' => 'nullable|email|max:255',
+        'name'      => 'required|string|max:255',
+        'url'       => 'nullable|url|max:255',
+        'address'   => 'nullable|string|max:255',
+        'phone'     => 'nullable|string|max:20',
+        'email'     => 'required|email|max:255',
+        'is_active' => 'nullable|boolean',
+        'image'     => 'nullable|image|max:2048',
     ];
 
-    public function mount($companyId)
+    public function mount(InsuranceCompany $company)
     {
-        $this->companyId = $companyId;
-        $this->company = InsuranceCompany::findOrFail($companyId)->toArray();
+        $this->company      = $company;
+        $this->name         = $company->name;
+        $this->url          = $company->url;
+        $this->address      = $company->address;
+        $this->phone        = $company->phone;
+        $this->email        = $company->email;
+        $this->is_active    = $company->is_active;
+        $this->image        = $company->image;
     }
 
     public function updated($propertyName)
@@ -30,23 +42,30 @@ class InsuranceCompanyEdit extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function updateCompany()
+    public function update()
     {
         $this->validate();
 
-        InsuranceCompany::find($this->companyId)->update($this->company);
+        $data = [
+            'name'      => $this->name,
+            'url'       => $this->url,
+            'address'   => $this->address,
+            'phone'     => $this->name,
+            'email'     => $this->email,
+            'is_active' => $this->is_active,
+        ];
 
-        $this->resetForm();
+        if ($this->image) {
+            $data['image'] = $this->image->store('companies');
+        }
+
+        $this->company->update($data);
+
+        $this->open_edit = false;
+
         $this->emitTo('companies.insurance-companies', 'render');
-        $this->emit('alert', '¡Compañía de Seguros Editada Exitosamente!');
-    }
 
-    private function resetForm()
-    {
-        $this->reset([
-            'open',
-            'company',
-        ]);
+        $this->emit('alert', '¡Compañía Actualizada Exitosamente!');
     }
 
     public function render()

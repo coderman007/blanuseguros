@@ -1,5 +1,5 @@
 <div class="relative p-4 bg-gray-100 rounded-lg">
-    <!-- Verificar si hay pólizas antes de renderizar la tabla y su encabezado -->
+
     <div class="grid items-center w-full mt-2 md:grid-cols-12">
         <div class="col-span-4">
             <input type="text" name="search" wire:model="search" class="w-full bg-gray-200 border-2 border-gray-300 rounded-lg focus:ring-gray-400" placeholder="Buscar...">
@@ -10,7 +10,10 @@
             </div>
         </div>
     </div>
+
     <livewire:users.user-create />
+
+    <!-- Verificar si hay usuarios antes de renderizar la tabla y su encabezado -->
     @if ($users->count() > 0)
     <div class="py-2 md:py-4 ml-4 text-gray-500 dark:text-gray-100">
         Registros por página
@@ -97,10 +100,12 @@
             <tbody>
                 @forelse ($users as $user)
                 <div class="hidden">
-                    @if ($user->status === 'Activo')
-                    {{ $colorStatus = 'text-green-600' }}
+                    @if ($user->is_active)
+                    {{ $colorIsActive = 'text-green-600' }}
+                    {{ $textIsActive = 'Activo'}}
                     @else
-                    {{ $colorStatus = 'text-red-500' }}
+                    {{ $colorIsActive = 'text-red-500' }}
+                    {{ $textIsActive = 'Inactivo'}}
                     @endif
                 </div>
                 <tr class="text-center bg-white border-b text-md dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -112,7 +117,7 @@
                     <td class="px-6 py-4 ">{{ $user->email }}</td>
                     {{-- <td class="px-6 py-4 ">{{ $user->address }}</td> --}}
                     <td class="px-6 py-4 ">{{ $user->phone }}</td>
-                    <td class="px-6 py-4 dark:text-lg {{ $colorStatus }}">{{ $user->status }}</td>
+                    <td class="px-6 py-4 dark:text-lg {{ $colorIsActive }}">{{ $textIsActive }}</td>
                     <td class="flex justify-around py-4 pl-2 pr-8">
 
                         {{-- Modales de detalle, actualización y eliminación de usuarios. --}}

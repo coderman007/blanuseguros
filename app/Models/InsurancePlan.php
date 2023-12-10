@@ -15,9 +15,10 @@ class InsurancePlan extends Model
         'name',
         'description',
         'coverage',
-        'image',
         'price',
+        'slug',
         'is_active',
+        'image',
     ];
 
     public function line()

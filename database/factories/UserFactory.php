@@ -20,17 +20,23 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->name();
+
         return [
-            'document' => $this->faker->numberBetween(1000000000, 9999999999),
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'two_factor_secret' => null,
+            'document'                  => Str::random(10),
+            'name'                      => $name,
+            'email'                     => $this->faker->unique()->safeEmail(),
+            'email_verified_at'         => now(),
+            'address'                   => fake('es_ES')->address(),
+            'phone'                     => fake('es_ES')->phoneNumber(),
+            'password'                  => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'slug'                      => Str::slug($name),
+            'two_factor_secret'         => null,
             'two_factor_recovery_codes' => null,
-            'remember_token' => Str::random(10),
-            'profile_photo_path' => null,
-            'current_team_id' => null,
+            'remember_token'            => Str::random(10),
+            'is_active'                 => fake()->randomElement([true, false]),
+            'profile_photo_path'        => 'users/' . fake()->image('public/storage/users', 640, 480, null, false),
+            'current_team_id'           => null,
         ];
     }
 

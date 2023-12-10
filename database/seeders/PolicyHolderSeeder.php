@@ -14,6 +14,6 @@ class PolicyHolderSeeder extends Seeder
      */
     public function run(): void
     {
-        PolicyHolder::factory(20)->create();
+        PolicyHolder::factory(15)->create();
     }
 }

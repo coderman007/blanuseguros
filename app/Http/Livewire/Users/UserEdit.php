@@ -2,26 +2,28 @@
 
 namespace App\Http\Livewire\Users;
 
+use Illuminate\Support\Str;
 use Livewire\Component;
 use App\Models\User;
-use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Hash;
+use Livewire\WithFileUploads;
 
 class UserEdit extends Component
 {
     use WithFileUploads;
 
     public $user;
-    public $document, $name, $email, $address, $phone, $password, $status, $profile_photo_path;
+    public $document, $name, $email, $password, $slug, $address, $phone, $is_active, $profile_photo_path;
     public $open_edit = false;
 
     protected $rules = [
         'document'           => 'nullable',
         'name'               => 'required|max:50',
         'email'              => 'required|email',
+        'password'           => 'nullable|min:8',
         'address'            => 'nullable',
         'phone'              => 'nullable',
-        'status'             => 'required',
+        'is_active'          => 'nullable',
         'profile_photo_path' => 'nullable|image|max:2048',
     ];
 
@@ -31,24 +33,37 @@ class UserEdit extends Component
         $this->document = $user->document;
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->slug = $user->slug;
         $this->address = $user->address;
         $this->phone = $user->phone;
-        $this->status = $user->status;
+        $this->is_active = $user->is_active;
     }
 
+    public function updatedName()
+    {
+        $this->slug = Str::slug($this->name);
+    }
     public function update()
     {
         $this->validate();
 
         // Actualizar el usuario en la base de datos
-        $this->user->update([
+        $userData = [
             'document' => $this->document,
             'name' => $this->name,
             'email' => $this->email,
+            'password' => $this->password,
+            'slug' => $this->slug,
             'address' => $this->address,
             'phone' => $this->phone,
-            'status' => $this->status,
-        ]);
+            'is_active' => $this->is_active,
+        ];
+
+        if ($this->password) {
+            $userData['password'] = Hash::make($this->password);
+        }
+
+        $this->user->update($userData);
 
         if ($this->profile_photo_path) {
             // Actualizar la imagen si se ha cargado una nueva
@@ -60,6 +75,7 @@ class UserEdit extends Component
         $this->emitTo('users.users', 'render');
         $this->emit('alert', '¡Usuario Actualizado Exitosamente!');
     }
+
 
     public function render()
     {

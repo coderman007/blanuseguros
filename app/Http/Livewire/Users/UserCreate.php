@@ -13,7 +13,7 @@ class UserCreate extends Component
     use WithFileUploads;
 
     public $open_create = false;
-    public $user, $document, $name, $email, $address, $phone, $password, $slug, $status, $profile_photo_path;
+    public $user, $document, $name, $email, $address, $phone, $password, $slug, $is_active, $profile_photo_path;
 
     protected $rules = [
         'document'            => 'nullable',
@@ -21,8 +21,8 @@ class UserCreate extends Component
         'email'               => 'required|email',
         'address'             => 'nullable',
         'phone'               => 'nullable',
-        'password'            => 'nullable',
-        'status'              => 'nullable',
+        'password'            => 'required',
+        'is_active'           => 'required',
         'profile_photo_path'  => 'nullable|image|max:2048',
     ];
 
@@ -45,12 +45,12 @@ class UserCreate extends Component
             'phone'               => $this->phone,
             'password'            => Hash::make($this->password),
             'slug'                => Str::slug($this->name),
-            'status'              => $this->status,
+            'is_active'           => $this->is_active,
             'profile_photo_path'  => $image_url,
 
         ]);
 
-        $this->reset('document', 'name', 'email', 'address', 'phone', 'password', 'slug', 'status', 'profile_photo_path');
+        $this->reset('document', 'name', 'email', 'address', 'phone', 'password', 'slug', 'is_active', 'profile_photo_path');
         $this->open_create = false;
         $this->emitTo('users.users', 'render');
         $this->emit('alert', '¡Usuario Creado Exitosamente!');

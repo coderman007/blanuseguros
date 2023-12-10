@@ -22,11 +22,11 @@
                         <x-label value="Compañía de Seguros" class="text-gray-700" />
                         <select class="w-full mb-4 rounded-md" wire:model.defer="insurance_company_id">
                             <option disabled>-- Selecciona una compañía de seguros --</option>
-                            @foreach($insurance_companies as $company)
+                            @foreach($insuranceCompanies as $company)
                             <option value="{{ $company->id }}">{{ $company->name }}</option>
                             @endforeach
                         </select>
-                        <x-input-error for="insurance_company_id" />
+                        <x-input-error for="insuranceCompanyId" />
                     </div>
 
                     <!-- Nombre -->

@@ -15,11 +15,12 @@ class InsuranceCompanySeeder extends Seeder
     {
         $insuranceCompanies = [
             [
-                'name' => 'Seguros Mundial',
-                'url' => 'https://www.segurosmundial.com.co/',
-                'address' => 'Cll. Example 123',
-                'phone' => '1254569',
-                'email' => 'correo@example.com',
+                'name'      => 'Seguros Mundial',
+                'url'       => 'https://www.segurosmundial.com.co/',
+                'address'   => 'Cll. Example 123',
+                'phone'     => '1254569',
+                'email'     => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
             [
                 'name' => 'Solunion',
@@ -27,6 +28,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
             [
                 'name' => 'Aseguradora Solidaria',
@@ -34,6 +36,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -42,6 +45,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -50,6 +54,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -58,6 +63,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -66,6 +72,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -74,6 +81,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -82,6 +90,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -90,6 +99,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -98,6 +108,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -106,6 +117,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -114,6 +126,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -122,6 +135,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -130,6 +144,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -138,6 +153,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -146,6 +162,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
             [
@@ -154,6 +171,7 @@ class InsuranceCompanySeeder extends Seeder
                 'address' => 'Cll. Example 123',
                 'phone' => '1254569',
                 'email' => 'correo@example.com',
+                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
             ],
 
 
