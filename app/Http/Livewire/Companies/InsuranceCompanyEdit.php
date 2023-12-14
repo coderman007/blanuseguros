@@ -12,7 +12,7 @@ class InsuranceCompanyEdit extends Component
     use WithFileUploads;
 
     public $company;
-    public $name, $url, $address, $phone, $email, $slug, $is_active, $image;
+    public $name, $url, $address, $phone, $email, $is_active, $image;
     public $open_edit = false;
 
     protected $rules = [
@@ -46,20 +46,19 @@ class InsuranceCompanyEdit extends Component
     {
         $this->validate();
 
-        $data = [
+        $this->company->update([
             'name'      => $this->name,
             'url'       => $this->url,
             'address'   => $this->address,
             'phone'     => $this->name,
             'email'     => $this->email,
             'is_active' => $this->is_active,
-        ];
+        ]);
 
         if ($this->image) {
-            $data['image'] = $this->image->store('companies');
+            $image_url = $this->image->store('companies');
+            $this->company->update(['profile_photo_path' => $image_url]);
         }
-
-        $this->company->update($data);
 
         $this->open_edit = false;
 

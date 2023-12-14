@@ -21,10 +21,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-
-        Storage::deleteDirectory('users');
-        Storage::makeDirectory('users');
-
         Storage::deleteDirectory('companies');
         Storage::makeDirectory('companies');
 
@@ -40,12 +36,15 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('beneficiaries');
         Storage::makeDirectory('beneficiaries');
 
+        Storage::deleteDirectory('users');
+        Storage::makeDirectory('users');
 
-        $this->call(UserSeeder::class);
+
         $this->call(InsuranceCompanySeeder::class);
         $this->call(InsuranceLineSeeder::class);
         $this->call(InsurancePlanSeeder::class);
         $this->call(PolicyHolderSeeder::class);
         $this->call(BeneficiarySeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

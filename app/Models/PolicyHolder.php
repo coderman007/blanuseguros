@@ -17,7 +17,6 @@ class PolicyHolder extends Model
         'address',
         'phone',
         'email',
-        'slug',
         'is_active',
         'image',
     ];

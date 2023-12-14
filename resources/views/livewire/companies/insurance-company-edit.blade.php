@@ -29,7 +29,7 @@
                                 <span class="font-normal text-gray-600">Cambiar la foto de la compañía</span>
                             </div>
 
-                            <input type="file" class="hidden" wire:model.lazy="image">
+                            <input type="file" class="hidden" wire:model="image">
                             <div class="absolute top-0 h-48 w-72">
                                 @if ($image)
                                 <img class="object-cover w-full h-full rounded-lg" src="{{ $image->temporaryUrl() }}" class="mb-4" alt="Imagen de Compañía">
@@ -44,35 +44,35 @@
                     <!-- Nombre de la Compañía -->
                     <div class="mt-4">
                         <x-label value="Nombre de la Compañía" class="text-gray-700" />
-                        <x-input class="w-full" wire:model.lazy="name" />
+                        <x-input class="w-full" wire:model="name" />
                         <x-input-error for="name" />
                     </div>
 
                     <!-- Correo Electrónico -->
                     <div class="mt-4">
                         <x-label value="Correo Electrónico" class="text-gray-700" />
-                        <x-input class="w-full" wire:model.lazy="email" type="email" />
+                        <x-input class="w-full" wire:model="email" type="email" />
                         <x-input-error for="email" />
                     </div>
 
                     <!-- Dirección -->
                     <div class="mt-4">
                         <x-label value="Dirección" class="text-gray-700" />
-                        <x-input class="w-full" wire:model.lazy="address" />
+                        <x-input class="w-full" wire:model="address" />
                         <x-input-error for="address" />
                     </div>
 
                     <!-- Teléfono -->
                     <div class="mt-4">
                         <x-label value="Teléfono" class="text-gray-700" />
-                        <x-input class="w-full" wire:model.lazy="phone" />
+                        <x-input class="w-full" wire:model="phone" />
                         <x-input-error for="phone" />
                     </div>
                     <!-- Activa -->
                     <div class="mt-4">
                         <x-label value="Activa?" class="text-gray-700" />
                         <div class="flex items-center">
-                            <input type="checkbox" wire:model.lazy="is_active" class="ml-2 mr-4 my-4">
+                            <input type="checkbox" wire:model="is_active" class="ml-2 mr-4 my-4">
                             <span class="{{ $is_active ? 'text-green-500' : 'text-red-500' }} text-lg">{{ $is_active ? 'Activa' : 'Inactiva' }}</span>
                         </div>
                         <x-input-error for="is_active" />

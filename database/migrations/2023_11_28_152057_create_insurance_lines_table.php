@@ -18,13 +18,12 @@ return new class extends Migration
 
             $table->string('name'); // Nombre de la línea de negocio (por ejemplo, vida, automóvil, hogar)
             $table->text('description')->nullable(); // Descripción de la línea de negocio (puede ser nulo)
-            $table->string('slug')->nullable();
             $table->boolean('is_active')->default(true);
             $table->string('image')->nullable();
             $table->timestamps();
 
 
-            $table->foreign('insurance_company_id')->references('id')->on('insurance_companies');
+            $table->foreign('insurance_company_id')->references('id')->on('insurance_companies')->onDelete('cascade');
         });
     }
 

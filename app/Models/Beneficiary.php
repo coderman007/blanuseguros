@@ -17,9 +17,8 @@ class Beneficiary extends Model
         'email',
         'phone',
         'address',
-        'slug',
-        'is_active',
         'relationship',
+        'is_active',
         'image',
     ];
 

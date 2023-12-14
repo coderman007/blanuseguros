@@ -16,7 +16,6 @@ class InsurancePlan extends Model
         'description',
         'coverage',
         'price',
-        'slug',
         'is_active',
         'image',
     ];

@@ -25,9 +25,9 @@ return new class extends Migration
             $table->decimal('premium_amount', 10, 2);
             $table->timestamps();
 
-            $table->foreign('insurance_company_id')->references('id')->on('insurance_companies');
-            $table->foreign('insurance_line_id')->references('id')->on('insurance_lines');
-            $table->foreign('policy_holder_id')->references('id')->on('policy_holders');
+            $table->foreign('insurance_company_id')->references('id')->on('insurance_companies')->onDelete('cascade');
+            $table->foreign('insurance_line_id')->references('id')->on('insurance_lines')->onDelete('cascade');
+            $table->foreign('policy_holder_id')->references('id')->on('policy_holders')->onDelete('cascade');
         });
     }
 

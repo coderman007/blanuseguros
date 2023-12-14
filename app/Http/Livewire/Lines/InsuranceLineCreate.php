@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Lines;
 
 use App\Models\InsuranceCompany;
 use App\Models\InsuranceLine;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -41,12 +40,10 @@ class InsuranceLineCreate extends Component
 
         $image_url = $this->image ? $this->image->store('lines') : null;
 
-        $slug = Str::slug($this->name);
 
         InsuranceLine::create([
             'insurance_company_id' => $this->insuranceCompanyId,
             'name' => $this->name,
-            'slug' => $slug,
             'description' => $this->description,
             'is_active' => $this->is_active,
             'image' => $image_url,

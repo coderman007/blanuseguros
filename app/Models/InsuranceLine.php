@@ -14,7 +14,6 @@ class InsuranceLine extends Model
         'insurance_company_id',
         'name',
         'description',
-        'slug',
         'is_active',
         'image',
     ];

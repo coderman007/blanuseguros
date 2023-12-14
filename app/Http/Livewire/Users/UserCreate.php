@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Users;
 
 use Livewire\Component;
 use App\Models\User;
-use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,7 +12,7 @@ class UserCreate extends Component
     use WithFileUploads;
 
     public $open_create = false;
-    public $user, $document, $name, $email, $address, $phone, $password, $slug, $is_active, $profile_photo_path;
+    public $user, $document, $name, $email, $address, $phone, $password, $is_active, $profile_photo_path;
 
     protected $rules = [
         'document'            => 'nullable',
@@ -44,13 +43,12 @@ class UserCreate extends Component
             'address'             => $this->address,
             'phone'               => $this->phone,
             'password'            => Hash::make($this->password),
-            'slug'                => Str::slug($this->name),
             'is_active'           => $this->is_active,
             'profile_photo_path'  => $image_url,
 
         ]);
 
-        $this->reset('document', 'name', 'email', 'address', 'phone', 'password', 'slug', 'is_active', 'profile_photo_path');
+        $this->reset('document', 'name', 'email', 'address', 'phone', 'password', 'is_active', 'profile_photo_path');
         $this->open_create = false;
         $this->emitTo('users.users', 'render');
         $this->emit('alert', '¡Usuario Creado Exitosamente!');

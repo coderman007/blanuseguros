@@ -23,7 +23,6 @@ class UserSeeder extends Seeder
             'address'               => 'Cll. 123 # 45-67',
             'phone'                 => '321 456 789',
             'password'              => Hash::make('coderman'),
-            'slug'                  => Str::slug('Jaime Sierra'),
             'is_active'             => true,
             'profile_photo_path'    => 'users/' . fake()->image('public/storage/users', 640, 480, null, false),
         ]);
