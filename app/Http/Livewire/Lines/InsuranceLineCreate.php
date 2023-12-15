@@ -12,9 +12,10 @@ class InsuranceLineCreate extends Component
     use WithFileUploads;
 
     public $insuranceCompanies;
+    public $insuranceLine;
     public $insuranceCompanyId;
     public $name, $description, $is_active, $image;
-    public $open = false;
+    public $open_create = false;
 
     protected $rules = [
         'insuranceCompanyId' => 'required|exists:insurance_companies,id',
@@ -57,7 +58,7 @@ class InsuranceLineCreate extends Component
     private function resetForm()
     {
         $this->reset([
-            'open',
+            'open_create',
             'insuranceCompanyId',
             'name',
             'description',

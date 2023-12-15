@@ -21,7 +21,7 @@ class UserCreate extends Component
         'address'             => 'nullable',
         'phone'               => 'nullable',
         'password'            => 'required',
-        'is_active'           => 'required',
+        'is_active'           => 'required|boolean',
         'profile_photo_path'  => 'nullable|image|max:2048',
     ];
 

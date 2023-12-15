@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\lines;
+namespace App\Http\Livewire\Lines;
 
 use App\Models\InsuranceLine;
 use Livewire\Component;
@@ -28,24 +28,6 @@ class InsuranceLines extends Component
     {
         $this->search = '';
     }
-
-    public function render()
-    {
-        $query = InsuranceLine::query();
-
-        if ($this->search) {
-            $query->where('id', 'like', '%' . $this->search . '%')
-                ->orWhere('name', 'like', '%' . $this->search . '%')
-                ->orWhere('description', 'like', '%' . $this->search . '%')
-                ->orWhere('is_active', 'like', '%' . $this->search . '%');
-        }
-
-        $insuranceLines = $query->orderBy($this->sort, $this->direction)
-            ->paginate($this->perPage);
-
-        return view('livewire.lines.insurance-lines', compact('insuranceLines'));
-    }
-
     public function order($sort)
     {
         if ($this->sort == $sort) {
@@ -54,5 +36,20 @@ class InsuranceLines extends Component
             $this->sort = $sort;
             $this->direction = "asc";
         }
+    }
+    public function render()
+    {
+        $query = InsuranceLine::query();
+
+        if ($this->search) {
+            $query->where('id', 'like', '%' . $this->search . '%')
+                ->orWhere('name', 'like', '%' . $this->search . '%')
+                ->orWhere('description', 'like', '%' . $this->search . '%');
+        }
+
+        $insuranceLines = $query->orderBy($this->sort, $this->direction)
+            ->paginate($this->perPage);
+
+        return view('livewire.lines.insurance-lines', compact('insuranceLines'));
     }
 }

@@ -23,7 +23,7 @@
                             <div class="text-center">
                                 <span class="font-normal text-gray-600">Agrega una foto del usuario</span>
                             </div>
-                            <input type="file" class="hidden" wire:model.lazy="profile_photo_path">
+                            <input type="file" class="hidden" wire:model="profile_photo_path">
                             <div class="absolute top-0 h-48 w-72">
                                 @if ($profile_photo_path)
                                 <img class="object-cover w-full h-full rounded-lg" src="{{ $profile_photo_path->temporaryUrl() }}" class="mb-4" alt="Foto de Perfil">
@@ -35,38 +35,38 @@
 
                     <!-- Documento de Identidad -->
                     <x-label value="Documento de identidad" class="text-gray-700" />
-                    <x-input class="w-full" wire:model.lazy="document" />
+                    <x-input class="w-full" wire:model="document" />
                     <x-input-error for="document" />
 
                     <!-- Nombre -->
                     <x-label value="Nombre" class="text-gray-700" />
-                    <x-input class="w-full" wire:model.lazy="name" />
+                    <x-input class="w-full" wire:model="name" />
                     <x-input-error for="name" />
 
                     <!-- Correo Electrónico -->
                     <x-label value="Correo Electrónico" class="text-gray-700" />
-                    <x-input class="w-full" wire:model.lazy="email" type="email" />
+                    <x-input class="w-full" wire:model="email" type="email" />
                     <x-input-error for="email" />
 
                     <!-- Dirección -->
                     <x-label value="Dirección" class="text-gray-700" />
-                    <x-input class="w-full" wire:model.lazy="address" />
+                    <x-input class="w-full" wire:model="address" />
                     <x-input-error for="address" />
 
                     <!-- Teléfono -->
                     <x-label value="Teléfono" class="text-gray-700" />
-                    <x-input class="w-full" wire:model.lazy="phone" />
+                    <x-input class="w-full" wire:model="phone" />
                     <x-input-error for="phone" />
 
                     <!-- Contraseña -->
                     <x-label value="Contraseña" class="text-gray-700" />
-                    <x-input class="w-full" wire:model.lazy="password" type="password" />
+                    <x-input class="w-full" wire:model="password" type="password" />
                     <x-input-error for="password" />
 
                     <!-- Estado -->
                     <x-label value="Estado" class="text-gray-700" />
                     <div class="flex items-center">
-                        <input type="checkbox" wire:model.lazy="is_active" class="ml-2 mr-4 my-4">
+                        <input type="checkbox" wire:model="is_active" class="ml-2 mr-4 my-4">
                         <span class="{{ $is_active ? 'text-green-500' : 'text-red-500' }} text-lg">{{ $is_active ? 'Activo' : 'Inactivo' }}</span>
                     </div>
                     <x-input-error for="is_active" />

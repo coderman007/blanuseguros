@@ -3,12 +3,11 @@
 namespace App\Http\Livewire\Lines;
 
 use Livewire\Component;
-use App\Models\InsuranceCompany;
 use App\Models\InsuranceLine;
 
 class InsuranceLineShow extends Component
 {
-    public $open = false;
+    public $open_show = false;
     public $company;
     public $line;
 

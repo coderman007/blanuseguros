@@ -12,24 +12,28 @@ class InsuranceLineEdit extends Component
     use WithFileUploads;
 
     public $insuranceCompanies;
-    public $lineId;
     public $insuranceLine;
-
-    public $insuranceCompanyId, $name, $description, $is_active, $image;
-    public $open = false;
+    public $insuranceCompanyId;
+    public $name, $description, $is_active, $image;
+    public $open_edit = false;
 
     protected $rules = [
-        'insuranceCompanyId'  => 'required|exists:insurance_companies,id',
-        'name'               => 'required|max:50',
-        'description'        => 'required',
-        'is_active'          => 'required|boolean',
-        'image'              => 'nullable|image|max:2048',
+        'insuranceCompanyId' => 'required|exists:insurance_companies,id',
+        'name' => 'required|max:50',
+        'description' => 'required',
+        'is_active' => 'required|boolean',
+        'image' => 'nullable|image|max:2048',
     ];
 
-
-    public function mount()
+    public function mount(InsuranceLine $line)
     {
+        $this->insuranceLine = $line;
         $this->insuranceCompanies = InsuranceCompany::all();
+        $this->insuranceCompanyId = $line->insurance_company_id;
+        $this->name = $line->name;
+        $this->description = $line->description;
+        $this->is_active = $line->is_active;
+        $this->image = $line->image;
     }
 
     public function updated($propertyName)
@@ -37,31 +41,17 @@ class InsuranceLineEdit extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function edit($lineId)
-    {
-        $this->insuranceLine = InsuranceLine::find($lineId);
-
-        $this->lineId = $lineId;
-        $this->insuranceCompanyId = $this->insuranceLine->insurance_company_id;
-        $this->name = $this->insuranceLine->name;
-        $this->description = $this->insuranceLine->description;
-        $this->is_active = $this->insuranceLine->is_active;
-        $this->image = null; // Reiniciar la imagen al editar
-        $this->open = true;
-    }
-
-    public function update()
+    public function edit()
     {
         $this->validate();
 
-        $image_url = $this->image ? $this->image->store('lines') : $this->insuranceLine->image;
-
+        // Lógica para la edición de la línea de seguro
         $this->insuranceLine->update([
             'insurance_company_id' => $this->insuranceCompanyId,
             'name' => $this->name,
             'description' => $this->description,
             'is_active' => $this->is_active,
-            'image' => $image_url,
+            // Otras actualizaciones necesarias
         ]);
 
         $this->resetForm();
@@ -72,8 +62,7 @@ class InsuranceLineEdit extends Component
     private function resetForm()
     {
         $this->reset([
-            'open',
-            'lineId',
+            'open_edit',
             'insuranceCompanyId',
             'name',
             'description',

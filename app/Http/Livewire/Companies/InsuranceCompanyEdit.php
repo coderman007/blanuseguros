@@ -57,7 +57,7 @@ class InsuranceCompanyEdit extends Component
 
         if ($this->image) {
             $image_url = $this->image->store('companies');
-            $this->company->update(['profile_photo_path' => $image_url]);
+            $this->company->update(['image' => $image_url]);
         }
 
         $this->open_edit = false;

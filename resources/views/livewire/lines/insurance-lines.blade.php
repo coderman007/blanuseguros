@@ -1,5 +1,3 @@
-<!-- resources/views/livewire/lines/insurance-lines.blade.php -->
-
 <div class="relative p-4 bg-gray-100 rounded-lg">
     <!-- Search and Title Section -->
     <div class="grid items-center w-full mt-2 md:grid-cols-12">
@@ -8,7 +6,7 @@
         </div>
         <div class="inline pl-4 pr-16 mt-4 md:pl-0 md:pr-0 md:mt-0 md:block md:col-span-4">
             <div class="text-xl font-bold text-center text-blue-400 uppercase">
-                <h1>Líneas de Seguros</h1>
+                <h1>Ramos de Seguros</h1>
             </div>
         </div>
     </div>
@@ -88,18 +86,27 @@
             <!-- Table Body -->
             <tbody>
                 @forelse ($insuranceLines as $line)
+                <div class="hidden">
+                    @if ($line->is_active)
+                    {{ $colorIsActive = 'text-green-600' }}
+                    {{ $textIsActive = 'Activo'}}
+                    @else
+                    {{ $colorIsActive = 'text-red-500' }}
+                    {{ $textIsActive = 'Inactivo'}}
+                    @endif
+                </div>
                 <tr class="text-center bg-white border-b text-md dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $line->id }}
                     </th>
                     <td class="px-6 py-4 dark:text-lg">{{ $line->name }}</td>
                     <td class="px-6 py-4 ">{{ $line->description }}</td>
-                    <td class="px-6 py-4 ">{{ $line->is_active ? 'Sí' : 'No' }}</td>
+                    <td class="px-6 py-4 dark:text-lg {{ $colorIsActive }}">{{ $textIsActive }}</td>
                     <td class="flex justify-around py-4 pl-2 pr-8">
                         <div @if ($open) class="flex pointer-events-none opacity-20" @else class="flex" @endif>
-                            {{-- <livewire:lines.insurance-line-show :line="$line" :key="time() . $line->id" />
+                            <livewire:lines.insurance-line-show :line="$line" :key="time() . $line->id" />
                             <livewire:lines.insurance-line-edit :lineId="$line->id" :key="time() . $line->id" />
-                            <livewire:lines.insurance-line-delete :lineId="$line->id" :key="time() . $line->id" /> --}}
+                            {{-- <livewire:lines.insurance-line-delete :lineId="$line->id" :key="time() . $line->id" /> --}}
                         </div>
                     </td>
                 </tr>
