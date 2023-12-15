@@ -45,13 +45,51 @@
             </div>
 
             <!-- Footer -->
-            <div class="flex w-full mt-8 h-80" style="background: rgb(22,48,81);
-        background: linear-gradient(90deg, rgba(22,48,81,1) 0%, rgba(66,87,114,1) 100%);">
-                <div class="flex items-center ml-8">
-                    <img src="{{ asset('images/logo1.png') }}" alt="Logo" class="w-full h-1/2">
+            <div class="w-full mt-8 h-80" style="background: rgb(22,48,81);
+                background: linear-gradient(90deg, rgba(22,48,81,1) 0%, rgba(66,87,114,1) 100%);">
+                <div class="grid grid-cols-5 w-full h-full text-center text-gray-100">
+                    <div class="col-span-1 p-3 mt-8">
+                        Redes sociales
+                        <hr class="w-1/2 mx-auto">
+                        <hr class="w-1/2 mx-auto">
+                        <div class="w-1/2 mx-auto text-left pl-10 pt-2">
+                            <div>Facebook</div>
+                            <div>Instagram</div>
+                            <div>Whatsapp</div>
+                        </div>
+                    </div>
+                    <div class="col-span-1 p-3 mt-8">
+                        servicios
+                        <hr class="w-1/2 mx-auto">
+                        <hr class="w-1/2 mx-auto">
+                        <div class="w-1/2 mx-auto text-left pl-2 top-2">
+                            <div>Seguros familiares</div>
+                            <div>Seguros personales</div>
+                            <div>Seguros vehiculos</div>
+                            <div>Seguros ancianos</div>
+                            <div>Seguros de vida</div>
+                        </div>
+                    </div>
+                    <div class="col-span-1 p-3 mt-8">
+                        Secciones
+                        <hr class="w-1/2 mx-auto">
+                        <hr class="w-1/2 mx-auto">
+                        <div class="w-1/2 mx-auto text-left pl-2 top-2">
+                            <div>Seccion uno</div>
+                            <div>Seccion dos</div>
+                            <div>Seccion tres</div>
+                            <div>Seccion cuatro</div>
+                            <div>Seccion cinco</div>
+                        </div>
+                    </div>
+                    <div class="col-span-2 bg-green-500 p-3">
+                        hola
+                        <hr class="w-1/2 mx-auto">
+                        <hr class="w-1/2 mx-auto">
+                    </div>
                 </div>
-                <div>
-                    {{-- Contenido del footer --}}
+                <div class="w-full bg-gray-700">
+                    copy
                 </div>
             </div>
 
