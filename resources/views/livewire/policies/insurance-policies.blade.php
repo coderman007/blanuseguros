@@ -134,7 +134,7 @@
     </h1>
     <div class="flex justify-center w-full h-auto">
         <button class="px-8 py-3 mx-auto text-2xl text-blue-500 bg-blue-200 border-2 border-blue-400 rounded-md shadow-md hover:border-blue-500 hover:shadow-blue-400 hover:text-gray-100 hover:bg-blue-300">
-            <a href="{{ route('dashboard') }}">Volver</a>
+            <a href="{{ route('policies') }}">Volver</a>
         </button>
     </div>
     @endif

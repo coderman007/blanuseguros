@@ -12,21 +12,33 @@ class InsuranceCompanies extends Component
 
     public $search;
     public $perPage = 10;
-    public $sort = "id";
-    public $direction = "desc";
+    public $lineFilter;
+    public $planFilter;
+    public $sort = 'id';
+    public $direction = 'asc';
     public $open = false;
 
     protected $listeners = ['render'];
+
 
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
-    // Restablecer propiedades de filtro de búsqueda.
     public function resetFilters()
     {
         $this->search = '';
+    }
+
+    public function order($column)
+    {
+        if ($this->sort === $column) {
+            $this->direction = $this->direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sort = $column;
+            $this->direction = 'asc';
+        }
     }
 
     public function render()
@@ -34,27 +46,17 @@ class InsuranceCompanies extends Component
         $query = InsuranceCompany::query();
 
         if ($this->search) {
-            $query->where('id', 'like', '%' . $this->search . '%')
-                ->orWhere('name', 'like', '%' . $this->search . '%')
-                ->orWhere('url', 'like', '%' . $this->search . '%')
-                ->orWhere('email', 'like', '%' . $this->search . '%')
-                ->orWhere('address', 'like', '%' . $this->search . '%')
-                ->orWhere('phone', 'like', '%' . $this->search . '%');
+            $query->where(function ($q) {
+                $q->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('email', 'like', '%' . $this->search . '%')
+                    ->orWhere('address', 'like', '%' . $this->search . '%');
+            });
         }
 
-        $insuranceCompanies = $query->orderBy($this->sort, $this->direction)
+        $companies = $query
+            ->orderBy($this->sort, $this->direction)
             ->paginate($this->perPage);
 
-        return view('livewire.companies.insurance-companies', compact('insuranceCompanies'));
-    }
-
-    public function order($sort)
-    {
-        if ($this->sort == $sort) {
-            $this->direction = ($this->direction == "desc") ? "asc" : "desc";
-        } else {
-            $this->sort = $sort;
-            $this->direction = "asc";
-        }
+        return view('livewire.companies.insurance-companies', compact('companies'));
     }
 }

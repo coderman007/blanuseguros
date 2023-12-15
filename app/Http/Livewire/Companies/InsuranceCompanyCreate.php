@@ -6,28 +6,21 @@ use App\Models\InsuranceCompany;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-
 class InsuranceCompanyCreate extends Component
 {
     use WithFileUploads;
 
-    public $name;
-    public $url;
-    public $address;
-    public $phone;
-    public $email;
-    public $is_active;
-    public $image;
+    public $name, $url, $email, $address, $phone, $is_active, $image;
     public $open = false;
 
     protected $rules = [
-        'name'      => 'required|string|max:255',
-        'url'       => 'nullable|url|max:255',
-        'address'   => 'nullable|string|max:255',
-        'phone'     => 'nullable|string|max:20',
-        'email'     => 'nullable|email|max:255',
-        'is_active' => 'nullable',
-        'image'     => 'nullable|image|max:2048',
+        'name' => 'required|max:255',
+        'url' => 'nullable|max:255',
+        'email' => 'required|email|unique:insurance_companies,email',
+        'address' => 'nullable|max:255',
+        'phone' => 'nullable|max:255',
+        'is_active' => 'required',
+        'image' => 'nullable|image|max:2048',
     ];
 
     public function updated($propertyName)
@@ -35,7 +28,7 @@ class InsuranceCompanyCreate extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function addCompany()
+    public function add()
     {
         $this->validate();
 
@@ -46,18 +39,18 @@ class InsuranceCompanyCreate extends Component
         }
 
         InsuranceCompany::create([
-            'name'      => $this->name,
-            'url'       => $this->url,
-            'address'   => $this->address,
-            'phone'     => $this->phone,
-            'email'     => $this->email,
+            'name' => $this->name,
+            'url' => $this->url,
+            'address' => $this->address,
+            'phone' => $this->phone,
+            'email' => $this->email,
             'is_active' => $this->is_active,
-            'image'     => $image_url,
+            'image' => $image_url,
         ]);
 
         $this->resetForm();
         $this->emitTo('companies.insurance-companies', 'render');
-        $this->emit('alert', '¡Compañía de Seguros Creada Exitosamente!');
+        $this->emit('alert', '¡Compañía Creada Exitosamente!');
     }
 
     private function resetForm()

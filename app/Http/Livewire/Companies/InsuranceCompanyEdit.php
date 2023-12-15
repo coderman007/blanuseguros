@@ -2,39 +2,40 @@
 
 namespace App\Http\Livewire\Companies;
 
-use Livewire\Component;
 use App\Models\InsuranceCompany;
-use Illuminate\Support\Facades\Storage;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class InsuranceCompanyEdit extends Component
 {
     use WithFileUploads;
 
+    public $companyId;
     public $company;
+
     public $name, $url, $address, $phone, $email, $is_active, $image;
-    public $open_edit = false;
+    public $open = false;
 
     protected $rules = [
-        'name'      => 'required|string|max:255',
-        'url'       => 'nullable|url|max:255',
-        'address'   => 'nullable|string|max:255',
-        'phone'     => 'nullable|string|max:20',
-        'email'     => 'required|email|max:255',
-        'is_active' => 'nullable|boolean',
-        'image'     => 'nullable|image|max:2048',
+        'name' => 'required|max:255',
+        'url' => 'nullable|max:255',
+        'address' => 'nullable|max:255',
+        'phone' => 'nullable|max:255',
+        'email' => 'required|max:255|email',
+        'is_active' => 'required|boolean',
+        'image' => 'nullable|image|max:2048',
     ];
 
-    public function mount(InsuranceCompany $company)
+    public function mount()
     {
-        $this->company      = $company;
-        $this->name         = $company->name;
-        $this->url          = $company->url;
-        $this->address      = $company->address;
-        $this->phone        = $company->phone;
-        $this->email        = $company->email;
-        $this->is_active    = $company->is_active;
-        $this->image        = $company->image;
+        $this->company = InsuranceCompany::find($this->companyId);
+
+        $this->name = $this->company->name;
+        $this->url = $this->company->url;
+        $this->address = $this->company->address;
+        $this->phone = $this->company->phone;
+        $this->email = $this->company->email;
+        $this->is_active = $this->company->is_active;
     }
 
     public function updated($propertyName)
@@ -46,25 +47,23 @@ class InsuranceCompanyEdit extends Component
     {
         $this->validate();
 
-        $this->company->update([
-            'name'      => $this->name,
-            'url'       => $this->url,
-            'address'   => $this->address,
-            'phone'     => $this->name,
-            'email'     => $this->email,
+        $data = [
+            'name' => $this->name,
+            'url' => $this->url,
+            'address' => $this->address,
+            'phone' => $this->phone,
+            'email' => $this->email,
             'is_active' => $this->is_active,
-        ]);
+        ];
 
         if ($this->image) {
-            $image_url = $this->image->store('companies');
-            $this->company->update(['image' => $image_url]);
+            $data['image'] = $this->image->store('companies');
         }
 
-        $this->open_edit = false;
+        $this->company->update($data);
 
         $this->emitTo('companies.insurance-companies', 'render');
-
-        $this->emit('alert', '¡Compañía Actualizada Exitosamente!');
+        $this->emit('alert', '¡Compañía Editada Exitosamente!');
     }
 
     public function render()

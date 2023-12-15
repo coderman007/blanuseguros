@@ -12,11 +12,11 @@ class InsuranceCompanyDelete extends Component
 
     public function deleteConfirmed()
     {
-        $insuranceCompany = InsuranceCompany::find($this->companyId);
+        $company = InsuranceCompany::find($this->companyId);
 
-        $insuranceCompany->delete();
+        $company->delete();
         $this->emitTo('companies.insurance-companies', 'render');
-        $this->emit('alert', '¡Compañía de Seguros Eliminada!');
+        $this->emit('alert', '¡Compañía Eliminada!');
         $this->open = false;
     }
 
