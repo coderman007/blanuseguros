@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Holders;
 
-use App\Models\PolicyHolder;
 use Livewire\Component;
+use App\Models\PolicyHolder;
 
-class InsuranceHolderShow extends Component
+class PolicyHolderShow extends Component
 {
-    public $open = false;
     public $holder;
+    public $open_show = false;
 
     public function mount(PolicyHolder $holder)
     {
@@ -17,6 +17,6 @@ class InsuranceHolderShow extends Component
 
     public function render()
     {
-        return view('livewire.holders.insurance-holder-show');
+        return view('livewire.holders.policy-holder-show');
     }
 }

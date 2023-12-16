@@ -49,9 +49,9 @@
                                 <img src="{{ asset('storage/' . $beneficiary->image) }}" alt="{{ $beneficiary->name }}" class="w-full h-auto rounded-lg">
                             </div>
                             <li>{{ $beneficiary->name }}</li>
-                            <li>{{$beneficiary->email}}</li>
-                            <li>{{$beneficiary->address}}</li>
-                            <li>{{$beneficiary->phone}}</li>
+                            <li>{{ $beneficiary->email }}</li>
+                            <li>{{ $beneficiary->address }}</li>
+                            <li>{{ $beneficiary->phone }}</li>
                             @empty
                             <li>No hay beneficiarios registrados</li>
                             @endforelse

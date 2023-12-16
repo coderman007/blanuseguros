@@ -7,6 +7,7 @@
             </svg>
         </div>
     </a>
+
     <x-dialog-modal wire:model="open_edit">
         <x-slot name="title">
             <h2 class="mt-3 text-2xl text-center">Editar Ramo</h2>
@@ -14,9 +15,10 @@
 
         <div class="w-1">
             <x-slot name="content">
-                <form>
+
+                <form wire:submit.prevent="update">
                     <!-- Imagen -->
-                    <div class="relative my-4">
+                    <div class="relative mt-4">
                         <label class="flex flex-col items-center justify-center h-48 gap-4 p-6 mx-auto bg-white border-2 border-gray-300 border-dashed rounded-lg shadow-md cursor-pointer w-72">
                             <div class="flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ddd" viewBox="0 0 24 24" class="w-16 h-16 text-gray-600">
@@ -24,30 +26,18 @@
                                 </svg>
                             </div>
                             <div class="text-center">
-                                <span class="font-normal text-gray-600">Agrega una imagen del ramo</span>
+                                <span class="font-normal text-gray-600">Cambiar imagen del ramo (opcional)</span>
                             </div>
                             <input type="file" class="hidden" wire:model="image">
                             <div class="absolute top-0 h-48 w-72">
                                 @if ($image)
-                                <img class="object-cover w-full h-full rounded-lg" src="{{ $image->temporaryUrl() }}" class="mb-4" alt="Foto de Perfil">
-                                @elseif ($insuranceLine->image)
-                                <img class="object-cover w-full h-full rounded-lg" src="{{ asset('storage/' . $insuranceLine->image) }}" class="mb-4" alt="Foto de Perfil">
+                                <img class="object-cover w-full h-full rounded-lg" src="{{ $image->temporaryUrl() }}" class="mb-4" alt="Image">
+                                @else
+                                <img class="object-cover w-full h-full rounded-lg" src="{{ asset('storage/' . $insuranceLine->image) }}" class="mb-4" alt="Image">
                                 @endif
                             </div>
                         </label>
                     </div>
-                    <x-input-error for="image" />
-
-
-                    <!-- Compañía de Seguros -->
-                    <x-label for="company_id" class="text-gray-700" />
-                    <select id="company_id" class="w-full mb-4 rounded-md" wire:model.lazy="insuranceCompanyId">
-                        <option disabled>Selecciona una compañía</option>
-                        @foreach($insuranceCompanies as $company)
-                        <option value="{{ $company->id }}">{{ $company->name }}</option>
-                        @endforeach
-                    </select>
-                    <x-input-error for="insuranceCompanyId" />
 
                     <!-- Nombre -->
                     <x-label value="Nombre" class="text-gray-700" />
@@ -75,8 +65,8 @@
                     <x-secondary-button wire:click="$set('open_edit', false)" class="mr-4 text-gray-500 border border-gray-500 shadow-lg hover:bg-gray-400 hover:shadow-gray-400">
                         Cancelar
                     </x-secondary-button>
-                    <x-secondary-button class="text-blue-500 border border-blue-500 shadow-lg hover:bg-blue-400 hover:shadow-blue-400 disabled:opacity-50 disabled:bg-blue-600 disabled:text-white" wire:click="edit" wire:loading.attr="disabled" wire:target="edit, image">
-                        Guardar Cambios
+                    <x-secondary-button class="text-blue-500 border border-blue-500 shadow-lg hover:bg-blue-400 hover:shadow-blue-400 disabled:opacity-50 disabled:bg-blue-600 disabled:text-white" wire:click="update" wire:loading.attr="disabled" wire:target="update, image">
+                        Actualizar
                     </x-secondary-button>
                 </div>
             </x-slot>

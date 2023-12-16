@@ -12,11 +12,11 @@ class InsurancePlanDelete extends Component
 
     public function deleteConfirmed()
     {
-        $insurancePlan = InsurancePlan::find($this->planId);
+        $plan = InsurancePlan::find($this->planId);
 
-        $insurancePlan->delete();
+        $plan->delete();
         $this->emitTo('plans.insurance-plans', 'render');
-        $this->emit('alert', '¡Plan Eliminado!');
+        $this->emit('alert', 'Plan Eliminado!');
         $this->open = false;
     }
 

@@ -41,8 +41,7 @@ class InsuranceLineCreate extends Component
 
         $image_url = $this->image ? $this->image->store('lines') : null;
 
-
-        InsuranceLine::create([
+        $insuranceLine = InsuranceLine::create([
             'insurance_company_id' => $this->insuranceCompanyId,
             'name' => $this->name,
             'description' => $this->description,

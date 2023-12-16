@@ -2,20 +2,20 @@
 
 namespace App\Http\Livewire\Plans;
 
-use Livewire\Component;
 use App\Models\InsuranceLine;
 use App\Models\InsurancePlan;
+use Livewire\Component;
 
 class InsurancePlanShow extends Component
 {
     public $open = false;
-    public $lines;
+    public $line;
     public $plan;
 
     public function mount(InsurancePlan $plan)
     {
         $this->plan = $plan;
-        $this->lines = InsuranceLine::get(['id', 'name']);
+        $this->line = InsuranceLine::get(['id', 'name']);
     }
 
     public function render()

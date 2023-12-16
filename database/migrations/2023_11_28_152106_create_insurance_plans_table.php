@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('insurance_plans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('insurance_line_id'); // Clave foránea para la relación con los ramos
+            $table->unsignedBigInteger('insurance_line_id');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->text('coverage');
             $table->decimal('price', 10, 2);
             $table->boolean('is_active')->default(true);

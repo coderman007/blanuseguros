@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Livewire\Users;
+namespace App\Http\Livewire\Holders;
 
 use Livewire\Component;
-use App\Models\User;
+use App\Models\PolicyHolder;
 use Livewire\WithPagination;
 
-class Users extends Component
+class PolicyHolders extends Component
 {
     use WithPagination;
 
-    public $search, $user;
+    public $search, $holder;
     public $sort = "id";
     public $direction = "desc";
     public $perPage = 10;
@@ -24,17 +24,19 @@ class Users extends Component
 
     public function render()
     {
-        $query = User::query();
+        $query = PolicyHolder::query();
 
         if ($this->search) {
             $query->where('id', 'like', '%' . $this->search . '%')
-                ->orWhere('name', 'like', '%' . $this->search . '%')
-                ->orWhere('document', 'like', '%' . $this->search . '%');
+                ->orWhere('document', 'like', '%' . $this->search . '%')
+                ->orWhere('first_name', 'like', '%' . $this->search . '%')
+                ->orWhere('last_name', 'like', '%' . $this->search . '%');
         }
-        $users = $query->orderBy($this->sort, $this->direction)
+
+        $holders = $query->orderBy($this->sort, $this->direction)
             ->paginate($this->perPage);
 
-        return view('livewire.users.users', compact('users'));
+        return view('livewire.holders.policy-holders', compact('holders'));
     }
 
     public function order($sort)
@@ -47,18 +49,18 @@ class Users extends Component
         }
     }
 
-    public function confirmDelete($userId)
+    public function confirmDelete($holderId)
     {
-        $this->user = User::find($userId);
+        $this->holder = PolicyHolder::find($holderId);
         $this->open = true;
     }
 
     public function deleteConfirmed()
     {
-        if ($this->user) {
-            $this->user->delete();
-            $this->emitTo('users', 'render');
-            $this->emit('alert', '¡Usuario Eliminado!');
+        if ($this->holder) {
+            $this->holder->delete();
+            $this->emitTo('holders.policy-holders', 'render');
+            $this->emit('alert', '¡Titular Eliminado!');
         }
         $this->open = false;
     }

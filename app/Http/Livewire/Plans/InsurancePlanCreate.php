@@ -12,23 +12,22 @@ class InsurancePlanCreate extends Component
     use WithFileUploads;
 
     public $lines;
-    public $line_id;
-    public $name, $description, $coverage, $price, $is_active, $image;
+    public $lineId, $name, $description, $price, $coverage, $is_active, $image;
     public $open = false;
 
     protected $rules = [
-        'line_id' => 'required|exists:insurance_lines,id',
-        'name' => 'required|max:50',
-        'description' => 'required',
-        'coverage' => 'required|numeric|min:0',
+        'lineId' => 'required|exists:insurance_lines,id',
+        'name' => 'required|string|min:5|max:255',
+        'description' => 'nullable|min:5|string|max:255',
+        'coverage' => 'required|string|min:5|max:255',
         'price' => 'required|numeric|min:0',
-        'is_active' => 'required',
+        'is_active' => 'required|boolean',
         'image' => 'nullable|image|max:2048',
     ];
 
-    public function mount(InsuranceLine $lineModel)
+    public function mount()
     {
-        $this->lines = $lineModel->all();
+        $this->lines = InsuranceLine::all();
     }
 
     public function updated($propertyName)
@@ -47,25 +46,25 @@ class InsurancePlanCreate extends Component
         }
 
         InsurancePlan::create([
-            'line_id' => $this->line_id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'coverage' => $this->coverage,
-            'price' => $this->price,
-            'is_active' => $this->is_active,
-            'image' => $image_url,
+            'insurance_line_id' => $this->lineId,
+            'name'              => $this->name,
+            'description'       => $this->description,
+            'coverage'          => $this->coverage,
+            'price'             => $this->price,
+            'is_active'         => $this->is_active,
+            'image'             => $image_url,
         ]);
 
         $this->resetForm();
         $this->emitTo('plans.insurance-plans', 'render');
-        $this->emit('alert', '¡Plan de Seguro Creado Exitosamente!');
+        $this->emit('alert', '¡Plan Creado Exitosamente!');
     }
 
     private function resetForm()
     {
         $this->reset([
             'open',
-            'line_id',
+            'lineId',
             'name',
             'description',
             'coverage',

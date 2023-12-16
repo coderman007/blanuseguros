@@ -64,6 +64,9 @@
                         <i class="ml-2 fa-solid fa-sort"></i>
                         @endif
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Compañía
+                    </th>
                     <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('is_active')">
                         Activo
                         <!-- Sorting Icons -->
@@ -101,14 +104,17 @@
                     </th>
                     <td class="px-6 py-4 dark:text-lg">{{ $line->name }}</td>
                     <td class="px-6 py-4 ">{{ $line->description }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ optional($line->insuranceCompany)->name }}</td>
                     <td class="px-6 py-4 dark:text-lg {{ $colorIsActive }}">{{ $textIsActive }}</td>
+
                     <td class="flex justify-around py-4 pl-2 pr-8">
                         <div @if ($open) class="flex pointer-events-none opacity-20" @else class="flex" @endif>
                             <livewire:lines.insurance-line-show :line="$line" :key="time() . $line->id" />
                             <livewire:lines.insurance-line-edit :lineId="$line->id" :key="time() . $line->id" />
-                            {{-- <livewire:lines.insurance-line-delete :lineId="$line->id" :key="time() . $line->id" /> --}}
+                            <livewire:lines.insurance-line-delete :lineId="$line->id" :key="time() . $line->id" />
                         </div>
                     </td>
+
                 </tr>
                 @empty
                 <tr>

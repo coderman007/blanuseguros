@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Lines;
 
+use App\Models\InsuranceCompany;
 use App\Models\InsuranceLine;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,6 +12,7 @@ class InsuranceLines extends Component
     use WithPagination;
 
     public $search;
+    public $companies;
     public $perPage = 10;
     public $sort = "id";
     public $direction = "desc";
@@ -18,12 +20,15 @@ class InsuranceLines extends Component
 
     protected $listeners = ['render'];
 
+    public function mount(InsuranceCompany $companyModel)
+    {
+        $this->companies = $companyModel->all();
+    }
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
-    // Reset search filters
     public function resetFilters()
     {
         $this->search = '';
@@ -42,7 +47,7 @@ class InsuranceLines extends Component
         $query = InsuranceLine::query();
 
         if ($this->search) {
-            $query->where('id', 'like', '%' . $this->search . '%')
+            $query->where('id', $this->search)
                 ->orWhere('name', 'like', '%' . $this->search . '%')
                 ->orWhere('description', 'like', '%' . $this->search . '%');
         }

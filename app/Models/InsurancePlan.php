@@ -20,7 +20,7 @@ class InsurancePlan extends Model
         'image',
     ];
 
-    public function line()
+    public function insuranceLine()
     {
         return $this->belongsTo(InsuranceLine::class);
     }
