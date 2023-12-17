@@ -17,6 +17,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css ">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"  rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <style>
              #contentEval{
@@ -55,9 +56,14 @@
     </head>
     <body>
         <x-home-menu />
+        <div class="z-50 sticky top-96">
+            <x-social-networks />
+        </div>
+        
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+        <x-footer />
 
         <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
