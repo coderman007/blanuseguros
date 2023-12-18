@@ -1,13 +1,13 @@
 <div>
   <x-guest-layout>
 
-    <div>
-      ¿Quienes somos?
+    <div class="bg-gray-300 w-4/5 mx-auto text-center my-6 rounded-md text-gray-700 text-4xl font-bold py-3">
+      Descubre ¿Quienes somos?
     </div>
 
-    <div id="default-carousel" class="relative w-4/5 mx-auto" data-carousel="slide">
+    <div id="default-carousel" class="relative w-4/6 mx-auto" data-carousel="slide">
       <!-- Carousel wrapper -->
-      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+      <div class="relative h-64 overflow-hidden rounded-lg md:h-96">
         <!-- Item 1 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
           <img src="{{asset('images/carrusel/img1.jpg')}}"
@@ -61,6 +61,73 @@
           <span class="sr-only">Next</span>
         </span>
       </button>
+    </div>
+    <div class="w-3/6 mx-auto grid grid-cols-2 my-20 gap-x-6">
+        <div>
+            <div class="font-semibold text-4xl">Mision</div>
+            <div>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem sit pariatur animi molestias, nemo quia error ad sint, minus suscipit quae doloribus, beatae cum ipsum exercitationem. Recusandae maxime maiores eaque?
+            </div>
+        </div>
+        <div>
+            <div class="font-semibold text-4xl">Vision</div>
+            <div>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem sit pariatur animi molestias, nemo quia error ad sint, minus suscipit quae doloribus, beatae cum ipsum exercitationem. Recusandae maxime maiores eaque?
+            </div>
+        </div>
+    </div>
+    <div class="w-3/6 mx-auto mt-10 mb-20">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos similique officia consectetur esse itaque voluptates quaerat sed dolore iusto quisquam ea libero assumenda, reprehenderit ipsa vitae soluta sint dolores eveniet.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat molestias exercitationem ad dolorum reiciendis necessitatibus ullam nesciunt. Cum, debitis. Odio quia quos iusto ipsum aliquid mollitia harum nulla temporibus illum.Laudantium ipsam, doloremque omnis suscipit necessitatibus quo ex quos tempora culpa iusto quisquam, blanditiis adipisci ducimus, autem dicta veniam quibusdam? Amet perspiciatis quo accusantium esse, dicta quaerat ut reprehenderit libero.
+    </div>
+    <div>
+        <div class="bg-gray-300 w-2/5 mx-auto text-center my-6 rounded-md text-gray-700 text-4xl font-bold py-3">
+            Aliados
+        </div>
+        <div class="w-4/6 mx-auto grid grid-cols-3 gap-x-20 gap-y-10">
+            <div class="bg-gray-300 px-3 py-6 rounded-lg">
+                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
+                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
+                <div class="px-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
+                </div>
+            </div>
+            <div class="bg-gray-300 px-3 py-6 rounded-lg">
+                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
+                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
+                <div class="px-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
+                </div>
+            </div>
+            <div class="bg-gray-300 px-3 py-6 rounded-lg">
+                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
+                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
+                <div class="px-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
+                </div>
+            </div>
+            <div class="bg-gray-300 px-3 py-6 rounded-lg">
+                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
+                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
+                <div class="px-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
+                </div>
+            </div>
+            <div class="bg-gray-300 px-3 py-6 rounded-lg">
+                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
+                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
+                <div class="px-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
+                </div>
+            </div>
+            <div class="bg-gray-300 px-3 py-6 rounded-lg">
+                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
+                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
+                <div class="px-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
