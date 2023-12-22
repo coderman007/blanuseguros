@@ -8,7 +8,7 @@ use App\Models\InsurancePolicy;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class InsurancePoliciesTable extends Component
+class InsurancePolicies extends Component
 {
     use WithPagination;
 
@@ -18,8 +18,8 @@ class InsurancePoliciesTable extends Component
     public $perPage = 10;
     public $lineFilter;
     public $planFilter;
-    public $sort = "id";
-    public $direction = "asc";
+    public $sort = 'id';
+    public $direction = 'asc';
     public $open = false;
 
     protected $listeners = ['render'];
@@ -52,13 +52,13 @@ class InsurancePoliciesTable extends Component
         $this->planFilter = '';
     }
 
-    public function order($sort)
+    public function order($column)
     {
-        if ($this->sort == $sort) {
-            $this->direction = ($this->direction == "desc") ? "asc" : "desc";
+        if ($this->sort === $column) {
+            $this->direction = $this->direction === 'asc' ? 'desc' : 'asc';
         } else {
-            $this->sort = $sort;
-            $this->direction = "asc";
+            $this->sort = $column;
+            $this->direction = 'asc';
         }
     }
 
@@ -67,28 +67,29 @@ class InsurancePoliciesTable extends Component
         $query = InsurancePolicy::query();
 
         if ($this->search) {
-            $query->where('policy_number', 'like', '%' . $this->search . '%')
-                ->orWhere('start_date', 'like', '%' . $this->search . '%')
-                ->orWhere('end_date', 'like', '%' . $this->search . '%');
+            $query->where(function ($q) {
+                $q->where('policy_number', 'like', '%' . $this->search . '%')
+                    ->orWhere('start_date', 'like', '%' . $this->search . '%')
+                    ->orWhere('end_date', 'like', '%' . $this->search . '%');
+            });
         }
 
         if ($this->lineFilter) {
-            $query->whereHas('line', function ($q) {
+            $query->whereHas('insuranceLine', function ($q) {
                 $q->where('name', $this->lineFilter);
             });
         }
 
         if ($this->planFilter) {
-            $query->whereHas('insurancePlan', function ($q) {
-                $q->where('title', $this->planFilter);
+            $query->whereHas('insuranceLine.insurancePlans', function ($q) {
+                $q->where('name', $this->planFilter);
             });
         }
 
-        $policies = $query->orderBy($this->sort, $this->direction)
+        $policies = $query->with(['insuranceLine.insurancePlans'])
+            ->orderBy($this->sort, $this->direction)
             ->paginate($this->perPage);
 
-        return view('livewire.policies.insurance-policies-table', [
-            'policies' => $policies,
-        ]);
+        return view('livewire.policies.insurance-policies', compact('policies'));
     }
 }

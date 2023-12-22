@@ -16,7 +16,9 @@ class PolicyHolder extends Model
         'last_name',
         'address',
         'phone',
-        'email'
+        'email',
+        'is_active',
+        'image',
     ];
 
     public function beneficiaries()

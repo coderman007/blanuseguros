@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('url')->nullable(); // URL de la compañía (puede ser nulo)
             $table->string('address')->nullable(); // Dirección de la compañía (puede ser nulo)
             $table->string('phone')->nullable(); // Número de teléfono de la compañía (puede ser nulo)
-            $table->string('email')->nullable(); // Dirección de correo electrónico de la compañía (puede ser nulo)
+            $table->string('email')->unique(); // Dirección de correo electrónico de la compañía (puede ser nulo)
+            $table->boolean('is_active')->default(true);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

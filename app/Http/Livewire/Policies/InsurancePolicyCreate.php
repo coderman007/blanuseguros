@@ -14,16 +14,16 @@ class InsurancePolicyCreate extends Component
     use WithFileUploads;
 
     public $insurance_companies;
-    public $lines;
+    public $insurance_lines;
     public $policy_holders;
 
-    public $insurance_company_id, $line_id, $policy_holder_id;
+    public $insurance_company_id, $insurance_line_id, $policy_holder_id;
     public $policy_number, $start_date, $end_date, $premium_amount;
     public $open = false;
 
     protected $rules = [
         'insurance_company_id' => 'required|exists:insurance_companies,id',
-        'line_id' => 'required|exists:insurance_lines,id',
+        'insurance_line_id' => 'required|exists:insurance_lines,id',
         'policy_holder_id' => 'required|exists:policy_holders,id',
         'policy_number' => 'required|unique:insurance_policies,policy_number',
         'start_date' => 'required|date',
@@ -34,7 +34,7 @@ class InsurancePolicyCreate extends Component
     public function mount()
     {
         $this->insurance_companies = InsuranceCompany::all();
-        $this->lines = InsuranceLine::all();
+        $this->insurance_lines = InsuranceLine::all();
         $this->policy_holders = PolicyHolder::all();
     }
 
@@ -49,7 +49,7 @@ class InsurancePolicyCreate extends Component
 
         InsurancePolicy::create([
             'insurance_company_id' => $this->insurance_company_id,
-            'line_id' => $this->line_id,
+            'insurance_line_id' => $this->insurance_line_id, // Add this line
             'policy_holder_id' => $this->policy_holder_id,
             'policy_number' => $this->policy_number,
             'start_date' => $this->start_date,
@@ -58,7 +58,7 @@ class InsurancePolicyCreate extends Component
         ]);
 
         $this->resetForm();
-        $this->emitTo('policies.insurance-policies-table', 'render');
+        $this->emitTo('policies.insurance-policies', 'render');
         $this->emit('alert', '¡Póliza Creada Exitosamente!');
     }
 
@@ -67,7 +67,7 @@ class InsurancePolicyCreate extends Component
         $this->reset([
             'open',
             'insurance_company_id',
-            'line_id',
+            'insurance_line_id',
             'policy_holder_id',
             'policy_number',
             'start_date',

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('insurance_company_id'); // Clave foránea para la relación con las aseguradoras
-            $table->unsignedBigInteger('line_id'); // Clave foránea para la relación con los ramos
+            $table->unsignedBigInteger('insurance_line_id'); // Clave foránea para la relación con los ramos
             $table->unsignedBigInteger('policy_holder_id'); // Clave foránea para la relación con los tomadores
 
 
@@ -25,9 +25,9 @@ return new class extends Migration
             $table->decimal('premium_amount', 10, 2);
             $table->timestamps();
 
-            $table->foreign('insurance_company_id')->references('id')->on('insurance_companies');
-            $table->foreign('line_id')->references('id')->on('insurance_lines');
-            $table->foreign('policy_holder_id')->references('id')->on('policy_holders');
+            $table->foreign('insurance_company_id')->references('id')->on('insurance_companies')->onDelete('cascade');
+            $table->foreign('insurance_line_id')->references('id')->on('insurance_lines')->onDelete('cascade');
+            $table->foreign('policy_holder_id')->references('id')->on('policy_holders')->onDelete('cascade');
         });
     }
 
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('insurane_policies');
+        Schema::dropIfExists('insurance_policies');
     }
 };

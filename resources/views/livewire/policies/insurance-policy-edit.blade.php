@@ -1,6 +1,5 @@
 <div class="my-auto">
-    <a href="#" wire:click="$set('open', true)"
-        class="flex items-center p-1 space-x-1 text-blue-400 rounded hover:text-white hover:bg-blue-500">
+    <a href="#" wire:click="$set('open', true)" class="flex items-center p-1 space-x-1 text-blue-400 rounded hover:text-white hover:bg-blue-500">
         <i class="fa-solid fa-pen-to-square"></i>
         <span class="hidden group-hover:inline">Editar</span>
     </a>
@@ -16,27 +15,27 @@
             <select class="w-full rounded-md" wire:model.lazy="insurance_company_id">
                 <option value="">Selecciona una compañía de seguros</option>
                 @foreach ($insurance_companies as $company)
-                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                <option value="{{ $company->id }}">{{ $company->name }}</option>
                 @endforeach
             </select>
             <x-input-error for="insurance_company_id" />
 
             <!-- Dropdown para Ramo -->
             <x-label value="Ramo" class="text-gray-700" />
-            <select class="w-full rounded-md" wire:model.lazy="line_id">
+            <select class="w-full rounded-md" wire:model.lazy="insurance_line_id">
                 <option value="">Selecciona un ramo</option>
-                @foreach ($lines as $line)
-                    <option value="{{ $line->id }}">{{ $line->name }}</option>
+                @foreach ($insurance_lines as $insurance_line)
+                <option value="{{ $insurance_line->id }}">{{ $insurance_line->name }}</option>
                 @endforeach
             </select>
-            <x-input-error for="line_id" />
+            <x-input-error for="insurance_line_id" />
 
             <!-- Dropdown para Tomador de Póliza -->
             <x-label value="Tomador de Póliza" class="text-gray-700" />
             <select class="w-full rounded-md" wire:model.lazy="policy_holder_id">
                 <option value="">Selecciona un tomador de póliza</option>
                 @foreach ($policy_holders as $holder)
-                    <option value="{{ $holder->id }}">{{ $holder->first_name . ' ' . $holder->last_name }}</option>
+                <option value="{{ $holder->id }}">{{ $holder->first_name . ' ' . $holder->last_name }}</option>
                 @endforeach
             </select>
             <x-input-error for="policy_holder_id" />
@@ -66,13 +65,10 @@
 
         <x-slot name="footer">
             <div class="flex justify-end mt-4">
-                <x-secondary-button wire:click="$set('open', false)"
-                    class="mr-4 text-gray-500 border border-gray-500 shadow-lg hover:shadow-gray-400">
+                <x-secondary-button wire:click="$set('open', false)" class="mr-4 text-gray-500 border border-gray-500 shadow-lg hover:shadow-gray-400">
                     Cancelar
                 </x-secondary-button>
-                <x-secondary-button
-                    class="text-blue-500 border border-blue-500 shadow-lg hover:shadow-blue-400 disabled:opacity-50 disabled:bg-blue-600 disabled:text-white"
-                    wire:click="updatePolicy" wire:loading.attr="disabled" wire:target="updatePolicy">
+                <x-secondary-button class="text-blue-500 border border-blue-500 shadow-lg hover:shadow-blue-400 disabled:opacity-50 disabled:bg-blue-600 disabled:text-white" wire:click="updatePolicy" wire:loading.attr="disabled" wire:target="updatePolicy">
                     Editar
                 </x-secondary-button>
             </div>

@@ -11,19 +11,25 @@ class InsuranceLine extends Model
 
     protected $fillable =
     [
+        'insurance_company_id',
         'name',
         'description',
-        'image',
         'is_active',
+        'image',
     ];
 
-    public function InsurancePlans()
+    public function insurancePlans()
     {
         return $this->hasMany(InsurancePlan::class);
     }
 
-    public function InsurancePolicies()
+    public function insurancePolicies()
     {
         return $this->hasMany(InsurancePolicy::class);
+    }
+
+    public function insuranceCompany()
+    {
+        return $this->belongsTo(InsuranceCompany::class);
     }
 }

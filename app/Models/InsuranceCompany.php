@@ -15,10 +15,17 @@ class InsuranceCompany extends Model
         'address',
         'phone',
         'email',
+        'is_active',
+        'image',
     ];
 
     public function insurancePolicies()
     {
         return $this->hasMany(InsurancePolicy::class);
+    }
+
+    public function insuranceLines()
+    {
+        return $this->hasMany(InsuranceLine::class);
     }
 }

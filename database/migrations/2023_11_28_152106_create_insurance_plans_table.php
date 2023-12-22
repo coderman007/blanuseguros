@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('insurance_plans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('line_id'); // Clave foránea para la relación con los ramos
+            $table->unsignedBigInteger('insurance_line_id');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->text('coverage');
             $table->decimal('price', 10, 2);
-            $table->string('image')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->string('image')->nullable();
             $table->timestamps();
 
-            $table->foreign('line_id')->references('id')->on('insurance_lines');
+            $table->foreign('insurance_line_id')->references('id')->on('insurance_lines')->onDelete('cascade');
         });
     }
 

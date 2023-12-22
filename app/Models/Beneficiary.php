@@ -12,8 +12,14 @@ class Beneficiary extends Model
     protected $fillable =
     [
         'policy_holder_id',
+        'document',
         'name',
-        'relationship'
+        'email',
+        'phone',
+        'address',
+        'relationship',
+        'is_active',
+        'image',
     ];
 
     public function policyHolder()
