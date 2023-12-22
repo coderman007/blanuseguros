@@ -11,27 +11,27 @@ class HomeController extends Controller
     {
 
         $lines = InsuranceLine::take(3)->get();
-        return view('home', compact('lines'));
+        return view('home.home', compact('lines'));
     }
 
     public function about()
     {
-        return view('about');
+        return view('home.about');
     }
 
     public function services()
     {
-        return view('services');
+        return view('home.services');
     }
 
     public function contact()
     {
-        return view('contact');
+        return view('home.contact');
     }
 
     public function blog()
     {
-        return view('blog');
+        return view('home.blog');
     }
 
     public function terms()
