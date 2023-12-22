@@ -1,22 +1,12 @@
 <div>
     <x-guest-layout>
-        <div class="m-4">
-            <x-home-menu />
-
+        <div>
             <!-- Contenido principal -->
             <!-- Video de presentación -->
             <div class="relative aspect-w-16 aspect-h-9">
                 <!-- Contenedor del video -->
                 <div class="w-full mx-auto h-[94vh]">
                     <video class="object-cover w-full h-full" src="{{ asset('video/video.mp4') }}" autoplay muted loop></video>
-                </div>
-                <!-- Redes sociales -->
-                <div class="text-3xl text-black dark:text-white social-icons absolute top-1/3 right-4 flex flex-col items-end m-4">
-                    <a href="#"><i class="fa-brands fa-whatsapp mb-2"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook mb-2"></i></a>
-                    <a href="#"><i class="fa-brands fa-telegram mb-2"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube mb-2"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram mb-2"></i></a>
                 </div>
 
                 <!-- Contenedor del mensaje superpuesto -->
@@ -43,17 +33,6 @@
                         </p>
                     </div>
                     @endforeach
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="flex w-full mt-8 h-80" style="background: rgb(22,48,81);
-        background: linear-gradient(90deg, rgba(22,48,81,1) 0%, rgba(66,87,114,1) 100%);">
-                <div class="flex items-center ml-8">
-                    <img src="{{ asset('images/logo1.png') }}" alt="Logo" class="w-full h-1/2">
-                </div>
-                <div>
-                    {{-- Contenido del footer --}}
                 </div>
             </div>
 
