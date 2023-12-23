@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
         Storage::makeDirectory('users');
 
 
+        $this->call(RoleSeeder::class);
         $this->call(InsuranceCompanySeeder::class);
         $this->call(InsuranceLineSeeder::class);
         $this->call(InsurancePlanSeeder::class);

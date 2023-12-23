@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Blanuseguros</title>
-    <link rel="icon" href="{{ asset('img/logo_ico.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/logo1.png') }}" type="image/x-icon">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -15,13 +15,12 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Styles -->
     @livewireStyles
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css ">
 
 </head>
 
@@ -32,7 +31,7 @@
 
         <!-- Page Heading -->
         @if (isset($header))
-        <header class="bg-white shadow">
+        <header class="bg-gray-300 shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
@@ -47,19 +46,19 @@
 
     @stack('modals')
 
-    @livewireScripts
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.all.min.js"></script>
     <script>
         Livewire.on('alert', function(message) {
             Swal.fire(
-                'Excelente!',
-                message,
-                'success'
+                'Excelente!'
+                , message
+                , 'success'
             );
         });
+
     </script>
-    <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/8e38c8557e.js" crossorigin="anonymous"></script>
+    @livewireScripts
 </body>
 
 </html>

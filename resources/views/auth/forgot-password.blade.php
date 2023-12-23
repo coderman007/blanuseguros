@@ -4,12 +4,12 @@
 
 
         @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
+        <div class="mb-4 font-medium text-sm text-green-600">
+            {{ session('status') }}
+        </div>
         @endif
         <div class="grid lg:grid-cols-2 justify-center m-auto rounded-lg overflow-hidden shadow-2xl lg:h-[500px] lg:w-4/6 bg-white">
-            <img src="{{ asset('img/password.jpg') }}" alt="logo" class="w-full h-full">
+            <img src="{{ asset('images/logo.jpeg') }}" alt="logo" class="w-full h-full">
             <div>
                 <form method="POST" action="{{ route('password.email') }}" class="p-1 md:p-10 lg:p-16 h-full flex flex-col justify-between">
                     @csrf

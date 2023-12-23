@@ -6,13 +6,14 @@ use Livewire\Component;
 use App\Models\User;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserCreate extends Component
 {
     use WithFileUploads;
 
     public $open_create = false;
-    public $user, $document, $name, $email, $address, $phone, $password, $is_active, $profile_photo_path;
+    public $user, $document, $name, $email, $address, $phone, $password, $is_active, $profile_photo_path, $selectedRole;
 
     protected $rules = [
         'document'            => 'nullable',
@@ -36,7 +37,7 @@ class UserCreate extends Component
             $image_url = null;
         }
 
-        User::create([
+        $newUser = User::create([
             'document'            => $this->document,
             'name'                => $this->name,
             'email'               => $this->email,
@@ -48,6 +49,8 @@ class UserCreate extends Component
 
         ]);
 
+        $newUser->assignRole($this->selectedRole);
+
         $this->reset('document', 'name', 'email', 'address', 'phone', 'password', 'is_active', 'profile_photo_path');
         $this->open_create = false;
         $this->emitTo('users.users', 'render');
@@ -56,6 +59,7 @@ class UserCreate extends Component
 
     public function render()
     {
-        return view('livewire.users.user-create');
+        $roles = Role::all();
+        return view('livewire.users.user-create', ['roles' => $roles]);
     }
 }

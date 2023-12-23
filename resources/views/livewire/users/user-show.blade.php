@@ -21,6 +21,11 @@
                         <h5 class="mb-4 text-3xl font-semibold tracking-tight text-center text-gray-900 dark:text-white">
                             {{ $user->name }}</h5>
                         <div class="text-lg text-start">
+
+                            <div class="mb-3">
+                                <h1 class="ml-2 text-sm">Rol:</h1>
+                                <p class="p-2 bg-gray-200 rounded-md">{{ $user->roles->first()->name ?? 'Sin Rol' }}</p>
+                            </div>
                             <div class="mb-3">
                                 <h1 class="ml-2 text-sm">Documento de Identidad:</h1>
                                 <p class="p-2 bg-gray-200 rounded-md">{{ $user->document }}</p>

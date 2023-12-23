@@ -6,13 +6,14 @@ use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\WithFileUploads;
+use Spatie\Permission\Models\Role;
 
 class UserEdit extends Component
 {
     use WithFileUploads;
 
     public $user;
-    public $document, $name, $email, $password, $address, $phone, $is_active, $profile_photo_path;
+    public $document, $name, $email, $password, $address, $phone, $is_active, $profile_photo_path, $selectedRole;
     public $open_edit = false;
 
     protected $rules = [
@@ -35,6 +36,7 @@ class UserEdit extends Component
         $this->address = $user->address;
         $this->phone = $user->phone;
         $this->is_active = $user->is_active;
+        $this->selectedRole = $user->roles->first()->name ?? null;
     }
 
     public function update()
@@ -52,6 +54,11 @@ class UserEdit extends Component
             'is_active' => $this->is_active,
         ];
         $this->user->update($userData);
+
+        if ($this->selectedRole) {
+            // Actualizar el rol si se ha seleccionado uno nuevo
+            $this->user->syncRoles([$this->selectedRole]);
+        }
 
         if ($this->profile_photo_path) {
             // Actualizar la imagen si se ha cargado una nueva
@@ -71,6 +78,8 @@ class UserEdit extends Component
 
     public function render()
     {
-        return view('livewire.users.user-edit');
+        $roles = Role::all();
+
+        return view('livewire.users.user-edit', ['roles' => $roles]);
     }
 }

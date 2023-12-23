@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Companies;
 use App\Models\InsuranceCompany;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Permission;
 
 class InsuranceCompanies extends Component
 {

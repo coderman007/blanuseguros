@@ -16,7 +16,6 @@ Route::get('/',         [HomeController::class, 'home'])->name('home');
 Route::get('/about',    [HomeController::class, 'about'])->name('about');
 Route::get('/blog',     [HomeController::class, 'blog'])->name('blog');
 Route::get('/contact',  [HomeController::class, 'contact'])->name('contact');
-Route::get('/policies', [HomeController::class, 'policies'])->name('policies');
 Route::get('/services', [HomeController::class, 'services'])->name('services');
 Route::get('/terms',    [HomeController::class, 'terms'])->name('terms');
 
@@ -31,12 +30,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
-
-    Route::get('/users', Users::class)->name('users');
-    Route::get('/companies', InsuranceCompanies::class)->name('companies');
-    Route::get('/holders', PolicyHolders::class)->name('holders');
-    Route::get('/lines', InsuranceLines::class)->name('lines');
-    Route::get('/plans', InsurancePlans::class)->name('plans');
-    Route::get('/policies', InsurancePolicies::class)->name('policies');
+    Route::middleware(['checkRole:admin,developer'])->group(function () {
+        Route::get('/users', Users::class)->name('users');
+        Route::get('/companies', InsuranceCompanies::class)->name('companies');
+        Route::get('/holders', PolicyHolders::class)->name('holders');
+        Route::get('/lines', InsuranceLines::class)->name('lines');
+        Route::get('/plans', InsurancePlans::class)->name('plans');
+        Route::get('/policies', InsurancePolicies::class)->name('policies');
+    });
 });

@@ -33,6 +33,16 @@
                     </div>
                     <x-input-error for="profile_photo_path" />
 
+                    <!-- Dropdown para Roles -->
+                    <x-label value="Rol" class="text-gray-700" />
+                    <select class="w-full cursor-pointer rounded-md" wire:model.lazy="selectedRole">
+                        <option value="" class="hidden">Selecciona un rol para el usuario</option>
+                        @foreach($roles as $role)
+                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error for="selectedRole" />
+
                     <!-- Documento de Identidad -->
                     <x-label value="Documento de identidad" class="text-gray-700" />
                     <x-input class="w-full" wire:model="document" />
