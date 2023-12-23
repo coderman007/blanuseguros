@@ -65,11 +65,8 @@
         <x-social-networks />
     </div>
 
-    <div class="font-sans text-gray-900 antialiased">
+    <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
         {{ $slot }}
-    </div>
-    <div class="mt-48">
-        <x-footer />
     </div>
 
     <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>

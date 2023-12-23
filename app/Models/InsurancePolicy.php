@@ -16,7 +16,11 @@ class InsurancePolicy extends Model
         'policy_number',
         'start_date',
         'end_date',
-        'premium_amount',
+        'payment_method',
+        'payment_date',
+        'value_added_tax',
+        'net_premium',
+        'total_value',
     ];
 
     public function insuranceCompany()

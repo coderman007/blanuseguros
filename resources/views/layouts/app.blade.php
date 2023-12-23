@@ -29,9 +29,9 @@
     <div class="min-h-screen bg-gray-300">
         @livewire('navigation-menu')
 
-        <div class="z-50 sticky top-96">
+        {{-- <div class="z-50 sticky top-96">
             <x-social-networks />
-        </div>
+        </div> --}}
 
         <!-- Page Heading -->
         @if (isset($header))
