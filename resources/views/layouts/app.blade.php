@@ -29,6 +29,10 @@
     <div class="min-h-screen bg-gray-300">
         @livewire('navigation-menu')
 
+        <div class="z-50 sticky top-96">
+            <x-social-networks />
+        </div>
+
         <!-- Page Heading -->
         @if (isset($header))
         <header class="bg-gray-300 shadow">
@@ -41,11 +45,14 @@
         <!-- Page Content -->
         <main>
             {{ $slot }}
+
         </main>
+        <x-footer />
     </div>
 
     @stack('modals')
 
+    @livewireScripts
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.all.min.js"></script>
     <script>
         Livewire.on('alert', function(message) {
@@ -58,7 +65,6 @@
 
     </script>
     <script src="https://kit.fontawesome.com/8e38c8557e.js" crossorigin="anonymous"></script>
-    @livewireScripts
 </body>
 
 </html>

@@ -6,6 +6,7 @@ use App\Http\Livewire\Users\Users;
 use App\Http\Livewire\Lines\InsuranceLines;
 use App\Http\Livewire\Plans\InsurancePlans;
 use App\Http\Livewire\Companies\InsuranceCompanies;
+use App\Http\Livewire\Companies\InsuranceCompanyCreate;
 use App\Http\Livewire\Holders\PolicyHolders;
 use App\Http\Livewire\Policies\InsurancePolicies;
 
@@ -18,7 +19,9 @@ Route::get('/blog',     [HomeController::class, 'blog'])->name('blog');
 Route::get('/contact',  [HomeController::class, 'contact'])->name('contact');
 Route::get('/services', [HomeController::class, 'services'])->name('services');
 Route::get('/terms',    [HomeController::class, 'terms'])->name('terms');
-
+Route::get('/lines-list',    function () {
+    return view('livewire.lines.lines-list');
+})->name('lines-list');
 
 
 //Rutas para usuarios autenticados
@@ -33,6 +36,7 @@ Route::middleware([
     Route::middleware(['checkRole:admin,developer'])->group(function () {
         Route::get('/users', Users::class)->name('users');
         Route::get('/companies', InsuranceCompanies::class)->name('companies');
+        Route::get('/companies/create', InsuranceCompanyCreate::class)->name('companies');
         Route::get('/holders', PolicyHolders::class)->name('holders');
         Route::get('/lines', InsuranceLines::class)->name('lines');
         Route::get('/plans', InsurancePlans::class)->name('plans');
