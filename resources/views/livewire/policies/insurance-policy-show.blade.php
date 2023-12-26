@@ -1,7 +1,7 @@
 <div class="relative inline-block text-center cursor-pointer group">
     <a href="#" wire:click="$set('open', true)">
-        <i class="p-1 text-green-400 rounded hover:text-white hover:bg-green-500 fa-solid fa-eye"></i>
-        <div class="absolute z-10 px-3 py-2 mb-2 text-center text-white bg-gray-700 rounded-lg opacity-0 pointer-events-none text-md group-hover:opacity-80 bottom-full -left-3">
+        <i class="p-1 text-green-600 rounded hover:text-white hover:bg-green-700 fa-solid fa-eye"></i>
+        <div class="absolute z-10 px-3 py-2 mb-2 text-center text-white bg-gray-800 rounded-lg opacity-0 pointer-events-none text-md group-hover:opacity-80 dark:bg-gray-600 dark:hover:bg-gray-700 bottom-full -left-3">
             Ver
             <svg class="absolute left-0 w-full h-2 text-black top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve">
                 <polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
@@ -12,51 +12,49 @@
     <x-dialog-modal wire:model="open">
         <x-slot name="title">
             <h5 class="mb-4 mt-4 text-3xl font-semibold tracking-tight text-center text-gray-900 dark:text-white">
-                Póliza N° {{ $policy->policy_number }}
+                Póliza N° <span class="text-blue-600">{{ $policy->policy_number }}</span>
+                @if ($policy->insuranceLine->name == 'Seguro de Automóvil')
+                <!-- Mostrar información de placa de vehículo -->
+                <p><strong class="text-blue-600">Placa del Vehículo:</strong> {{ $policy->vehicle_plate }}</p>
+                @elseif ($policy->insuranceLine->name == 'Seguro de Cumplimiento' || $policy->insuranceLine->name == 'Seguro de Responsabilidad Civil')
+                <!-- Mostrar información de número de contrato -->
+                <p><strong class="text-blue-600">Número de Contrato:</strong> {{ $policy->contract_number }}</p>
+                @endif
             </h5>
         </x-slot>
 
         <x-slot name="content">
-            <div class="px-5 pb-5">
-                <div class="mx-6">
+            <div class="bg-gray-100 dark:bg-gray-900 p-8 rounded-lg shadow-md">
+                <div class="text-center mb-6">
+                    <img src="{{ asset('storage/' . $policy->policyHolder->image) }}" alt="{{ $policy->policyHolder->first_name . $policy->policyHolder->last_name }}" class="w-32 h-32 mx-auto mb-4 rounded-full border-4 border-blue-600">
+                    <h5 class="mt-4 text-2xl font-semibold">{{ $policy->policyHolder->first_name }} {{ $policy->policyHolder->last_name }}</h5>
+                    <p class="text-gray-600 dark:text-gray-400">{{ $policy->policyHolder->email }}</p>
+                </div>
 
-                    <div class="text-lg text-start">
-                        <p><strong>Fecha de Inicio:</strong> {{ $policy->start_date }}</p>
-                        <p><strong>Fecha de Fin:</strong> {{ $policy->end_date }}</p>
-                        <p><strong>Monto de Prima:</strong> {{ $policy->premium_amount }}</p>
-                        <p><strong>Compañía:</strong> {{ $policy->insuranceLine->insuranceCompany->name }}</p>
-                        <p><strong>Ramo:</strong> {{ $policy->insuranceLine->name }}</p>
-                        <p><strong>Plan:</strong> {{ optional($policy->insuranceLine->insurancePlans->first())->name }}</p>
-                        <div>
-                            <h5 class="mb-4 mt-4 text-3xl font-semibold tracking-tight text-center text-gray-900 dark:text-white">
-                                Información del tomador de la póliza
-                            </h5>
-                            <div class="mx-auto my-2 rounded-lg w-72">
-                                <img src="{{ asset('storage/' . $policy->policyHolder->image) }}" alt="{{ $policy->policyHolder->first_name . $policy->policyHolder->last_name }}" class="w-full h-auto rounded-lg">
-                            </div>
-                            <p><strong>Nombre Completo:</strong> {{ $policy->policyHolder->first_name }} {{ $policy->policyHolder->last_name }}</p>
-                            <p><strong>correo Electrónico:</strong> {{ $policy->policyHolder->email }}</p>
-                            <p><strong>Dirección:</strong> {{ $policy->policyHolder->address }}</p>
-                            <p><strong>Teléfono:</strong> {{ $policy->policyHolder->phone }}</p>
-                        </div>
+                <div class="mb-8">
+                    <h5 class="text-xl font-semibold mb-4">Detalles del Tomador de la Póliza</h5>
+                    <p><strong class="text-blue-600">Documento de Identidad:</strong> {{ $policy->policyHolder->document }}</p>
+                    <p><strong class="text-blue-600">Dirección:</strong> {{ $policy->policyHolder->address }}</p>
+                    <p><strong class="text-blue-600">Teléfono:</strong> {{ $policy->policyHolder->phone }}</p>
+                </div>
 
-                        <h5 class="mb-4 mt-4 text-3xl font-semibold tracking-tight text-center text-gray-900 dark:text-white">
-                            Información de benficiarios
-                        </h5>
-                        <ul>
-                            @forelse ($policy->policyHolder->beneficiaries as $beneficiary)
-                            <div class="mx-auto my-2 rounded-lg w-72">
-                                <img src="{{ asset('storage/' . $beneficiary->image) }}" alt="{{ $beneficiary->name }}" class="w-full h-auto rounded-lg">
+                <div class="mb-8">
+                    <h5 class="mb-4 mt-4 text-3xl font-semibold tracking-tight text-center text-gray-900 dark:text-white">
+                        Beneficiarios
+                    </h5>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        @forelse ($policy->policyHolder->beneficiaries as $beneficiary)
+                        <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+                            <div class="relative w-full h-32 mb-4 overflow-hidden">
+                                <img src="{{ asset('storage/' . $beneficiary->image) }}" alt="{{ $beneficiary->name }}" class="w-full h-full object-cover rounded-lg">
                             </div>
-                            <li>{{ $beneficiary->name }}</li>
-                            <li>{{ $beneficiary->email }}</li>
-                            <li>{{ $beneficiary->address }}</li>
-                            <li>{{ $beneficiary->phone }}</li>
-                            @empty
-                            <li>No hay beneficiarios registrados</li>
-                            @endforelse
-                        </ul>
-                    </div>
+                            <p class="font-semibold text-gray-900 dark:text-white">{{ $beneficiary->name }}</p>
+                            <p class="text-gray-500 dark:text-gray-400">{{ $beneficiary->email }}</p>
+                        </li>
+                        @empty
+                        <li class="col-span-full">No hay beneficiarios registrados</li>
+                        @endforelse
+                    </ul>
                 </div>
             </div>
         </x-slot>

@@ -14,6 +14,6 @@ class InsuranceLineSeeder extends Seeder
      */
     public function run(): void
     {
-        InsuranceLine::factory(15)->create();
+        InsuranceLine::factory()->create();
     }
 }

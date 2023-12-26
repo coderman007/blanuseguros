@@ -17,8 +17,7 @@ class InsurancePolicyEdit extends Component
     public $insurancePolicy;
     public $insurance_lines;
 
-    public $insurance_company_id, $insurance_line_id, $policy_holder_id;
-    public $policy_number, $start_date, $end_date, $premium_amount;
+    public $insurance_company_id, $insurance_line_id, $policy_holder_id, $policy_number, $start_date, $end_date, $net_premium, $expenditures, $value_added_tax, $value_added_tax_amount, $total_value, $payment_date, $payment_method;
     public $open = false;
 
     protected $rules = [
@@ -28,7 +27,12 @@ class InsurancePolicyEdit extends Component
         'policy_number' => 'required',
         'start_date' => 'required|date',
         'end_date' => 'required|date|after:start_date',
-        'premium_amount' => 'required|numeric|min:0',
+        'net_premium' => 'required|numeric|min:0',
+        'expenditures' => 'required|numeric|min:0',
+        'value_added_tax' => 'required|numeric|min:0|max:100',
+        'total_value' => 'required|numeric|min:0',
+        'payment_date' => 'required|date|after:start_date',
+        'payment_method' => 'required',
     ];
 
     public function mount()
@@ -36,40 +40,93 @@ class InsurancePolicyEdit extends Component
         $this->insurancePolicy = InsurancePolicy::find($this->policyId);
         $this->insurance_lines = InsuranceLine::all();
 
+        $this->initializeForm();
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+
+        // Si los campos modificables se actualizan, recalcular los campos calculados
+        if (in_array($propertyName, ['net_premium', 'expenditures', 'value_added_tax'])) {
+            $this->calculateTotalValue();
+        }
+    }
+
+    public function updatePolicy()
+    {
+        try {
+            $this->validate();
+
+            $this->insurancePolicy->update([
+                'insurance_company_id' => $this->insurance_company_id,
+                'insurance_line_id' => $this->insurance_line_id,
+                'policy_holder_id' => $this->policy_holder_id,
+                'policy_number' => $this->policy_number,
+                'start_date' => $this->start_date,
+                'end_date' => $this->end_date,
+                'net_premium' => $this->net_premium,
+                'expenditures' => $this->expenditures,
+                'value_added_tax' => $this->value_added_tax,
+                'total_value' => $this->total_value,
+                'payment_date' => $this->payment_date,
+                'payment_method' => $this->payment_method,
+            ]);
+
+            $this->emitTo('policies.insurance-policies', 'render');
+            $this->emit('alert', '¡Póliza Editada Exitosamente!');
+            $this->resetForm();
+        } catch (\Exception $e) {
+            $this->emit('error', 'Error al actualizar la póliza: ' . $e->getMessage());
+        }
+    }
+
+    private function initializeForm()
+    {
         $this->insurance_company_id = $this->insurancePolicy->insurance_company_id;
         $this->insurance_line_id = $this->insurancePolicy->insurance_line_id;
         $this->policy_holder_id = $this->insurancePolicy->policy_holder_id;
         $this->policy_number = $this->insurancePolicy->policy_number;
         $this->start_date = $this->insurancePolicy->start_date;
         $this->end_date = $this->insurancePolicy->end_date;
-        $this->premium_amount = $this->insurancePolicy->premium_amount;
+        $this->net_premium = $this->insurancePolicy->net_premium;
+        $this->expenditures = $this->insurancePolicy->expenditures;
+        $this->value_added_tax = $this->insurancePolicy->value_added_tax;
+        $this->total_value = $this->insurancePolicy->total_value;
+        $this->payment_date = $this->insurancePolicy->payment_date;
+        $this->payment_method = $this->insurancePolicy->payment_method;
     }
 
-    public function updated($propertyName)
+    private function calculateTotalValue()
     {
-        $this->validateOnly($propertyName);
+        // Calcular el IVA en base al valor del campo 'net_premium' y el porcentaje de IVA
+        $this->value_added_tax_amount = ($this->net_premium * $this->value_added_tax) / 100;
+
+        // Calcular el valor total sumando la prima neta, el IVA y los gastos
+        $this->total_value = $this->net_premium + $this->value_added_tax_amount + $this->expenditures;
     }
 
-    public function updatePolicy()
+    private function resetForm()
     {
-        $this->validate();
-
-        $this->insurancePolicy->insurance_company_id = $this->insurance_company_id;
-        $this->insurancePolicy->insurance_line_id = $this->insurance_line_id;
-        $this->insurancePolicy->policy_holder_id = $this->policy_holder_id;
-        $this->insurancePolicy->policy_number = $this->policy_number;
-        $this->insurancePolicy->start_date = $this->start_date;
-        $this->insurancePolicy->end_date = $this->end_date;
-        $this->insurancePolicy->premium_amount = $this->premium_amount;
-        $this->insurancePolicy->save();
-
-        $this->emitTo('policies.insurance-policies', 'render');
-        $this->emit('alert', '¡Póliza Editada Exitosamente!');
+        $this->reset([
+            'open',
+            'insurance_company_id',
+            'insurance_line_id',
+            'policy_holder_id',
+            'policy_number',
+            'start_date',
+            'end_date',
+            'net_premium',
+            'expenditures',
+            'value_added_tax',
+            'total_value',
+            'payment_date',
+            'payment_method',
+        ]);
     }
 
     public function render()
     {
-        // Asegúrate de definir las variables $insurance_companies, $policy_holders, etc.
         return view('livewire.policies.insurance-policy-edit', [
             'insurance_companies' => InsuranceCompany::all(),
             'policy_holders' => PolicyHolder::all(),

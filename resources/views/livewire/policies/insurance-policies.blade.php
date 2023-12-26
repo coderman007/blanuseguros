@@ -46,8 +46,18 @@
                         <i class="ml-2 fa-solid fa-sort"></i>
                         @endif
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Plan
+
+                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click.prevent="order('insurance_line_id')">
+                        Ramo
+                        @if ($sort == 'insurance_line_id')
+                        @if ($direction == 'asc')
+                        <i class="ml-2 fa-solid fa-arrow-up-z-a"></i>
+                        @else
+                        <i class="ml-2 fa-solid fa-arrow-down-z-a"></i>
+                        @endif
+                        @else
+                        <i class="ml-2 fa-solid fa-sort"></i>
+                        @endif
                     </th>
 
                     <th scope="col" class="px-6 py-3 cursor-pointer" wire:click.prevent="order('start_date')">
@@ -76,17 +86,46 @@
                         @endif
                     </th>
 
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click.prevent="order('net_premium')">
                         Valor de Prima
+                        @if ($sort == 'net_premium')
+                        @if ($direction == 'asc')
+                        <i class="ml-2 fa-solid fa-arrow-up-z-a"></i>
+                        @else
+                        <i class="ml-2 fa-solid fa-arrow-down-z-a"></i>
+                        @endif
+                        @else
+                        <i class="ml-2 fa-solid fa-sort"></i>
+                        @endif
                     </th>
 
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click.prevent="order('insurance_line_id')">
                         Ramo
+                        @if ($sort == 'insurance_line_id')
+                        @if ($direction == 'asc')
+                        <i class="ml-2 fa-solid fa-arrow-up-z-a"></i>
+                        @else
+                        <i class="ml-2 fa-solid fa-arrow-down-z-a"></i>
+                        @endif
+                        @else
+                        <i class="ml-2 fa-solid fa-sort"></i>
+                        @endif
                     </th>
 
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click.prevent="order('insurance_company_id')">
                         Compañía
+                        @if ($sort == 'insurance_company_id')
+                        @if ($direction == 'asc')
+                        <i class="ml-2 fa-solid fa-arrow-up-z-a"></i>
+                        @else
+                        <i class="ml-2 fa-solid fa-arrow-down-z-a"></i>
+                        @endif
+                        @else
+                        <i class="ml-2 fa-solid fa-sort"></i>
+                        @endif
                     </th>
+
+                    <!-- Más campos según el modelo -->
 
                     <th scope="col" class="px-6 py-3">
                         Acciones
@@ -102,9 +141,10 @@
                     <td class="px-6 py-4 dark:text-lg">{{ optional($policy->insuranceLine->insurancePlans->first())->name }}</td>
                     <td class="px-6 py-4 dark:text-lg">{{ $policy->start_date }}</td>
                     <td class="px-6 py-4 dark:text-lg">{{ $policy->end_date }}</td>
-                    <td class="px-6 py-4 dark:text-lg">{{ $policy->premium_amount }}</td>
-                    <td class="px-6 py-4 dark:text-lg">{{ optional($policy->insuranceLine)->name }}</td>
-                    <td class="px-6 py-4 dark:text-lg">{{ optional($policy->insuranceCompany)->name }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $policy->net_premium }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $policy->insuranceLine->name }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $policy->insuranceCompany->name }}</td>
+                    <!-- Más campos según el modelo -->
                     <td class="flex justify-around py-4 pl-2 pr-8">
                         <div @if ($open) class="flex pointer-events-none opacity-20" @else class="flex" @endif>
                             <livewire:policies.insurance-policy-show :policy="$policy" :key="time() . $policy->id" />

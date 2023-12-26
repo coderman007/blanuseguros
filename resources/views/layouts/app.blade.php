@@ -64,6 +64,17 @@
         });
 
     </script>
+    <script>
+        Livewire.on('error', function(text) {
+            Swal.fire({
+                icon: "error"
+                , title: "Oops..."
+                , text
+                // , footer: '<a href="#">Why do I have this issue?</a>'
+            });
+        });
+
+    </script>
     <script src="https://kit.fontawesome.com/8e38c8557e.js" crossorigin="anonymous"></script>
 </body>
 

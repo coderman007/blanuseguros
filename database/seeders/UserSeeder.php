@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-
 class UserSeeder extends Seeder
 {
     /**
@@ -16,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        $admin = User::create([
             'document'              => 71369852,
             'name'                  => 'Jaime Sierra',
             'email'                 => 'coderman1980@gmail.com',
@@ -25,8 +24,16 @@ class UserSeeder extends Seeder
             'password'              => Hash::make('coderman'),
             'is_active'             => true,
             'profile_photo_path'    => 'users/' . fake()->image('public/storage/users', 640, 480, null, false),
-        ])->assignRole('admin');
-        User::factory(5)->create()->assignRole('supervisor');
-        User::factory(15)->create()->assignRole('user');
+        ]);
+
+        $admin->assignRole('admin');
+
+        User::factory(5)->create()->each(function ($user) {
+            $user->assignRole('supervisor');
+        });
+
+        User::factory(15)->create()->each(function ($user) {
+            $user->assignRole('user');
+        });
     }
 }

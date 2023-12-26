@@ -14,13 +14,16 @@ class InsurancePolicy extends Model
         'insurance_line_id',
         'policy_holder_id',
         'policy_number',
+        'vehicle_plate',
+        'contract_number',
         'start_date',
         'end_date',
-        'payment_method',
-        'payment_date',
-        'value_added_tax',
         'net_premium',
+        'expenditures',
+        'value_added_tax',
         'total_value',
+        'payment_date',
+        'payment_method',
     ];
 
     public function insuranceCompany()

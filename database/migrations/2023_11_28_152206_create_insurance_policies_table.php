@@ -20,13 +20,16 @@ return new class extends Migration
 
 
             $table->string('policy_number');
+            $table->string('vehicle_plate')->nullable();
+            $table->string('contract_number')->nullable();
             $table->date('start_date');
             $table->date('end_date');
+            $table->decimal('net_premium', 10, 2)->nullable();
+            $table->decimal('expenditures', 10, 2)->nullable();
+            $table->decimal('value_added_tax', 10, 2)->nullable();
+            $table->decimal('total_value', 10, 2);
             $table->enum('payment_method', ['Credit Card', 'Debit Card', 'Bank Transfer', 'Cash', 'Other'])->nullable();
             $table->date('payment_date')->nullable();
-            $table->decimal('value_added_tax', 10, 2)->nullable();
-            $table->decimal('net_premium', 10, 2)->nullable();
-            $table->decimal('total_value', 10, 2);
             $table->timestamps();
 
             $table->foreign('insurance_company_id')->references('id')->on('insurance_companies')->onDelete('cascade');
