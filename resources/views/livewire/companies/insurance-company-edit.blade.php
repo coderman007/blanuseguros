@@ -74,7 +74,7 @@
                     Cancelar
                 </x-secondary-button>
                 <x-secondary-button class="text-blue-500 border border-blue-500 shadow-lg hover:shadow-blue-400 disabled:opacity-50 disabled:bg-blue-600 disabled:text-white" wire:click="update" wire:loading.attr="disabled" wire:target="update">
-                    Editar
+                    Actualizar
                 </x-secondary-button>
             </div>
         </x-slot>

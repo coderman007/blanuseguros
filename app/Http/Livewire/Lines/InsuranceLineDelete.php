@@ -16,7 +16,7 @@ class InsuranceLineDelete extends Component
             $insuranceline = InsuranceLine::findOrFail($this->lineId);
             $insuranceline->delete();
 
-            $this->emitTo('lines.insurance-lines-table', 'render');
+            $this->emitTo('lines.insurance-lines', 'render');
             $this->emit('alert', '¡Ramo Eliminado Exitosamente!');
             $this->open = false;
         } catch (\Exception $e) {

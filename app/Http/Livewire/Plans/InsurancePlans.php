@@ -14,7 +14,6 @@ class InsurancePlans extends Component
     public $search;
     public $lines;
     public $perPage = 10;
-    public $lineFilter;
     public $sort = 'id';
     public $direction = 'asc';
     public $open = false;
@@ -23,9 +22,8 @@ class InsurancePlans extends Component
 
     public function mount(InsuranceLine $lineModel)
     {
-        $this->lines = $lineModel->all();
+        $this->lines = $lineModel->get();
     }
-
     public function updatingSearch()
     {
         $this->resetPage();
@@ -33,21 +31,15 @@ class InsurancePlans extends Component
 
     public function updatedLineFilter()
     {
-        $this->resetPage();
-    }
-
-    public function resetFilters()
-    {
         $this->search = '';
-        $this->lineFilter = '';
     }
 
-    public function order($column)
+    public function order($sort)
     {
-        if ($this->sort === $column) {
+        if ($this->sort === $sort) {
             $this->direction = $this->direction === 'asc' ? 'desc' : 'asc';
         } else {
-            $this->sort = $column;
+            $this->sort = $sort;
             $this->direction = 'asc';
         }
     }
@@ -57,22 +49,13 @@ class InsurancePlans extends Component
         $query = InsurancePlan::query();
 
         if ($this->search) {
-            $query->where(function ($q) {
-                $q->where('id', 'like', '%' . $this->search . '%')
-                    ->orWhere('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('description', 'like', '%' . $this->search . '%')
-                    ->orWhere('price', 'like', '%' . $this->search . '%');
-            });
+            $query->where('id', $this->search)
+                ->orWhere('name', 'like', '%' . $this->search . '%')
+                ->orWhere('description', 'like', '%' . $this->search . '%')
+                ->orWhere('price', $this->search);
         }
 
-        if ($this->lineFilter) {
-            $query->whereHas('insuranceLine', function ($q) {
-                $q->where('name', $this->lineFilter);
-            });
-        }
-
-        $plans = $query->with(['insuranceLine'])
-            ->orderBy($this->sort, $this->direction)
+        $plans = $query->orderBy($this->sort, $this->direction)
             ->paginate($this->perPage);
 
         return view('livewire.plans.insurance-plans', compact('plans'));

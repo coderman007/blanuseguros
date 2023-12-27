@@ -1,5 +1,5 @@
 <div class="relative p-4 bg-gray-100 rounded-lg">
-    <!-- Search and Title Section -->
+    <!-- Sección de Título y Búsqueda -->
     <div class="grid items-center w-full mt-2 md:grid-cols-12">
         <div class="col-span-4">
             <input type="text" name="search" wire:model="search" class="w-full bg-gray-200 border-2 border-gray-300 rounded-lg focus:ring-gray-400" placeholder="Buscar...">
@@ -11,18 +11,19 @@
         </div>
     </div>
 
-    <!-- Create Form -->
+    <!-- Componente para crear ramos -->
     <livewire:lines.insurance-line-create />
 
-    <!-- Display Insurance Lines Table -->
-    @if ($insuranceLines->count() > 0)
-    <div class="py-2 md:py-4 ml-4 text-gray-500 dark:text-gray-100">
+    <!-- Verificar si hay ramos antes de renderizar la tabla y su encabezado -->
+    @if ($lines->count() > 0)
+    <div class="py-4 ml-4 text-gray-500">
         Registros por página
-        <input type="number" name="perPage" wire:model="perPage" class="w-[70px] dark:bg-gray-800 pr-2 py-1 cursor-pointer bg-white border-none rounded-lg focus:ring-gray-400">
+        <input type="number" name="perPage" min=1 wire:model="perPage" class="w-[70px] pr-2 py-1 cursor-pointer bg-gray-200 border-2 border-gray-300 rounded-lg focus:ring-gray-400">
     </div>
+
     <div class="relative hidden md:block mt-2 md:mt-4 overflow-x-hidden shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <!-- Table Header -->
+            <!-- Cabecera de la tabla -->
             <thead class="text-sm text-center text-gray-100 uppercase bg-gray-400 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-1 py-4 cursor-pointer" wire:click.prevent="order('id')">
@@ -68,7 +69,7 @@
                         Compañía
                     </th>
                     <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('is_active')">
-                        Activo
+                        Estado
                         <!-- Sorting Icons -->
                         @if ($sort == 'is_active')
                         @if ($direction == 'asc')
@@ -86,9 +87,9 @@
                 </tr>
             </thead>
 
-            <!-- Table Body -->
+            <!-- Cuerpo de la tabla -->
             <tbody>
-                @forelse ($insuranceLines as $line)
+                @forelse ($lines as $line)
                 <div class="hidden">
                     @if ($line->is_active)
                     {{ $colorIsActive = 'text-green-600' }}
@@ -128,7 +129,7 @@
 
         <!-- Pagination Links -->
         <div class="px-3 py-1">
-            {{ $insuranceLines->links() }}
+            {{ $lines->links() }}
         </div>
     </div>
     @else

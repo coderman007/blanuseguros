@@ -11,10 +11,9 @@ class InsuranceLineCreate extends Component
 {
     use WithFileUploads;
 
-    public $insuranceCompanies;
-    public $insuranceLine;
+    public $companies;
     public $insuranceCompanyId;
-    public $name, $description, $is_active, $image;
+    public $name, $description, $is_active, $image, $unique_input_identifier;
     public $open_create = false;
 
     protected $rules = [
@@ -27,7 +26,8 @@ class InsuranceLineCreate extends Component
 
     public function mount()
     {
-        $this->insuranceCompanies = InsuranceCompany::all();
+        $this->companies = InsuranceCompany::get(['id', 'name']);
+        $this->unique_input_identifier = rand();
     }
 
     public function updated($propertyName)
@@ -38,20 +38,23 @@ class InsuranceLineCreate extends Component
     public function add()
     {
         $this->validate();
+        try {
+            $image_url = $this->image ? $this->image->store('lines') : null;
 
-        $image_url = $this->image ? $this->image->store('lines') : null;
+            InsuranceLine::create([
+                'insurance_company_id' => $this->insuranceCompanyId,
+                'name' => $this->name,
+                'description' => $this->description,
+                'is_active' => $this->is_active,
+                'image' => $image_url,
+            ]);
 
-        $insuranceLine = InsuranceLine::create([
-            'insurance_company_id' => $this->insuranceCompanyId,
-            'name' => $this->name,
-            'description' => $this->description,
-            'is_active' => $this->is_active,
-            'image' => $image_url,
-        ]);
-
-        $this->resetForm();
-        $this->emitTo('lines.insurance-lines', 'render');
-        $this->emit('alert', '¡Ramo Creado Exitosamente!');
+            $this->resetForm();
+            $this->emitTo('lines.insurance-lines', 'render');
+            $this->emit('alert', '¡Ramo Creado Exitosamente!');
+        } catch (\Exception $e) {
+            $this->emit('error', 'Error al crear el ramo: ' . $e->getMessage());
+        }
     }
 
     private function resetForm()

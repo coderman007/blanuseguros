@@ -19,9 +19,6 @@ class InsuranceLineShow extends Component
 
     public function render()
     {
-        return view('livewire.lines.insurance-line-show', [
-            'company' => $this->company,
-            'line' => $this->line,
-        ]);
+        return view('livewire.lines.insurance-line-show');
     }
 }

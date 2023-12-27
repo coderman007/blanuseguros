@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Lines;
 
 use App\Models\InsuranceLine;
-use Illuminate\Support\Facades\Storage;
+use App\Models\InsuranceCompany;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -11,25 +11,26 @@ class InsuranceLineEdit extends Component
 {
     use WithFileUploads;
 
-    public $lineId;
-    public $insuranceLine;
+    public $lineId, $line, $companies;
     public $name, $description, $is_active, $image;
     public $open_edit = false;
 
     protected $rules = [
-        'name' => 'required|max:50',
-        'description' => 'required',
-        'is_active' => 'required|boolean',
-        'image' => 'nullable|image|max:2048',
+        'line.insurance_company_id' => 'required|exists:insurance_companies,id',
+        'name'                      => 'required|string|min:5|max:255',
+        'description'               => 'nullable|min:5|string|max:255',
+        'is_active'                 => 'required|boolean',
+        'image'                     => 'nullable|image|max:2048',
     ];
 
     public function mount($lineId)
     {
         $this->lineId = $lineId;
-        $this->insuranceLine = InsuranceLine::find($lineId);
-        $this->name = $this->insuranceLine->name;
-        $this->description = $this->insuranceLine->description;
-        $this->is_active = $this->insuranceLine->is_active;
+        $this->line = insuranceLine::find($lineId);
+        $this->companies = InsuranceCompany::get(['id', 'name']);
+        $this->name = $this->line->name;
+        $this->description = $this->line->description;
+        $this->is_active = $this->line->is_active;
     }
 
     public function updated($propertyName)
@@ -40,29 +41,25 @@ class InsuranceLineEdit extends Component
     public function update()
     {
         $this->validate();
-        if ($this->image) {
-            // Actualizar la imagen si se ha cargado una nueva
-            $image_url = $this->image->store('plans');
-
-            // Eliminar la imagen antigua si existe
-            if ($this->insuranceLine->image) {
-                Storage::delete($this->insuranceLine->image);
+        try {
+            $data = [
+                'insurance_company_id'  => $this->line->insurance_company_id,
+                'name'                  => $this->name,
+                'description'           => $this->description,
+                'is_active'             => $this->is_active,
+            ];
+            if ($this->image) {
+                $data['image'] = $this->image->store('lines');
             }
 
-            $this->insuranceLine->update(['image' => $image_url]);
+            $this->line->update($data);
+            $this->open_edit = false;
+            $this->resetForm();
+            $this->emitTo('lines.insurance-lines', 'render');
+            $this->emit('alert', '¡Ramo Actualizado Exitosamente!');
+        } catch (\Exception $e) {
+            $this->emit('error', 'Error al actualizar el ramo: ' . $e->getMessage());
         }
-        // $image_url = $this->image ? $this->image->store('lines') : $this->insuranceLine->image;
-
-        $this->insuranceLine->update([
-            'name' => $this->name,
-            'description' => $this->description,
-            'is_active' => $this->is_active,
-            'image' => $image_url,
-        ]);
-
-        $this->resetForm();
-        $this->emitTo('lines.insurance-lines', 'render');
-        $this->emit('alert', '¡Ramo Actualizado Exitosamente!');
     }
 
     private function resetForm()

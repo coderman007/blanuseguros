@@ -22,7 +22,7 @@ class InsuranceLines extends Component
 
     public function mount(InsuranceCompany $companyModel)
     {
-        $this->companies = $companyModel->all();
+        $this->companies = $companyModel->get();
     }
     public function updatingSearch()
     {
@@ -42,6 +42,7 @@ class InsuranceLines extends Component
             $this->direction = "asc";
         }
     }
+
     public function render()
     {
         $query = InsuranceLine::query();
@@ -52,9 +53,9 @@ class InsuranceLines extends Component
                 ->orWhere('description', 'like', '%' . $this->search . '%');
         }
 
-        $insuranceLines = $query->orderBy($this->sort, $this->direction)
+        $lines = $query->orderBy($this->sort, $this->direction)
             ->paginate($this->perPage);
 
-        return view('livewire.lines.insurance-lines', compact('insuranceLines'));
+        return view('livewire.lines.insurance-lines', compact('lines'));
     }
 }

@@ -15,9 +15,9 @@
 
     <!-- Verificar si hay usuarios antes de renderizar la tabla y su encabezado -->
     @if ($users->count() > 0)
-    <div class="py-2 md:py-4 ml-4 text-gray-500 dark:text-gray-100">
+    <div class="py-4 ml-4 text-gray-500">
         Registros por página
-        <input type="number" name="perPage" wire:model="perPage" class="w-[70px] dark:bg-gray-800 pr-2 py-1 cursor-pointer bg-white border-none rounded-lg focus:ring-gray-400">
+        <input type="number" min=1 name="perPage" wire:model="perPage" class="w-[70px] pr-2 py-1 cursor-pointer bg-gray-200 border-2 border-gray-300 rounded-lg focus:ring-gray-400">
     </div>
 
     <div class="relative hidden md:block mt-2 md:mt-4 overflow-x-hidden shadow-md sm:rounded-lg">

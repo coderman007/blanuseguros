@@ -12,11 +12,12 @@ class InsurancePlanCreate extends Component
     use WithFileUploads;
 
     public $lines;
-    public $lineId, $name, $description, $price, $coverage, $is_active, $image;
-    public $open = false;
+    public $insuranceLineId;
+    public $name, $description, $price, $coverage, $is_active, $image, $unique_input_identifier;
+    public $open_create = false;
 
     protected $rules = [
-        'lineId' => 'required|exists:insurance_lines,id',
+        'insuranceLineId' => 'required|exists:insurance_lines,id',
         'name' => 'required|string|min:5|max:255',
         'description' => 'nullable|min:5|string|max:255',
         'coverage' => 'required|string|min:5|max:255',
@@ -27,7 +28,8 @@ class InsurancePlanCreate extends Component
 
     public function mount()
     {
-        $this->lines = InsuranceLine::all();
+        $this->lines = InsuranceLine::get(['id', 'name']);
+        $this->unique_input_identifier = rand();
     }
 
     public function updated($propertyName)
@@ -38,33 +40,32 @@ class InsurancePlanCreate extends Component
     public function add()
     {
         $this->validate();
+        try {
+            $image_url = $this->image ? $this->image->store('plans') : null;
 
-        if ($this->image) {
-            $image_url = $this->image->store('plans');
-        } else {
-            $image_url = null;
+            InsurancePlan::create([
+                'insurance_line_id' => $this->insuranceLineId,
+                'name'              => $this->name,
+                'description'       => $this->description,
+                'coverage'          => $this->coverage,
+                'price'             => $this->price,
+                'is_active'         => $this->is_active,
+                'image'             => $image_url,
+            ]);
+
+            $this->resetForm();
+            $this->emitTo('plans.insurance-plans', 'render');
+            $this->emit('alert', '¡Plan Creado Exitosamente!');
+        } catch (\Exception $e) {
+            $this->emit('error', 'Error al crear el ramo: ' . $e->getMessage());
         }
-
-        InsurancePlan::create([
-            'insurance_line_id' => $this->lineId,
-            'name'              => $this->name,
-            'description'       => $this->description,
-            'coverage'          => $this->coverage,
-            'price'             => $this->price,
-            'is_active'         => $this->is_active,
-            'image'             => $image_url,
-        ]);
-
-        $this->resetForm();
-        $this->emitTo('plans.insurance-plans', 'render');
-        $this->emit('alert', '¡Plan Creado Exitosamente!');
     }
 
     private function resetForm()
     {
         $this->reset([
-            'open',
-            'lineId',
+            'open_create',
+            'insuranceLineId',
             'name',
             'description',
             'coverage',
