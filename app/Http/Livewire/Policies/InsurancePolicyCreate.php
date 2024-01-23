@@ -3,9 +3,9 @@
 namespace App\Http\Livewire\Policies;
 
 use App\Models\InsuranceCompany;
-use App\Models\InsurancePolicy;
 use App\Models\InsuranceLine;
 use App\Models\PolicyHolder;
+use App\Models\InsurancePolicy;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -13,36 +13,37 @@ class InsurancePolicyCreate extends Component
 {
     use WithFileUploads;
 
-    public $insurance_companies;
-    public $insurance_lines;
-    public $policy_holders;
+    public $companies;
+    public $lines;
+    public $holders;
 
-    public $insurance_company_id, $insurance_line_id, $policy_holder_id;
-    public $policy_number, $vehicle_plate, $contract_number, $start_date, $end_date,  $net_premium, $expenditures, $value_added_tax, $value_added_tax_amount, $total_value, $payment_date, $payment_method;
-    public $open = false;
+    public $insuranceCompanyId, $insuranceLineId, $policyHolderId;
+    public $policyNumber, $vehiclePlate, $contractNumber, $startDate, $endDate,  $netPremium, $expenditures, $valueAddedTax, $valueAddedTaxAmount, $totalValue, $paymentDate, $paymentMethod, $isActive;
+    public $openCreate = false;
 
     protected $rules = [
-        'insurance_company_id' => 'required|exists:insurance_companies,id',
-        'insurance_line_id' => 'required|exists:insurance_lines,id',
-        'policy_holder_id' => 'required|exists:policy_holders,id',
-        'policy_number' => 'required|unique:insurance_policies,policy_number',
-        'vehicle_plate' => 'nullable|required_if:insurance_line_id,2|max:10', // Ajusta el valor 2 según el ID real del seguro de vehículo
-        'contract_number' => 'nullable|required_if:insurance_line_id,3,4|max:255', // Ajusta los valores 3 y 4 según los IDs reales de Responsabilidad Civil y Cumplimiento
-        'start_date' => 'required|date',
-        'end_date' => 'required|date|after:start_date',
-        'net_premium' => 'required|numeric|min:0',
+        'insuranceCompanyId' => 'required|exists:insurance_companies,id',
+        'insuranceLineId' => 'required|exists:insurance_lines,id',
+        'policyHolderId' => 'required|exists:policy_holders,id',
+        'policyNumber' => 'required',
+        'vehiclePlate' => 'nullable|required_if:insurance_line_id,2|max:10', // Ajusta el valor 2 según el ID real del seguro de vehículo
+        'contractNumber' => 'nullable|required_if:insurance_line_id,3,4|max:255', // Ajusta los valores 3 y 4 según los IDs reales de Responsabilidad Civil y Cumplimiento
+        'startDate' => 'required|date',
+        'endDate' => 'required|date|after:start_date',
+        'netPremium' => 'required|numeric|min:0',
         'expenditures' => 'required|numeric|min:0',
-        'value_added_tax' => 'required|numeric|min:0|max:100',
-        'total_value' => 'required|numeric|min:0',
-        'payment_date' => 'required|date|after:start_date',
-        'payment_method' => 'required',
+        'valueAddedTax' => 'required|numeric|min:0|max:100',
+        'totalValue' => 'required|numeric|min:0',
+        'paymentDate' => 'required|date|after:start_date',
+        'paymentMethod' => 'required',
+        'isActive' => 'required|boolean',
     ];
 
     public function mount()
     {
-        $this->insurance_companies = InsuranceCompany::all();
-        $this->insurance_lines = InsuranceLine::all();
-        $this->policy_holders = PolicyHolder::all();
+        $this->companies = InsuranceCompany::get(['id', 'name']);
+        $this->lines = InsuranceLine::get(['id', 'name']);
+        $this->holders = PolicyHolder::get(['id', 'first_name', 'last_name']);
     }
 
     public function updated($propertyName)
@@ -68,10 +69,10 @@ class InsurancePolicyCreate extends Component
     private function calculateTotalValue()
     {
         // Calcular el IVA en base al valor del campo 'net_premium' y el porcentaje de IVA
-        $this->value_added_tax_amount = ($this->net_premium * $this->value_added_tax) / 100;
+        $this->valueAddedTaxAmount = ($this->netPremium * $this->valueAddedTax) / 100;
 
         // Calcular el valor total sumando la prima neta, el IVA y los gastos
-        $this->total_value = $this->net_premium + $this->value_added_tax_amount + $this->expenditures;
+        $this->totalValue = $this->netPremium + $this->valueAddedTaxAmount + $this->expenditures;
     }
 
     public function add()
@@ -81,26 +82,26 @@ class InsurancePolicyCreate extends Component
             $this->calculateTotalValue();
 
             InsurancePolicy::create([
-                'insurance_company_id' => $this->insurance_company_id,
-                'insurance_line_id' => $this->insurance_line_id,
-                'policy_holder_id' => $this->policy_holder_id,
-                'policy_number' => $this->policy_number,
-                'vehicle_plate' => $this->vehicle_plate,
-                'contract_number' => $this->contract_number,
-                'start_date' => $this->start_date,
-                'end_date' => $this->end_date,
-                'net_premium' => $this->net_premium,
+                'insurance_company_id' => $this->insuranceCompanyId,
+                'insurance_line_id' => $this->insuranceLineId,
+                'policy_holder_id' => $this->policyHolderId,
+                'policy_number' => $this->policyNumber,
+                'vehicle_plate' => $this->vehiclePlate,
+                'contract_number' => $this->contractNumber,
+                'start_date' => $this->startDate,
+                'end_date' => $this->endDate,
+                'net_premium' => $this->netPremium,
                 'expenditures' => $this->expenditures,
-                'value_added_tax' => $this->value_added_tax,
-                'total_value' => $this->total_value,
-                'payment_date' => $this->payment_date,
-                'payment_method' => $this->payment_method,
+                'value_added_tax' => $this->valueAddedTax,
+                'total_value' => $this->totalValue,
+                'payment_date' => $this->paymentDate,
+                'payment_method' => $this->paymentMethod,
+                'is_active' => $this->isActive,
             ]);
             $this->resetForm();
             $this->emitTo('policies.insurance-policies', 'render');
             $this->emit('alert', '¡Póliza Creada Exitosamente!');
         } catch (\Exception $e) {
-            // Manejar el error y mostrar un mensaje al usuario
             $this->emit('error', 'Error al crear la póliza: ' . $e->getMessage());
         }
     }
@@ -108,22 +109,23 @@ class InsurancePolicyCreate extends Component
     private function resetForm()
     {
         $this->reset([
-            'open',
-            'insurance_company_id',
-            'insurance_line_id',
-            'policy_holder_id',
-            'policy_number',
-            'vehicle_plate',
-            'contract_number',
-            'start_date',
-            'end_date',
-            'net_premium',
+            'openCreate',
+            'insuranceCompanyId',
+            'insuranceLineId',
+            'policyHolderId',
+            'policyNumber',
+            'vehiclePlate',
+            'contractNumber',
+            'startDate',
+            'endDate',
+            'netPremium',
             'expenditures',
-            'value_added_tax',
-            'value_added_tax_amount',
-            'payment_date',
-            'payment_method',
-            'total_value',
+            'valueAddedTax',
+            'valueAddedTaxAmount',
+            'paymentDate',
+            'paymentMethod',
+            'totalValue',
+            'isActive',
         ]);
     }
 

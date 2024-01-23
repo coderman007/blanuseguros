@@ -12,7 +12,7 @@
     </div>
 
     <!-- Componente para creación de titulares de pólizas -->
-    {{-- <livewire:holders.policy-holder-create /> --}}
+    <livewire:holders.policy-holder-create />
 
     <!-- Verificar si hay titulares antes de renderizar la tabla y su encabezado -->
     @if ($holders->count() > 0)
@@ -131,7 +131,7 @@
                         <div @if ($open) class="flex pointer-events-none opacity-20" @else class="flex" @endif>
 
                             <livewire:holders.policy-holder-show :holder="$holder" :key="time() . $holder->id" />
-                            {{-- <livewire:holders.policy-holder-edit :holder="$holder" :key="time() . $holder->id" /> --}}
+                            <livewire:holders.policy-holder-edit :holderId="$holder->id" :key="time() . $holder->id" />
                             <div class="relative inline-block text-center cursor-pointer group">
                                 <a href="#" wire:click="confirmDelete({{ $holder->id }})">
                                     <i class="p-1 text-red-400 rounded hover:text-white hover:bg-red-400 fa-solid fa-trash"></i>

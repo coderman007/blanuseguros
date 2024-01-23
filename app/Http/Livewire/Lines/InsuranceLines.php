@@ -22,7 +22,7 @@ class InsuranceLines extends Component
 
     public function mount(InsuranceCompany $companyModel)
     {
-        $this->companies = $companyModel->get();
+        $this->companies = $companyModel->get(['id', 'name']);
     }
     public function updatingSearch()
     {

@@ -24,6 +24,7 @@ class InsurancePolicy extends Model
         'total_value',
         'payment_date',
         'payment_method',
+        'is_active',
     ];
 
     public function insuranceCompany()

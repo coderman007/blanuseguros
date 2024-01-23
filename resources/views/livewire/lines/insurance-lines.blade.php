@@ -16,6 +16,7 @@
 
     <!-- Verificar si hay ramos antes de renderizar la tabla y su encabezado -->
     @if ($lines->count() > 0)
+
     <div class="py-4 ml-4 text-gray-500">
         Registros por página
         <input type="number" name="perPage" min=1 wire:model="perPage" class="w-[70px] pr-2 py-1 cursor-pointer bg-gray-200 border-2 border-gray-300 rounded-lg focus:ring-gray-400">
@@ -115,7 +116,6 @@
                             <livewire:lines.insurance-line-delete :lineId="$line->id" :key="time() . $line->id" />
                         </div>
                     </td>
-
                 </tr>
                 @empty
                 <tr>

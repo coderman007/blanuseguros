@@ -4,16 +4,20 @@ namespace App\Http\Livewire\Holders;
 
 use App\Models\PolicyHolder;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
-class InsuranceHolderCreate extends Component
+class PolicyHolderCreate extends Component
 {
+    use WithFileUploads;
     public $document;
     public $first_name;
     public $last_name;
     public $address;
     public $phone;
     public $email;
-    public $open = false;
+    public $is_active;
+    public $image;
+    public $open_create = false;
 
     protected $rules = [
         'document' => 'required|unique:policy_holders,document',
@@ -22,6 +26,8 @@ class InsuranceHolderCreate extends Component
         'address' => 'required',
         'phone' => 'required',
         'email' => 'required|email|unique:policy_holders,email',
+        'is_active' => 'required|boolean',
+        'image'  => 'nullable|image|max:2048',
     ];
 
     public function updated($propertyName)
@@ -29,39 +35,54 @@ class InsuranceHolderCreate extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function addHolder()
+    public function add()
     {
         $this->validate();
 
-        PolicyHolder::create([
-            'document' => $this->document,
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
-            'address' => $this->address,
-            'phone' => $this->phone,
-            'email' => $this->email,
-        ]);
+        try {
 
-        $this->resetForm();
-        $this->emitTo('holders.insurance-holders', 'render');
-        $this->emit('alert', '¡Tomador de Póliza Creado Exitosamente!');
+            if ($this->image) {
+                $image_url = $this->image->store('holders');
+            } else {
+                $image_url = null;
+            }
+
+            PolicyHolder::create([
+                'document' => $this->document,
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'address' => $this->address,
+                'phone' => $this->phone,
+                'email' => $this->email,
+                'is_active' => $this->is_active,
+                'image' => $image_url,
+            ]);
+
+            $this->resetForm();
+            $this->emitTo('holders.policy-holders', 'render');
+            $this->emit('alert', '¡Titular de Póliza Creado Exitosamente!');
+        } catch (\Exception $e) {
+            $this->emit('error', 'Error al crear el titular' . $e->getMessage());
+        }
     }
 
     private function resetForm()
     {
         $this->reset([
-            'open',
+            'open_create',
             'document',
             'first_name',
             'last_name',
             'address',
             'phone',
             'email',
+            'is_active',
+            'image',
         ]);
     }
 
     public function render()
     {
-        return view('livewire.holders.insurance-holder-create');
+        return view('livewire.holders.policy-holder-create');
     }
 }

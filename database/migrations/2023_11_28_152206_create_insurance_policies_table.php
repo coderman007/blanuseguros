@@ -30,6 +30,8 @@ return new class extends Migration
             $table->decimal('total_value', 10, 2);
             $table->enum('payment_method', ['Credit Card', 'Debit Card', 'Bank Transfer', 'Cash', 'Other'])->nullable();
             $table->date('payment_date')->nullable();
+            $table->boolean('is_active')->default(true);
+
             $table->timestamps();
 
             $table->foreign('insurance_company_id')->references('id')->on('insurance_companies')->onDelete('cascade');

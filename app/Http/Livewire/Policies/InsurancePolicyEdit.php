@@ -3,9 +3,9 @@
 namespace App\Http\Livewire\Policies;
 
 use App\Models\InsuranceCompany;
-use App\Models\InsurancePolicy;
 use App\Models\InsuranceLine;
 use App\Models\PolicyHolder;
+use App\Models\InsurancePolicy;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -13,32 +13,34 @@ class InsurancePolicyEdit extends Component
 {
     use WithFileUploads;
 
-    public $policyId;
-    public $insurancePolicy;
-    public $insurance_lines;
+    public $policyId, $policy, $companies, $lines, $holders;
 
-    public $insurance_company_id, $insurance_line_id, $policy_holder_id, $policy_number, $start_date, $end_date, $net_premium, $expenditures, $value_added_tax, $value_added_tax_amount, $total_value, $payment_date, $payment_method;
-    public $open = false;
+    public $insuranceCompanyId, $insuranceLineId, $policyHolderId, $policyNumber, $startDate, $endDate, $netPremium, $expenditures, $valueAddedTax, $valueAddedTaxAmount, $totalValue, $paymentDate, $paymentMethod, $isActive;
+    public $openEdit = false;
 
     protected $rules = [
-        'insurance_company_id' => 'required|exists:insurance_companies,id',
-        'insurance_line_id' => 'required|exists:insurance_lines,id',
-        'policy_holder_id' => 'required|exists:policy_holders,id',
-        'policy_number' => 'required',
-        'start_date' => 'required|date',
-        'end_date' => 'required|date|after:start_date',
-        'net_premium' => 'required|numeric|min:0',
+        'insuranceCompanyId' => 'required|exists:insurance_companies,id',
+        'insuranceLineId' => 'required|exists:insurance_lines,id',
+        'policyHolderId' => 'required|exists:policy_holders,id',
+        'policyNumber' => 'required',
+        'startDate' => 'required|date',
+        'endDate' => 'required|date|after:start_date',
+        'netPremium' => 'required|numeric|min:0',
         'expenditures' => 'required|numeric|min:0',
-        'value_added_tax' => 'required|numeric|min:0|max:100',
-        'total_value' => 'required|numeric|min:0',
-        'payment_date' => 'required|date|after:start_date',
-        'payment_method' => 'required',
+        'valueAddedTax' => 'required|numeric|min:0|max:100',
+        'totalValue' => 'required|numeric|min:0',
+        'paymentDate' => 'required|date|after:start_date',
+        'paymentMethod' => 'required',
+        'isActive' => 'required|boolean',
     ];
 
-    public function mount()
+    public function mount($policyId)
     {
-        $this->insurancePolicy = InsurancePolicy::find($this->policyId);
-        $this->insurance_lines = InsuranceLine::all();
+        $this->policyId = $policyId;
+        $this->policy = InsurancePolicy::find($this->policyId);
+        $this->companies = InsuranceCompany::get(['id', 'name']);
+        $this->lines = InsuranceLine::get(['id', 'name']);
+        $this->holders = PolicyHolder::get(['id', 'first_name', 'last_name']);
 
         $this->initializeForm();
     }
@@ -58,23 +60,24 @@ class InsurancePolicyEdit extends Component
         try {
             $this->validate();
 
-            $this->insurancePolicy->update([
-                'insurance_company_id' => $this->insurance_company_id,
-                'insurance_line_id' => $this->insurance_line_id,
-                'policy_holder_id' => $this->policy_holder_id,
-                'policy_number' => $this->policy_number,
-                'start_date' => $this->start_date,
-                'end_date' => $this->end_date,
-                'net_premium' => $this->net_premium,
+            $this->policy->update([
+                'insurance_company_id' => $this->insuranceCompanyId,
+                'insurance_line_id' => $this->insuranceLineId,
+                'policy_holder_id' => $this->policyHolderId,
+                'policy_number' => $this->policyNumber,
+                'start_date' => $this->startDate,
+                'end_date' => $this->endDate,
+                'net_premium' => $this->netPremium,
                 'expenditures' => $this->expenditures,
-                'value_added_tax' => $this->value_added_tax,
-                'total_value' => $this->total_value,
-                'payment_date' => $this->payment_date,
-                'payment_method' => $this->payment_method,
+                'value_added_tax' => $this->valueAddedTax,
+                'total_value' => $this->totalValue,
+                'payment_date' => $this->paymentDate,
+                'payment_method' => $this->paymentMethod,
+                'is_active' => $this->isActive,
             ]);
 
             $this->emitTo('policies.insurance-policies', 'render');
-            $this->emit('alert', '¡Póliza Editada Exitosamente!');
+            $this->emit('alert', '¡Póliza Actualizada Exitosamente!');
             $this->resetForm();
         } catch (\Exception $e) {
             $this->emit('error', 'Error al actualizar la póliza: ' . $e->getMessage());
@@ -83,54 +86,52 @@ class InsurancePolicyEdit extends Component
 
     private function initializeForm()
     {
-        $this->insurance_company_id = $this->insurancePolicy->insurance_company_id;
-        $this->insurance_line_id = $this->insurancePolicy->insurance_line_id;
-        $this->policy_holder_id = $this->insurancePolicy->policy_holder_id;
-        $this->policy_number = $this->insurancePolicy->policy_number;
-        $this->start_date = $this->insurancePolicy->start_date;
-        $this->end_date = $this->insurancePolicy->end_date;
-        $this->net_premium = $this->insurancePolicy->net_premium;
-        $this->expenditures = $this->insurancePolicy->expenditures;
-        $this->value_added_tax = $this->insurancePolicy->value_added_tax;
-        $this->total_value = $this->insurancePolicy->total_value;
-        $this->payment_date = $this->insurancePolicy->payment_date;
-        $this->payment_method = $this->insurancePolicy->payment_method;
+        $this->insuranceCompanyId = $this->policy->insurance_company_id;
+        $this->insuranceLineId = $this->policy->insurance_line_id;
+        $this->policyHolderId = $this->policy->policy_holder_id;
+        $this->policyNumber = $this->policy->policy_number;
+        $this->startDate = $this->policy->start_date;
+        $this->endDate = $this->policy->end_date;
+        $this->netPremium = $this->policy->net_premium;
+        $this->expenditures = $this->policy->expenditures;
+        $this->valueAddedTax = $this->policy->value_added_tax;
+        $this->totalValue = $this->policy->total_value;
+        $this->paymentDate = $this->policy->payment_date;
+        $this->paymentMethod = $this->policy->payment_method;
+        $this->isActive = $this->policy->is_active;
     }
 
     private function calculateTotalValue()
     {
         // Calcular el IVA en base al valor del campo 'net_premium' y el porcentaje de IVA
-        $this->value_added_tax_amount = ($this->net_premium * $this->value_added_tax) / 100;
+        $this->valueAddedTaxAmount = ($this->netPremium * $this->valueAddedTax) / 100;
 
         // Calcular el valor total sumando la prima neta, el IVA y los gastos
-        $this->total_value = $this->net_premium + $this->value_added_tax_amount + $this->expenditures;
+        $this->totalValue = $this->netPremium + $this->valueAddedTaxAmount + $this->expenditures;
     }
 
     private function resetForm()
     {
         $this->reset([
-            'open',
-            'insurance_company_id',
-            'insurance_line_id',
-            'policy_holder_id',
-            'policy_number',
-            'start_date',
-            'end_date',
-            'net_premium',
+            'openEdit',
+            'insuranceCompanyId',
+            'insuranceLineId',
+            'policyHolderId',
+            'policyNumber',
+            'startDate',
+            'endDate',
+            'netPremium',
             'expenditures',
-            'value_added_tax',
-            'total_value',
-            'payment_date',
-            'payment_method',
+            'valueAddedTax',
+            'totalValue',
+            'paymentDate',
+            'paymentMethod',
+            'isActive',
         ]);
     }
 
     public function render()
     {
-        return view('livewire.policies.insurance-policy-edit', [
-            'insurance_companies' => InsuranceCompany::all(),
-            'policy_holders' => PolicyHolder::all(),
-            'insurance_lines' => $this->insurance_lines,
-        ]);
+        return view('livewire.policies.insurance-policy-edit');
     }
 }

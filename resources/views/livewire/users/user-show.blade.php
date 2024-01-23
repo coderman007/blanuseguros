@@ -13,9 +13,11 @@
         </x-slot>
         <x-slot name="content">
             <div>
+                @if($user->profile_photo_path)
                 <div class="mx-auto my-2 rounded-lg w-72">
                     <img src="{{ asset('storage/' . $user->profile_photo_path) }}" alt="{{ $user->name }}" class="w-full h-auto rounded-lg">
                 </div>
+                @endif
                 <div class="md:px-5 pb-5">
                     <div class="md:mx-6">
                         <h5 class="mb-4 text-3xl font-semibold tracking-tight text-center text-gray-900 dark:text-white">

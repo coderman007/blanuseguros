@@ -1,12 +1,12 @@
 <div class="my-auto">
     <!-- Botón para agregar ramos -->
     <button wire:click.prevent="$set('open_create', true)" class="absolute right-10 top-4 px-4 py-2 rounded-md text-blue-500 bg-blue-100 border border-blue-500 shadow-md hover:shadow-blue-400 hover:bg-blue-400 hover:text-white">
-        <i class="fa fa-solid fa-user-plus text-xl"></i> Agregar
+        <i class="fa fa-solid fa-plus text-xl"></i> Agregar
     </button>
 
     <x-dialog-modal wire:model="open_create">
         <x-slot name="title">
-            <h2 class="mt-3 text-2xl text-center">Nuevo Ramo</h2>
+            <h2 class="mt-3 text-2xl text-center">NUEVO RAMO</h2>
         </x-slot>
 
         <x-slot name="content">

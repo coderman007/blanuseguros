@@ -1,7 +1,8 @@
 <div class="my-auto">
-    <x-secondary-button wire:click="$set('open_create', true)" class="float-right dark:bg-gray-800 text-blue-500 bg-blue-100 border border-blue-500 shadow-md hover:shadow-blue-400 hover:bg-blue-400 hover:text-white">
-        <i class="fa fa-solid fa-user-plus"> Nuevo</i>
-    </x-secondary-button>
+    <!-- Botón para agregar ramos -->
+    <button wire:click.prevent="$set('open_create', true)" class="absolute right-10 top-4 px-4 py-2 rounded-md text-blue-500 bg-blue-100 border border-blue-500 shadow-md hover:shadow-blue-400 hover:bg-blue-400 hover:text-white">
+        <i class="fa fa-solid fa-user-plus text-xl"></i> Agregar
+    </button>
 
     <x-dialog-modal wire:model="open_create">
         <x-slot name="title">
@@ -13,7 +14,6 @@
 
                 <form>
                     <!-- Imágen -->
-                    <x-label value="Imagen" class="text-gray-700" />
                     <div class="relative my-4">
                         <label class="flex flex-col items-center justify-center h-48 gap-4 p-6 mx-auto bg-white border-2 border-gray-300 border-dashed rounded-lg shadow-md cursor-pointer w-72">
                             <div class="flex items-center justify-center">
@@ -22,7 +22,7 @@
                                 </svg>
                             </div>
                             <div class="text-center">
-                                <span class="font-normal text-gray-600">Agrega una imagen del titular</span>
+                                <span class="font-normal text-gray-600">Imagen para el titular de la póliza</span>
                             </div>
                             <input type="file" class="hidden" wire:model.lazy="image">
                             <div class="absolute top-0 h-48 w-72">
@@ -34,29 +34,43 @@
                     </div>
                     <x-input-error for="image" />
 
+                    <!-- Documento -->
+                    <x-label value="Documento" class="text-gray-700" />
+                    <x-input class="w-full" wire:model.lazy="document" />
+                    <x-input-error for="document" />
+
                     <!-- Nombre -->
                     <x-label value="Nombre" class="text-gray-700" />
-                    <x-input class="w-full" wire:model.lazy="name" />
-                    <x-input-error for="name" />
+                    <x-input class="w-full" wire:model.lazy="first_name" />
+                    <x-input-error for="first_name" />
 
-                    <!-- Correo Electrónico -->
-                    <x-label value="Correo Electrónico" class="text-gray-700" />
-                    <x-input class="w-full" wire:model.lazy="email" type="email" />
-                    <x-input-error for="email" />
+                    <!-- Apellido -->
+                    <x-label value="Apellido" class="text-gray-700" />
+                    <x-input class="w-full" wire:model.lazy="last_name" />
+                    <x-input-error for="last_name" />
+
+                    <!-- Dirección -->
+                    <x-label value="Dirección" class="text-gray-700" />
+                    <x-input class="w-full" wire:model.lazy="address" />
+                    <x-input-error for="address" />
 
                     <!-- Teléfono -->
                     <x-label value="Teléfono" class="text-gray-700" />
                     <x-input class="w-full" wire:model.lazy="phone" />
                     <x-input-error for="phone" />
 
-                    <!-- Dropdown para Estado -->
+                    <!-- Correo Electrónico -->
+                    <x-label value="Correo Electrónico" class="text-gray-700" />
+                    <x-input class="w-full" wire:model.lazy="email" type="email" />
+                    <x-input-error for="email" />
+
+                    <!-- Estado -->
                     <x-label value="Estado" class="text-gray-700" />
-                    <select class="w-full mb-4 rounded-md" wire:model.lazy="status">
-                        <option disabled>Selecciona un estado</option>
-                        <option value="Activo">Activo</option>
-                        <option value="Inactivo">Inactivo</option>
-                    </select>
-                    <x-input-error for="status" />
+                    <div class="flex items-center">
+                        <input type="checkbox" wire:model="is_active" class="ml-2 mr-4 my-4">
+                        <span class="{{ $is_active ? 'text-green-500' : 'text-red-500' }} text-lg">{{ $is_active ? 'Activo' : 'Inactivo' }}</span>
+                    </div>
+                    <x-input-error for="is_active" />
                 </form>
 
             </x-slot>
@@ -66,7 +80,7 @@
                     <x-secondary-button wire:click="$set('open_create', false)" class="mr-4 text-gray-500 border border-gray-500 shadow-lg hover:bg-gray-400 hover:shadow-gray-400">
                         Cancelar
                     </x-secondary-button>
-                    <x-secondary-button class="text-blue-500 border border-blue-500 shadow-lg hover:bg-blue-400 hover:shadow-blue-400 disabled:opacity-50 disabled:bg-blue-600 disabled:text-white" wire:click="create_holder" wire:loading.attr="disabled" wire:target="create_holder, image">
+                    <x-secondary-button class="text-blue-500 border border-blue-500 shadow-lg hover:bg-blue-400 hover:shadow-blue-400 disabled:opacity-50 disabled:bg-blue-600 disabled:text-white" wire:click="add" wire:loading.attr="disabled" wire:target="add, image">
                         Agregar
                     </x-secondary-button>
                 </div>

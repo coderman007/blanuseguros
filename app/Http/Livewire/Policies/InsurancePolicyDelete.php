@@ -7,17 +7,17 @@ use Livewire\Component;
 
 class InsurancePolicyDelete extends Component
 {
-    public $open = false;
+    public $openDelete = false;
     public $policyId;
 
     public function deleteConfirmed()
     {
-        $insurancePolicy = InsurancePolicy::find($this->policyId);
+        $policy = InsurancePolicy::findOrFail($this->policyId);
 
-        $insurancePolicy->delete();
+        $policy->delete();
         $this->emitTo('policies.insurance-policies', 'render');
         $this->emit('alert', '¡Póliza Eliminada!');
-        $this->open = false;
+        $this->openDelete = false;
     }
 
     public function render()

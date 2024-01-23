@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Policies;
 
-use App\Models\InsurancePlan;
+use App\Models\InsuranceCompany;
 use App\Models\InsuranceLine;
+use App\Models\PolicyHolder;
 use App\Models\InsurancePolicy;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,21 +14,21 @@ class InsurancePolicies extends Component
     use WithPagination;
 
     public $search;
+    public $companies;
     public $lines;
-    public $plans;
+    public $holders;
     public $perPage = 10;
-    public $lineFilter;
-    public $planFilter;
     public $sort = 'id';
     public $direction = 'asc';
     public $open = false;
 
     protected $listeners = ['render'];
 
-    public function mount(InsuranceLine $lineModel, InsurancePlan $planModel)
+    public function mount(InsuranceCompany $companyModel, InsuranceLine $lineModel, PolicyHolder $holderModel)
     {
-        $this->lines = $lineModel->all();
-        $this->plans = $planModel->all();
+        $this->companies = $companyModel->get(['id', 'name']);
+        $this->lines = $lineModel->get(['id', 'name']);
+        $this->holders = $holderModel->get(['id', 'first_name', 'last_name']);
     }
 
     public function updatingSearch()
@@ -35,29 +36,17 @@ class InsurancePolicies extends Component
         $this->resetPage();
     }
 
-    public function updatedLineFilter()
-    {
-        $this->resetPage();
-    }
-
-    public function updatedPlanFilter()
-    {
-        $this->resetPage();
-    }
-
     public function resetFilters()
     {
         $this->search = '';
-        $this->lineFilter = '';
-        $this->planFilter = '';
     }
 
-    public function order($column)
+    public function order($sort)
     {
-        if ($this->sort === $column) {
+        if ($this->sort === $sort) {
             $this->direction = $this->direction === 'asc' ? 'desc' : 'asc';
         } else {
-            $this->sort = $column;
+            $this->sort = $sort;
             $this->direction = 'asc';
         }
     }
@@ -67,27 +56,13 @@ class InsurancePolicies extends Component
         $query = InsurancePolicy::query();
 
         if ($this->search) {
-            $query->where(function ($q) {
-                $q->where('policy_number', 'like', '%' . $this->search . '%')
-                    ->orWhere('start_date', 'like', '%' . $this->search . '%')
-                    ->orWhere('end_date', 'like', '%' . $this->search . '%');
-            });
+            $query->where('id', $this->search)
+                ->orWhere('policy_number', 'like', '%' . $this->search . '%')
+                ->orWhere('start_date', 'like', '%' . $this->search . '%')
+                ->orWhere('end_date', 'like', '%' . $this->search . '%');
         }
 
-        if ($this->lineFilter) {
-            $query->whereHas('insuranceLine', function ($q) {
-                $q->where('name', $this->lineFilter);
-            });
-        }
-
-        if ($this->planFilter) {
-            $query->whereHas('insuranceLine.insurancePlans', function ($q) {
-                $q->where('name', $this->planFilter);
-            });
-        }
-
-        $policies = $query->with(['insuranceLine.insurancePlans'])
-            ->orderBy($this->sort, $this->direction)
+        $policies = $query->orderBy($this->sort, $this->direction)
             ->paginate($this->perPage);
 
         return view('livewire.policies.insurance-policies', compact('policies'));

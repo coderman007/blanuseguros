@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Lines;
 
-use App\Models\InsuranceLine;
 use App\Models\InsuranceCompany;
+use App\Models\InsuranceLine;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 

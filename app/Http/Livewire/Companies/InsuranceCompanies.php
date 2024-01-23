@@ -32,12 +32,12 @@ class InsuranceCompanies extends Component
         $this->search = '';
     }
 
-    public function order($column)
+    public function order($sort)
     {
-        if ($this->sort === $column) {
+        if ($this->sort === $sort) {
             $this->direction = $this->direction === 'asc' ? 'desc' : 'asc';
         } else {
-            $this->sort = $column;
+            $this->sort = $sort;
             $this->direction = 'asc';
         }
     }
