@@ -1,5 +1,3 @@
-<!-- resources/views/livewire/policies/insurance-policies.blade.php -->
-
 <div class="relative p-4 bg-gray-100 rounded-lg">
     <!-- Verificar si hay pólizas antes de renderizar la tabla y su encabezado -->
     <div class="grid items-center w-full mt-2 md:grid-cols-12">
@@ -12,6 +10,8 @@
             </div>
         </div>
     </div>
+
+    <livewire:policies.insurance-policy-create />
 
     @if ($policies->count() > 0)
     <div class="py-4 ml-4 text-gray-500">
@@ -94,8 +94,10 @@
 
                     <td class="flex justify-around py-4 pl-2 pr-8">
                         <div @if ($open) class="flex pointer-events-none opacity-20" @else class="flex" @endif>
-                            <!-- Agrega aquí los componentes de Livewire para editar, mostrar y eliminar -->
-                        </div>
+                            <livewire:policies.insurance-policy-show :policy="$policy" :key="time() . $policy->id" />
+                            <livewire:policies.insurance-policy-edit :policyId="$policy->id" :key="time() . $policy->id" />
+                            <livewire:policies.insurance-policy-delete :policyId="$policy->id" :key="time() . $policy->id" />
+                    </div>
                     </td>
                 </tr>
                 @empty

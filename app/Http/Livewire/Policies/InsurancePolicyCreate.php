@@ -26,8 +26,8 @@ class InsurancePolicyCreate extends Component
         'insuranceLineId' => 'required|exists:insurance_lines,id',
         'policyHolderId' => 'required|exists:policy_holders,id',
         'policyNumber' => 'required',
-        'vehiclePlate' => 'nullable|required_if:insurance_line_id,2|max:10', // Ajusta el valor 2 según el ID real del seguro de vehículo
-        'contractNumber' => 'nullable|required_if:insurance_line_id,3,4|max:255', // Ajusta los valores 3 y 4 según los IDs reales de Responsabilidad Civil y Cumplimiento
+        'vehiclePlate' => 'nullable|required_if:insurance_line_id,20|max:10',
+        'contractNumber' => 'nullable|required_if:insurance_line_id,18,19|max:255',
         'startDate' => 'required|date',
         'endDate' => 'required|date|after:start_date',
         'netPremium' => 'required|numeric|min:0',

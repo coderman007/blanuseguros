@@ -1,4 +1,4 @@
-<div class="my-auto">
+<div>
     <!-- Botón para agregar pólizas -->
     <button wire:click.prevent="$set('openCreate', true)" class="absolute right-10 top-4 px-4 py-2 rounded-md text-blue-500 bg-blue-100 border border-blue-500 shadow-md hover:shadow-blue-400 hover:bg-blue-400 hover:text-white">
         <i class="fa fa-solid fa-plus text-xl"></i> Agregar
