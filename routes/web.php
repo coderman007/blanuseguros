@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Users\Users;
 use App\Http\Livewire\Lines\InsuranceLines;
+use App\Http\Livewire\Lines\LinesList;
 use App\Http\Livewire\Plans\InsurancePlans;
 use App\Http\Livewire\Companies\InsuranceCompanies;
 use App\Http\Livewire\Companies\InsuranceCompanyCreate;
@@ -19,9 +20,7 @@ Route::get('/blog',     [HomeController::class, 'blog'])->name('blog');
 Route::get('/contact',  [HomeController::class, 'contact'])->name('contact');
 Route::get('/services', [HomeController::class, 'services'])->name('services');
 Route::get('/terms',    [HomeController::class, 'terms'])->name('terms');
-Route::get('/lines-list',    function () {
-    return view('livewire.lines.lines-list');
-})->name('lines-list');
+Route::get('/lines-list', [HomeController::class, 'linesList'])->name('lines-list');
 
 
 //Rutas para usuarios autenticados

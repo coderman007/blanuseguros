@@ -1,8 +1,9 @@
 <div>
   <x-guest-layout>
 
+    <!-- Sección de presentación -->
     <div class="bg-gray-300 w-4/5 mx-auto text-center my-6 rounded-md text-gray-700 text-4xl font-bold py-3">
-      Descubre ¿Quienes somos?
+      ¿Quiénes somos?
     </div>
 
     <div id="default-carousel" class="relative w-4/6 mx-auto" data-carousel="slide">
@@ -45,7 +46,7 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M5 1 1 5l4 4" />
           </svg>
-          <span class="sr-only">Previous</span>
+          <span class="sr-only">Anterior</span>
         </span>
       </button>
       <button type="button"
@@ -58,78 +59,74 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="m1 9 4-4-4-4" />
           </svg>
-          <span class="sr-only">Next</span>
+          <span class="sr-only">Siguiente</span>
         </span>
       </button>
     </div>
+
+    <!-- Reseña de AnuskinaSeguros -->
+    <div class="w-3/6 mx-auto my-10">
+      <div class="font-semibold text-4xl mb-4">Descubre más sobre AnuskinaSeguros</div>
+      <p>
+        AnuskinaSeguros es una compañía dedicada a proporcionar soluciones de seguros confiables y accesibles para
+        nuestros clientes. Nuestra misión es proteger a nuestros asegurados y sus activos, brindando tranquilidad y
+        seguridad financiera en cada paso del camino.
+      </p>
+      <p>
+        Nos esforzamos por ser líderes en el mercado de seguros en Colombia, destacándonos por la excelencia en el
+        servicio al cliente y la innovación constante en nuestros productos. Con una sólida experiencia y
+        profesionalismo, nos comprometemos a ser la mejor elección para aquellos que buscan proteger lo que más valoran.
+      </p>
+    </div>
+    <!-- Misión y Visión -->
     <div class="w-3/6 mx-auto grid grid-cols-2 my-20 gap-x-6">
+      <div>
+        <div class="font-semibold text-4xl">Misión</div>
         <div>
-            <div class="font-semibold text-4xl">Mision</div>
-            <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem sit pariatur animi molestias, nemo quia error ad sint, minus suscipit quae doloribus, beatae cum ipsum exercitationem. Recusandae maxime maiores eaque?
-            </div>
+          Ofrecer seguros confiables y accesibles que protejan a nuestros clientes y sus activos, brindando tranquilidad
+          y seguridad financiera.
         </div>
+      </div>
+      <div>
+        <div class="font-semibold text-4xl">Visión</div>
         <div>
-            <div class="font-semibold text-4xl">Vision</div>
-            <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem sit pariatur animi molestias, nemo quia error ad sint, minus suscipit quae doloribus, beatae cum ipsum exercitationem. Recusandae maxime maiores eaque?
-            </div>
+          Ser la compañía líder en el mercado de seguros en Colombia, reconocida por su excelencia en servicio al
+          cliente y productos innovadores.
         </div>
-    </div>
-    <div class="w-3/6 mx-auto mt-10 mb-20">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos similique officia consectetur esse itaque voluptates quaerat sed dolore iusto quisquam ea libero assumenda, reprehenderit ipsa vitae soluta sint dolores eveniet.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat molestias exercitationem ad dolorum reiciendis necessitatibus ullam nesciunt. Cum, debitis. Odio quia quos iusto ipsum aliquid mollitia harum nulla temporibus illum.Laudantium ipsam, doloremque omnis suscipit necessitatibus quo ex quos tempora culpa iusto quisquam, blanditiis adipisci ducimus, autem dicta veniam quibusdam? Amet perspiciatis quo accusantium esse, dicta quaerat ut reprehenderit libero.
-    </div>
-    <div>
-        <div class="bg-gray-300 w-2/5 mx-auto text-center my-6 rounded-md text-gray-700 text-4xl font-bold py-3">
-            Aliados
-        </div>
-        <div class="w-4/6 mx-auto grid grid-cols-3 gap-x-20 gap-y-10">
-            <div class="bg-gray-300 px-3 py-6 rounded-lg">
-                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
-                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
-                <div class="px-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
-                </div>
-            </div>
-            <div class="bg-gray-300 px-3 py-6 rounded-lg">
-                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
-                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
-                <div class="px-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
-                </div>
-            </div>
-            <div class="bg-gray-300 px-3 py-6 rounded-lg">
-                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
-                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
-                <div class="px-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
-                </div>
-            </div>
-            <div class="bg-gray-300 px-3 py-6 rounded-lg">
-                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
-                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
-                <div class="px-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
-                </div>
-            </div>
-            <div class="bg-gray-300 px-3 py-6 rounded-lg">
-                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
-                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
-                <div class="px-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
-                </div>
-            </div>
-            <div class="bg-gray-300 px-3 py-6 rounded-lg">
-                <img src="{{asset('images/lines/auto.jpeg')}}" alt="" class="w-80 rounded-md mx-auto">
-                <div class="text-center my-2 font-semibold bg-slate-600 w-fit mx-auto text-gray-100 py-1 px-2 rounded-md">Nombre del aliado</div>
-                <div class="px-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quo ad! Cumque provident nam nihil officia laboriosam.
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
+    <!-- Compromiso con el cliente -->
+    <div class="w-3/6 mx-auto mt-10 mb-20">
+      Estamos comprometidos con la satisfacción de nuestros clientes, ofreciendo soluciones de seguros adaptadas a sus
+      necesidades específicas. Nuestra experiencia y profesionalismo nos convierten en la mejor elección para proteger
+      lo que más valoran.
+    </div>
+    <!-- Sección de Aliados -->
+    <div>
+      <div class="bg-gray-300 w-3/5 mx-auto text-center my-6 rounded-md text-gray-700 text-4xl font-bold py-3">
+        Aliados
+      </div>
+      <div class="w-4/6 mx-auto grid grid-cols-1 md:grid-cols-3 gap-x-2 gap-y-10">
+        @foreach ($insuranceCompanies as $company)
+        <div class="bg-gray-300 px-3 py-6 rounded-lg flex flex-col items-center">
+          <!-- Imagen del aliado -->
+          <img src="{{ asset('storage/' . $company->image) }}" alt="Imagen de {{ $company->name }}"
+            class="w-full h-40 object-cover rounded-t-lg">
+          <div class="flex flex-col items-left mt-4">
+            <!-- Enlace al sitio web del aliado -->
+            <p><a href="{{$company['url']}}" target="_blank" class="text-blue-500">{{$company['url']}}</a></p>
+            <!-- Información de contacto del aliado -->
+            <p><strong>Dirección:</strong> {{$company['address']}}</p>
+            <p><strong>Teléfono:</strong> {{$company['phone']}}</p>
+            <p><strong>Email:</strong> <a href="mailto:{{$company['email']}}">{{$company['email']}}</a></p>
+          </div>
+          <!-- Botón de contacto con soporte técnico -->
+          <button class="bg-blue-500 text-white py-2 px-4 mt-4 rounded-full hover:bg-blue-700">Contáctanos</button>
+        </div>
+        @endforeach
+      </div>
+    </div>
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
   </x-guest-layout>
 </div>

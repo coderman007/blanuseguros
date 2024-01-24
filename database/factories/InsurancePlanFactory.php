@@ -17,7 +17,7 @@ class InsurancePlanFactory extends Factory
     public function definition(): array
     {
         return [
-            'insurance_line_id' => fake()->numberBetween(1, 15),
+            'insurance_line_id' => fake()->numberBetween(1, 9),
             'name'              => fake('es_ES')->name(),
             'description'       => fake('es_ES')->sentence(),
             'coverage'          => fake('es_ES')->paragraph(),

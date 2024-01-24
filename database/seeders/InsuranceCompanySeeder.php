@@ -21,7 +21,8 @@ class InsuranceCompanySeeder extends Seeder
                 'phone'     => fake('es_ES')->phoneNumber(),
                 'email'     => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/mundial_seguros.png',
+
             ],
             [
                 'name' => 'Solunion',
@@ -30,7 +31,8 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/solunion.png',
+
             ],
             [
                 'name' => 'Aseguradora Solidaria',
@@ -39,16 +41,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
-            ],
-
-            [
-                'name' => 'Expertos en Seguros de Crédito',
-                'url' => 'https://www.expertosensegurosdecredito.com/',
-                'address' => fake('es_ES')->address(),
-                'phone' => fake('es_ES')->phoneNumber(),
-                'email' => fake('es_ES')->unique()->safeEmail(), 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/aseguradora_solidaria.png',
             ],
 
             [
@@ -58,7 +51,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/liberty.png',
             ],
 
             [
@@ -68,7 +61,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/bolivar.png',
             ],
 
             [
@@ -78,7 +71,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/zurich.jpg',
             ],
 
             [
@@ -88,7 +81,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/allianz.png',
             ],
 
             [
@@ -98,7 +91,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/equidad.png',
             ],
 
             [
@@ -108,7 +101,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/metlife.jpg',
             ],
 
             [
@@ -118,7 +111,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/berkley.jpg',
             ],
 
             [
@@ -128,7 +121,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/chubb.png',
             ],
 
             [
@@ -138,7 +131,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/coface.jpg',
             ],
 
             [
@@ -148,7 +141,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/confianza.jpg',
             ],
 
             [
@@ -158,7 +151,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/jmalucelli.jpg',
             ],
 
             [
@@ -168,7 +161,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/seguros_del_estado.jpg',
             ],
 
             [
@@ -178,7 +171,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/mapfre.png',
             ],
 
             [
@@ -188,7 +181,7 @@ class InsuranceCompanySeeder extends Seeder
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),
                 'is_active' => fake()->boolean(90),
-                'image'     => 'companies/' . fake()->image('public/storage/companies', 640, 480, null, false),
+                'image'     => 'companies/sura.png',
             ],
         ];
 

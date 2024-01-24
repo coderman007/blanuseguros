@@ -5,6 +5,6 @@
                     background: linear-gradient(to right, #916737 0%, #DDDEC8 50%, #916737 100%);
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;">
-                BlanuSeguros</span>
+                AnuskinaSeguros</span>
         </div>
 </div>

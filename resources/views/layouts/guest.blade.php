@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Blanuseguros</title>
+    <title>AnuskinaSeguros</title>
     <link rel="icon" href="{{ asset('img/logo_ico.ico') }}" type="image/x-icon">
 
 

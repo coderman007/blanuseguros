@@ -10,7 +10,7 @@
                 <!-- Contenedor del mensaje superpuesto -->
                 <div class="absolute inset-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
                     <div class="p-4 text-center text-gray-300">
-                        <h2 class="text-6xl font-bold">¡Bienvenido a BlanuSeguros!</h2>
+                        <h2 class="text-6xl font-bold">¡Bienvenido a AnuskinaSeguros!</h2>
                         <p class="mt-2 text-4xl">"Tu seguridad, nuestro compromiso."</p>
                     </div>
                 </div>

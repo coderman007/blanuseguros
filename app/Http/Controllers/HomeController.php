@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InsuranceCompany;
 use App\Models\InsuranceLine;
 use Illuminate\Http\Request;
 
@@ -9,14 +10,14 @@ class HomeController extends Controller
 {
     public function home()
     {
-
         $lines = InsuranceLine::take(3)->get();
         return view('home.home', compact('lines'));
     }
 
     public function about()
     {
-        return view('home.about');
+        $insuranceCompanies = InsuranceCompany::get();
+        return view('home.about', compact('insuranceCompanies'));
     }
 
     public function services()
@@ -42,5 +43,11 @@ class HomeController extends Controller
     public function policy()
     {
         return view('policy');
+    }
+
+    public function linesList()
+    {
+        $lines = InsuranceLine::get();
+        return view('lines.lines-list', compact('lines'));
     }
 }
