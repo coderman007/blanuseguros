@@ -56,8 +56,7 @@ class InsurancePolicies extends Component
         $query = InsurancePolicy::query();
 
         if ($this->search) {
-            $query->where('id', $this->search)
-                ->orWhere('policy_number', 'like', '%' . $this->search . '%')
+            $query->where('policy_number', 'like', '%' . $this->search . '%')
                 ->orWhere('start_date', 'like', '%' . $this->search . '%')
                 ->orWhere('end_date', 'like', '%' . $this->search . '%');
         }

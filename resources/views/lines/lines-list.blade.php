@@ -20,13 +20,13 @@
                 @if ($lines->count() > 0)
                 @foreach ($lines as $line)
                 <div
-                    class="relative overflow-hidden rounded-lg border bg-white hover:bg-blue-100 transition-all duration-300 select-none hover:shadow hover:shadow-blue-900 p-2">
+                    class="relative overflow-hidden rounded-lg border bg-[#2C425F] hover:bg-[#1F2937] transition-all duration-300 select-none hover:shadow hover:shadow-blue-900 p-2">
                     <div class="flex h-[400px] flex-col justify-between rounded-md p-4">
                         <a href="#">
                             <img src="{{ asset('storage/' . $line->image) }}" alt="{{ $line->name }}"
                                 class="w-full h-40 object-cover rounded-t-lg">
                             <div class="space-y-2">
-                                <h3 class="font-bold text-[#183252] text-2xl">{{$line->name}}</h3>
+                                <h3 class="font-bold text-[#AF9670] text-2xl">{{$line->name}}</h3>
                                 <p class="text-md text-muted-foreground">{{$line->description}}</p>
                             </div>
                         </a>

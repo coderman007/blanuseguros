@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InsuranceDetailsController;
 use App\Http\Livewire\Users\Users;
 use App\Http\Livewire\Lines\InsuranceLines;
 use App\Http\Livewire\Lines\LinesList;
@@ -10,6 +11,7 @@ use App\Http\Livewire\Companies\InsuranceCompanies;
 use App\Http\Livewire\Companies\InsuranceCompanyCreate;
 use App\Http\Livewire\Holders\PolicyHolders;
 use App\Http\Livewire\Policies\InsurancePolicies;
+
 
 //Rutas Usuarios sin autenticación
 
@@ -21,6 +23,9 @@ Route::get('/contact',  [HomeController::class, 'contact'])->name('contact');
 Route::get('/services', [HomeController::class, 'services'])->name('services');
 Route::get('/terms',    [HomeController::class, 'terms'])->name('terms');
 Route::get('/lines-list', [HomeController::class, 'linesList'])->name('lines-list');
+
+Route::get('/insurance-details/{id}', [InsuranceDetailsController::class, 'show'])->name('insurance-details');
+
 
 
 //Rutas para usuarios autenticados
