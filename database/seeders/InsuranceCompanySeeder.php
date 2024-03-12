@@ -46,7 +46,7 @@ class InsuranceCompanySeeder extends Seeder
 
             [
                 'name' => 'Liberty Seguros',
-                'url' => 'https://www.libertyseguros.com.co/',
+                'url' => 'https://www.libertyseguros.co/',
                 'address' => fake('es_ES')->address(),
                 'phone' => fake('es_ES')->phoneNumber(),
                 'email' => fake('es_ES')->unique()->safeEmail(),

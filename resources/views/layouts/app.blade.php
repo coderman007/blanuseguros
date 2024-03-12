@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Blanuseguros</title>
+    <title>AnuskinaSegusors</title>
     <link rel="icon" href="{{ asset('images/logo1.png') }}" type="image/x-icon">
 
     <!-- Fonts -->
@@ -35,11 +35,11 @@
 
         <!-- Page Heading -->
         @if (isset($header))
-        <header class="bg-gray-300 shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
+            <header class="bg-gray-300 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
         @endif
 
         <!-- Page Content -->
@@ -57,23 +57,19 @@
     <script>
         Livewire.on('alert', function(message) {
             Swal.fire(
-                'Excelente!'
-                , message
-                , 'success'
+                'Excelente!', message, 'success'
             );
         });
-
     </script>
     <script>
         Livewire.on('error', function(text) {
             Swal.fire({
-                icon: "error"
-                , title: "Oops..."
-                , text
+                icon: "error",
+                title: "Oops...",
+                text
                 // , footer: '<a href="#">Why do I have this issue?</a>'
             });
         });
-
     </script>
     <script src="https://kit.fontawesome.com/8e38c8557e.js" crossorigin="anonymous"></script>
 </body>

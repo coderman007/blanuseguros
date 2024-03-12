@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,20 +57,17 @@
             background-color: #00000064;
             color: white;
         }
-
     </style>
 </head>
+
 <body>
     <x-home-menu />
-    <div class="z-50 sticky top-96">
-        <x-social-networks />
-    </div>
-
     <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
         {{ $slot }}
     </div>
-
+    <x-footer />
     <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
+
 </html>

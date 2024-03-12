@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    {{-- <livewire:policies.insurance-policy-create /> --}}
+    <livewire:policies.insurance-policy-create />
 
     @if ($policies->count() > 0)
         <div class="py-4 ml-4 text-gray-500">
