@@ -27,6 +27,31 @@
                         <button
                             class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#304765] dark:bg-[#4e6c92] hover:bg-[#192738] dark:hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Ver
                             más</button>
+
+                        {{-- Botón y formulario para crear nuevas entradas (visible solo para usuarios autenticados) --}}
+                        @auth
+                            <button
+                                class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#304765] dark:bg-[#4e6c92] hover:bg-[#192738] dark:hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Crear Nueva Entrada
+                            </button>
+                            <!-- Formulario para la nueva entrada -->
+                            <!-- ... -->
+                        @endauth
+
+                        {{-- Formulario para comentarios (visible solo para usuarios autenticados) --}}
+                        @auth
+                            <form action="#" method="POST">
+                                @csrf
+                                <textarea name="content" rows="3" placeholder="Escribe tu comentario"></textarea>
+                                <button type="submit">Comentar</button>
+                            </form>
+                        @endauth
+
+                        {{-- Mensaje para usuarios no autenticados --}}
+                        @guest
+                            <p>Para comentar o crear nuevas entradas, por favor inicia sesión.</p>
+                            <a href="{{ route('login') }}">Iniciar sesión</a>
+                        @endguest
                     </div>
                 </div>
                 <div class="flex justify-center my-3">

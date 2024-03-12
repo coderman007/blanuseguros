@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>AnuskinaSegusors</title>
-    <link rel="icon" href="{{ asset('images/logo1.png') }}" type="image/x-icon">
+    <title>AnuskinaSeguros</title>
+    <link rel="icon" href="{{ asset('images/carrusel/logo2.jpeg') }}" type="image/x-icon">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -28,10 +28,6 @@
     <x-banner />
     <div class="min-h-screen bg-gray-300">
         @livewire('navigation-menu')
-
-        {{-- <div class="z-50 sticky top-96">
-            <x-social-networks />
-        </div> --}}
 
         <!-- Page Heading -->
         @if (isset($header))

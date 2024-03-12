@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>AnuskinaSeguros</title>
-    <link rel="icon" href="{{ asset('img/logo_ico.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/carrusel/img2.jpg') }}" type="image/x-icon">
 
 
     <!-- Fonts -->
