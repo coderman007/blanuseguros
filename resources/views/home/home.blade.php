@@ -136,5 +136,24 @@
 
             </div>
         </section>
+
+        {{-- Código del logo --}}
+        {{-- <div
+            class="flex justify-start w-2/6 h-48 p-2 bg-[#304765] mx-auto text-4xl text-center text-[#B39C64] items-center font-semibold">
+
+            <div class="mr-4">
+                <img src="{{ asset('images/logo1.png') }}" alt="Seguros para Vehículos Pesados" class="rounded-lg">
+            </div>
+
+            <div>
+                <span
+                    style="background: #916737;
+                background: linear-gradient(to right, #916737 0%, #DDDEC8 50%, #916737 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;">AnuskinaSeguros</span>
+                <hr class="bg-[#B39C64] w-auto h-1 mt-2">
+            </div>
+        </div> --}}
+
     </div>
 </x-guest-layout>

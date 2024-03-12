@@ -41,5 +41,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PolicyHolderSeeder::class);
         $this->call(BeneficiarySeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(BlogSeeder::class);
+        $this->call(CommentSeeder::class);
     }
 }

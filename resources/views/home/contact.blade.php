@@ -1,6 +1,6 @@
 <x-guest-layout>
 
-    <div class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <div class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 py-2">
 
         <!-- Contenido principal -->
         <div class="container mx-auto my-8">
@@ -11,11 +11,41 @@
             <!-- Información de contacto -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md shadow-[#304765]">
-                    <h3 class="text-xl font-semibold mb-2">Información de contacto</h3>
-                    <p><strong>Teléfono:</strong> 123-456-7890</p>
-                    <p><strong>Correo electrónico:</strong> info@aseguradoraxyz.com</p>
-                    <p><strong>Dirección:</strong> Calle Principal #123, Ciudad</p>
+                    <h3 class="text-2xl font-semibold mb-4">Información de contacto</h3>
+
+                    <p class="text-lg"><strong>Asesor Comercial:</strong> <span class="text-blue-700">Tatiana
+                            Gordillo</span></p>
+
+                    <p class="text-lg mt-2"><strong>Celular:</strong>
+                        <span class="text-lg">
+                            <i class="fas fa-phone-alt text-green-500 text-lg"></i> 300 4544832
+                            <i class="fas fa-phone-alt text-green-500 text-lg"></i> 304 2998403
+                            <i class="fas fa-phone-alt text-green-500 text-lg"></i> 311 8174956
+                        </span>
+                    </p>
+
+                    <p class="text-lg mt-2"><strong>Whatsapp:</strong>
+                        <span class="text-lg">
+                            <i class="fab fa-whatsapp text-green-500 text-lg"></i> 304 2998403
+                        </span>
+                    </p>
+
+                    <p class="text-lg mt-2"><strong>Telegram:</strong>
+                        <span class="text-lg">
+                            <i class="fab fa-telegram text-blue-500 text-lg"></i> 311 8174956
+                            <i class="fab fa-telegram text-blue-500 text-lg"></i> 300 4544832
+                        </span>
+                    </p>
+
+                    <p class="text-lg mt-2"><strong>Correo electrónico:</strong>
+                        <a href="mailto:anuskinaseguros2024@gmail.com" class="hover:underline text-blue-700 text-lg">
+                            <i class="fas fa-envelope text-red-500 text-lg"></i> anuskinaseguros2024@gmail.com
+                        </a>
+                    </p>
+
+                    <p class="text-lg mt-2"><strong>Dirección:</strong> Calle 8 #69D-39, Barrio Marsella, Bogotá</p>
                 </div>
+
                 <!-- Formulario de contacto -->
                 <form class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md shadow-[#304765]">
                     <h3 class="text-xl font-semibold mb-2">Envíanos un mensaje</h3>
