@@ -6,6 +6,7 @@
             </a>
         </div>
 
+        <!-- Enlaces de navegación -->
         <div class="flex items-center">
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 <x-nav-link :href="auth()->check() ? route('dashboard') : route('home')" :active="request()->routeIs('home')">
@@ -25,14 +26,20 @@
                 </x-nav-link>
             </div>
         </div>
+
         @auth
-            <!-- Botón de cierre de sesión -->
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            <!-- Enlace al perfil del usuario -->
+            <div class="hidden space-x-2 sm:-my-px sm:ml-10 sm:flex mr-6 items-center">
+                <a href="{{ route('profile.show') }}">
+                    <img src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}"
+                        class="w-10 h-10 rounded-full">
+                </a>
+                <!-- Botón de cierre de sesión -->
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
                     <x-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();"
-                        class="text-white hover:text-gray-300 hidden sm:inline">
-                        {{ __('Cerrar sesión') }}
+                        class="text-[#D5D9DA] hover:text-white">
+                        {{ __('Log Out') }}
                     </x-nav-link>
                 </form>
             </div>
@@ -62,10 +69,7 @@
         </div>
     </div>
 
-
-    </div>
-    </div>
-
+    <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="auth()->check() ? route('dashboard') : route('home')" :active="request()->routeIs('home')">
@@ -86,6 +90,7 @@
             <x-responsive-nav-link href="{{ route('contact') }}" :active="request()->routeIs('contact')">
                 {{ __('Contacto') }}
             </x-responsive-nav-link>
+
             @auth
                 <!-- Botón de cierre de sesión responsivo -->
                 <form method="POST" action="{{ route('logout') }}" x-data>

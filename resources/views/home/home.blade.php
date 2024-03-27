@@ -42,7 +42,7 @@
     </style>
     <div>
         <section class="h-1/2 bg-center bg-no-repeat bg-cover mb-10"
-            style="background-image: url('{{ asset('images/home/beach4.jpg') }}')">
+            style="background-image: url('{{ asset('images/home/trailer2.jpg') }}')">
             <div class="px-4 mx-auto max-w-screen-xl text-center py-24">
                 <h1 id="title"
                     class="mb-4 text-5xl font-extrabold tracking-tight leading-none text-black md:text-5xl lg:text-6xl">
